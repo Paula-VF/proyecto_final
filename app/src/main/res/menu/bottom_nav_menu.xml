@@ -8,12 +8,12 @@
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@mipmap/ic_perchas_cc"
+        android:icon="@mipmap/ic_perchas_c"
         android:title="Conjuntos" />
 
     <item
         android:id="@+id/navigation_carrusel"
-        android:icon="@mipmap/carrusel"
+        android:icon="@mipmap/carrusel2"
         android:title="Carrusel" />
 
     <item
