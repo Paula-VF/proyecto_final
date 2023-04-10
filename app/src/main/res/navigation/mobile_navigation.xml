@@ -22,4 +22,9 @@
         android:name="com.example.proyectofinal_frame1.ui.notifications.NotificationsFragment"
         android:label="Otras opciones"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/carouselFragment"
+        android:name="com.example.proyectofinal_frame1.CarouselFragment"
+        android:label="Carrusel"
+        tools:layout="@layout/fragment_carousel" />
 </navigation>
