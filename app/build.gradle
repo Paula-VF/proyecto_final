@@ -44,13 +44,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'androidx.sqlite:sqlite:2.2.0'
-    /* Añadido:
-    implementation 'com.android.support:appcompat-v7'
-    implementation 'com.android.support:design'
-    implementation 'com.android.support:support-annotations:33.0.0'
-    implementation "com.android.support:support-appcompat:33.0.0"
-    implementation 'com.android.support:appcompat-v7:33.0.0'
-    implementation 'com.android.support:design:33.0.0'
-    */
+
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.2' // aniadido
+
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0-alpha2' // aniadido
 
 }
