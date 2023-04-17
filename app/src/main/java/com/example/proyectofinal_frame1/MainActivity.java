@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity{
     private Toolbar myToolbar;
     private ActivityMainBinding binding;
 
-    System.out.println();
     /* variables del otro carrusel:
     private ImageSwitcher imageSwitcher;
     private MaterialButton nextBtn;
