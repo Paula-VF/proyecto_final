@@ -159,6 +159,7 @@ public class MainActivity extends AppCompatActivity{
         //Creación de la base de datos
         ProyectoDatabaseHelper proyectoDBHelper = new ProyectoDatabaseHelper(MainActivity.this);
         SQLiteDatabase db = proyectoDBHelper.getWritableDatabase();
+
     }
 
     // para que aparezcan los iconos de toolbar_prendas en el toolbar

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".Inicio">
 
     <Button
         android:id="@+id/btnRegistro"
@@ -17,6 +18,7 @@
         android:layout_marginTop="502dp"
         android:layout_marginEnd="27dp"
         android:layout_marginBottom="159dp"
+        android:onClick="toRegistro"
         android:text="Regístrate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +39,7 @@
         android:layout_marginTop="88dp"
         android:layout_marginEnd="-2dp"
         android:layout_marginBottom="-90dp"
+        android:onClick="toAcceso"
         android:text="Accede a tu cuenta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

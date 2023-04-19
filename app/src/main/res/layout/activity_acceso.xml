@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Acceso">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="49dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Correo electrónico"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="89dp"
+            tools:layout_editor_absoluteY="222dp" />
+
+        <EditText
+            android:id="@+id/correoField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="5"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/txtVacio2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="82dp"
+            tools:layout_editor_absoluteY="81dp" />
+
+        <TextView
+            android:id="@+id/txtContrasena"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Contraseña"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="89dp"
+            tools:layout_editor_absoluteY="335dp" />
+
+        <EditText
+            android:id="@+id/contrasenaField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="5"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAccesoCuenta"
+        android:layout_width="321dp"
+        android:layout_height="59dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="536dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="135dp"
+        android:onClick="toMain"
+        android:text="Acceder a mi cuenta"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.837" />
+
+    <TextView
+        android:id="@+id/txtLinkCuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btnAccesoCuenta"
+        android:layout_alignTop="@+id/btnAccesoCuenta"
+        android:layout_alignEnd="@+id/btnAccesoCuenta"
+        android:layout_alignBottom="@+id/btnAccesoCuenta"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="89dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="-68dp"
+        android:gravity="center"
+        android:text="¿No tienes cuenta? Regístrate"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+</RelativeLayout>
