@@ -1,5 +1,6 @@
 package com.example.proyectofinal_frame1;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,11 +10,11 @@ import android.widget.Toast;
 
 import com.example.proyectofinal_frame1.database.ProyectoDatabaseHelper;
 
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.AnimationTypes;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.interfaces.ItemClickListener;
-import com.denzcoskun.imageslider.models.SlideModel;
+//import com.denzcoskun.imageslider.ImageSlider;
+//import com.denzcoskun.imageslider.constants.AnimationTypes;
+//import com.denzcoskun.imageslider.constants.ScaleTypes;
+//import com.denzcoskun.imageslider.interfaces.ItemClickListener;
+//import com.denzcoskun.imageslider.models.SlideModel;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -60,14 +61,14 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(myToolbar);
 
         // Carrusel
-        ImageSlider imageslider = findViewById(R.id.slider);
-        List<SlideModel> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModel(R.drawable.prenda1, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.prenda2, ScaleTypes.FIT));
+        //ImageSlider imageslider = findViewById(R.id.slider);
+        //List<SlideModel> slideModels = new ArrayList<>();
+        //slideModels.add(new SlideModel(R.drawable.prenda1, ScaleTypes.FIT));
+        //slideModels.add(new SlideModel(R.drawable.prenda2, ScaleTypes.FIT));
 
-        imageslider.setImageList(slideModels);
+        //imageslider.setImageList(slideModels);
 
-        imageslider.setSlideAnimation(AnimationTypes.ZOOM_OUT);
+        //imageslider.setSlideAnimation(AnimationTypes.ZOOM_OUT);
 
         /* Esto es del mismo carrusel, pero estaba en kotlin y no lo llegue a pasar a java
         Es de este repositorio: https://github.com/denzcoskun/ImageSlideshow
@@ -140,6 +141,18 @@ public class MainActivity extends AppCompatActivity{
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.carouselFragment, R.id.navigation_notifications)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+
+        //agregar un evento para navegar a la actividad CarruselActivity cuando se seleccione el botón con id carouselFragment
+        navView.setOnNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.carouselFragment) {
+                Intent intent = new Intent(this, CarruselActivity.class);
+                startActivity(intent);
+                return true;
+            } else {
+                return NavigationUI.onNavDestinationSelected(item, navController);
+            }
+        });
+
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
