@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageSwitcher;
 import android.widget.Toast;
 
@@ -181,6 +182,11 @@ public class MainActivity extends AppCompatActivity{
             Toast.makeText(this, "Buscar", Toast.LENGTH_SHORT).show();
         }
         return true;
+    }
+
+    public void toAccesorios(View view) {
+        Intent intent = new Intent(this, AccesoriosActivity.class);
+        startActivity(intent);
     }
 
     /*
