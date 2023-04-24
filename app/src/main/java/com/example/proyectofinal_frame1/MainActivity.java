@@ -27,11 +27,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectofinal_frame1.databinding.ActivityMainBinding;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 //  implements View.OnClickListener
@@ -182,6 +185,21 @@ public class MainActivity extends AppCompatActivity{
             Toast.makeText(this, "Buscar", Toast.LENGTH_SHORT).show();
         }
         return true;
+    }
+
+    public void toPArriba(View view) {
+        Intent intent = new Intent(this, RopaSuperiorActivity.class);
+        startActivity(intent);
+    }
+
+    public void toPAbajo(View view) {
+        Intent intent = new Intent(this, RopaInferiorActivity.class);
+        startActivity(intent);
+    }
+
+    public void toZapatos(View view) {
+        Intent intent = new Intent(this, ZapatosActivity.class);
+        startActivity(intent);
     }
 
     public void toAccesorios(View view) {

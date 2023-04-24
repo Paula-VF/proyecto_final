@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:onClick="toPArriba"
         android:src="@mipmap/p_arriba" />
 
     <ImageButton
@@ -19,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:onClick="toPAbajo"
         android:src="@mipmap/p_abajo" />
 
     <ImageButton
@@ -26,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:onClick="toZapatos"
         android:src="@mipmap/zapatos" />
 
     <ImageButton

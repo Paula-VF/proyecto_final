@@ -12,25 +12,9 @@ import java.util.List;
 
 public class RopaInferiorActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerViewPrendas;
-    private PrendaAdapter prendaAdapter;
-    private List<Prenda> listaPrendas;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ropa_superior);
-
-        recyclerViewPrendas = findViewById(R.id.recyclerViewPrendas);
-        recyclerViewPrendas.setLayoutManager(new GridLayoutManager(this, 2));
-
-        listaPrendas = new ArrayList<>();
-        listaPrendas.add(new Prenda("Pantalón", R.drawable.ic_baseline_photo_camera_back_24, Arrays.asList("Formal", "Blanco")));
-        listaPrendas.add(new Prenda("Falda", R.drawable.ic_baseline_photo_camera_back_24, Arrays.asList("Informal", "Azul")));
-        listaPrendas.add(new Prenda("Pantalón", R.drawable.ic_baseline_photo_camera_back_24, Arrays.asList("Formal", "Rojo", "Verano")));
-        listaPrendas.add(new Prenda("Short", R.drawable.ic_baseline_photo_camera_back_24, Arrays.asList("Informal", "Azul")));
-
-        prendaAdapter = new PrendaAdapter(listaPrendas);
-        recyclerViewPrendas.setAdapter(prendaAdapter);
     }
 }
