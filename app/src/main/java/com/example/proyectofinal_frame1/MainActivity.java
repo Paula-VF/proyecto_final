@@ -147,21 +147,6 @@ public class MainActivity extends AppCompatActivity{
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
 
-        //agregar un evento para navegar a la actividad CarruselActivity cuando se seleccione el botón con id carouselFragment
-        navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.carouselFragment) {
-                    Intent intent = new Intent(getApplicationContext(), CarruselActivity.class);
-                    startActivity(intent);
-                    return true;
-                } else {
-                    return NavigationUI.onNavDestinationSelected(item, navController);
-                }
-            }
-        });
-
-
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 

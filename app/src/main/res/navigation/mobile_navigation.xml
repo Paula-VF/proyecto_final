@@ -24,9 +24,9 @@
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/carouselFragment"
-        android:name="com.example.proyectofinal_frame1.CarouselFragment"
+        android:name="com.example.proyectofinal_frame1.CarruselFragment"
         android:label="Carrusel"
-        tools:layout="@layout/fragment_carousel" />
+        tools:layout="@layout/fragment_carrusel" />
     <activity
         android:id="@+id/carruselActivity"
         android:name="com.example.proyectofinal_frame1.CarruselActivity"
