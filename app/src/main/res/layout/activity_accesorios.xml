@@ -32,23 +32,24 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#f2cea1"
+            android:backgroundTint="#8bb8ef"
             android:onClick="toPulseras"
-            android:text="Pulseras" />
+            android:text="@string/pulseras"
+            tools:ignore="UsingOnClickInXml" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#8befc2"
-            android:text="Anillos" />
+            android:backgroundTint="#8bb8ef"
+            android:text="@string/anillos" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#f2cea1"
-            android:text="Colgantes" />
+            android:backgroundTint="#8bb8ef"
+            android:text="@string/colgantes" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -61,7 +62,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button2"
-            app:srcCompat="@drawable/ic_baseline_add_24"/>
+            app:srcCompat="@drawable/ic_baseline_add_24"
+            app:layout_anchor="@id/linear_layout"
+            app:layout_anchorGravity="bottom|right|end"
+            />
 
     </LinearLayout>
 

@@ -32,23 +32,22 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#f2cea1"
-            android:onClick="toPulseras"
-            android:text="Zapatillas" />
+            android:backgroundTint="#8bb8ef"
+            android:text="@string/zapatillas" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#8befc2"
-            android:text="Botas" />
+            android:backgroundTint="#8bb8ef"
+            android:text="@string/botas" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#f2cea1"
-            android:text="Tacones" />
+            android:backgroundTint="#8bb8ef"
+            android:text="@string/tacones" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"

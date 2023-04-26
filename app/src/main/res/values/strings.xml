@@ -5,4 +5,19 @@
     <string name="title_notifications">Notifications</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bolsos">Bolsos</string>
+    <string name="fulares">Fulares</string>
+    <string name="gafas_de_sol">Gafas de sol</string>
+    <string name="colgantes">Colgantes</string>
+    <string name="anillos">Anillos</string>
+    <string name="pulseras">Pulseras</string>
+    <string name="tacones">Tacones</string>
+    <string name="botas">Botas</string>
+    <string name="zapatillas">Zapatillas</string>
+    <string name="pantalones_pitillo">Pantalones pitillo</string>
+    <string name="faldas">Faldas</string>
+    <string name="vaqueros">Vaqueros</string>
+    <string name="camisetas">Camisetas</string>
+    <string name="sudaderas">Sudaderas</string>
+    <string name="jerseys">Jerseys</string>
 </resources>

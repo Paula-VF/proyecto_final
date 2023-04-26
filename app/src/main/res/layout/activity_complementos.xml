@@ -32,22 +32,22 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#8befc2"
-        android:text="Fulares" />
+        android:backgroundTint="#8bb8ef"
+        android:text="@string/fulares" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#f2cea1"
-        android:text="Bolsos" />
+        android:backgroundTint="#8bb8ef"
+        android:text="@string/bolsos" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#8befc2"
-        android:text="Gafas de sol" />
+        android:backgroundTint="#8bb8ef"
+        android:text="@string/gafas_de_sol" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"

@@ -1,5 +1,6 @@
 package com.example.proyectofinal_frame1.ui.dashboard;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +26,7 @@ import java.util.List;
 public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
+    Context context;
 
     // aniadido
     private RecyclerView recyclerViewPrendas;
@@ -37,6 +40,20 @@ public class DashboardFragment extends Fragment {
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        context = container.getContext();
+
+        recyclerViewPrendas = root.findViewById(R.id.recyclerViewPrendas);
+        recyclerViewPrendas.setLayoutManager(new GridLayoutManager(context, 2));
+
+        listaPrendas = new ArrayList<>();
+        listaPrendas.add(new Prenda("Conjunto día de playa", R.drawable.ic_baseline_photo_camera_back_24, Arrays.asList("Formal", "Blanco")));
+        listaPrendas.add(new Prenda("Conjunto boda", R.drawable.ic_baseline_photo_camera_back_24, Arrays.asList("Informal", "Azul")));
+        listaPrendas.add(new Prenda("Conjunto miércoles", R.drawable.ic_baseline_photo_camera_back_24, Arrays.asList("Formal", "Rojo", "Verano")));
+        listaPrendas.add(new Prenda("Conjunto casual", R.drawable.ic_baseline_photo_camera_back_24, Arrays.asList("Informal", "Azul")));
+
+        prendaAdapter = new PrendaAdapter(listaPrendas);
+        recyclerViewPrendas.setAdapter(prendaAdapter);
 
         /*
         final TextView textView = binding.textDashboard;
