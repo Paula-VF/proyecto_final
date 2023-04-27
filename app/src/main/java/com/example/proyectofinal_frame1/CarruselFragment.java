@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 public class CarruselFragment extends Fragment {
     private RecyclerView recyclerView;
-    private int[] imagenes = { R.drawable.prenda1, R.drawable.prenda2, R.drawable.prenda3 };
+    private int[] imagenes = { R.drawable.prenda1, R.drawable.prenda2, R.drawable.prenda3, R.drawable.prenda5};
 
     public CarruselFragment() {
         // Constructor vacío requerido
@@ -26,7 +26,7 @@ public class CarruselFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_carrusel, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerViewCarouselFragment);
+        recyclerView = view.findViewById(R.id.recyclerViewCarruselFragment);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
         CarruselAdapter adapter = new CarruselAdapter(getActivity(), imagenes);

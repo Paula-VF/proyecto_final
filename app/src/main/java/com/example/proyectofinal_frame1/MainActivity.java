@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageSwitcher;
 import android.widget.Toast;
 
 import com.example.proyectofinal_frame1.database.ProyectoDatabaseHelper;
@@ -20,23 +19,14 @@ import com.example.proyectofinal_frame1.database.ProyectoDatabaseHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectofinal_frame1.databinding.ActivityMainBinding;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.navigation.NavigationBarView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 //  implements View.OnClickListener
 public class MainActivity extends AppCompatActivity{
@@ -143,7 +133,7 @@ public class MainActivity extends AppCompatActivity{
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.carouselFragment, R.id.navigation_notifications)
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.armarConjuntosFragment, R.id.navigation_notifications)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
 
@@ -196,39 +186,4 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = new Intent(this, AccesoriosActivity.class);
         startActivity(intent);
     }
-
-    /*
-    Carousel
-
-    @Override
-    public void onClick(View v) {
-        counter ++;
-
-        if(counter == imageLength){
-            counter = 0;
-            imageSwitcher.setImageResource(ListImage[counter]);
-        }else {
-            imageSwitcher.setImageResource(ListImage[counter]);
-        }
-    }
-
-    carousel.setAdapter(new Carousel.Adapter() {
-        @Override
-        public int count() {
-            // need to return the number of items we have in the carousel
-        }
-
-        @Override
-        public void populate(View view, int index) {
-            // need to implement this to populate the view at the given index
-        }
-
-        @Override
-        public void onNewItem(int index) {
-            // called when an item is set
-        }
-    });
-
-     */
-
 }

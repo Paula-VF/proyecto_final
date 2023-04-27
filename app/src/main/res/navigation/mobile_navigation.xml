@@ -23,13 +23,14 @@
         android:label="Otras opciones"
         tools:layout="@layout/fragment_notifications" />
     <fragment
-        android:id="@+id/carouselFragment"
+        android:id="@+id/carruselFragment"
         android:name="com.example.proyectofinal_frame1.CarruselFragment"
         android:label="Carrusel"
         tools:layout="@layout/fragment_carrusel" />
-    <activity
-        android:id="@+id/carruselActivity"
-        android:name="com.example.proyectofinal_frame1.CarruselActivity"
-        android:label="activity_carrusel"
-        tools:layout="@layout/activity_carrusel" />
+
+    <fragment
+        android:id="@+id/armarConjuntosFragment"
+        android:name="com.example.proyectofinal_frame1.ArmarConjuntosFragment"
+        android:label="Carrusel"
+        tools:layout="@layout/fragment_armar_conjuntos" />
 </navigation>

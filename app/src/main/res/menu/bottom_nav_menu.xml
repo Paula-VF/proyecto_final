@@ -13,7 +13,7 @@
         android:title="Conjuntos" />
 
     <item
-        android:id="@+id/carouselFragment"
+        android:id="@+id/armarConjuntosFragment"
         android:icon="@mipmap/carrusel2"
         android:title="Carrusel" />
 
