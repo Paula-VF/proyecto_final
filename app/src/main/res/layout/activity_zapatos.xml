@@ -49,18 +49,27 @@
             android:backgroundTint="#8bb8ef"
             android:text="@string/tacones" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="355dp"
-            android:layout_marginRight="355dp"
-            android:clickable="true"
-            app:backgroundTint="#c28bef"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2"
-            app:srcCompat="@drawable/ic_baseline_add_24"/>
+            android:layout_height="match_parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                app:backgroundTint="#c28bef"
+                android:layout_margin="10dp"
+                android:gravity="right"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button2"
+                app:srcCompat="@drawable/ic_baseline_add_24"
+                android:layout_gravity="bottom|right"/>
+        </FrameLayout>
 
     </LinearLayout>
 

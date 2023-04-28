@@ -13,8 +13,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:id="@+id/RelativeLayout"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="618dp"
         android:orientation="vertical"
@@ -25,71 +25,54 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/mobile_navigation">
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="560dp"
             android:backgroundTint="#8bb8ef"
-            android:text="@string/camisetas" />
+            android:onClick="toPulseras"
+            android:text="@string/pulseras"
+            tools:ignore="UsingOnClickInXml" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/button"
-            android:layout_alignTop="@+id/button"
-            android:layout_alignEnd="@+id/button"
-            android:layout_alignBottom="@+id/button"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="460dp"
             android:backgroundTint="#8bb8ef"
-            android:text="@string/sudaderas" />
+            android:text="@string/anillos" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/button3"
-            android:layout_alignTop="@+id/button3"
-            android:layout_alignEnd="@+id/button3"
-            android:layout_alignBottom="@+id/button3"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginEnd="-0dp"
-            android:layout_marginBottom="160dp"
             android:backgroundTint="#8bb8ef"
-            android:text="@string/jerseys" />
+            android:text="@string/colgantes" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="3dp"
-            android:layout_marginRight="355dp"
-            android:layout_marginBottom="8dp"
-            android:clickable="true"
-            app:backgroundTint="#c28bef"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2"
-            app:srcCompat="@drawable/ic_baseline_add_24" />
+            android:layout_height="match_parent">
 
-    </RelativeLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                app:backgroundTint="#c28bef"
+                android:layout_margin="10dp"
+                android:gravity="right"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button2"
+                app:srcCompat="@drawable/ic_baseline_add_24"
+                android:layout_gravity="bottom|right"/>
+        </FrameLayout>
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
