@@ -1,14 +1,9 @@
 package com.example.proyectofinal_frame1;
 
+import static com.google.android.material.internal.ContextUtils.getActivity;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationBuilderWithBuilderAccessor;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +16,7 @@ import com.example.proyectofinal_frame1.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+
 public class AccesoriosActivity extends AppCompatActivity {
 
     @Override
@@ -29,7 +25,6 @@ public class AccesoriosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_accesorios);
 
         // funcionalidad bottom nav menu
-        /*
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -37,27 +32,22 @@ public class AccesoriosActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch(id){
                     case R.id.navigation_home:
-                        Intent intent1 = new Intent(AccesoriosActivity.this, HomeFragment.class);
-                        startActivity(intent1);
+                        startActivity(new Intent(AccesoriosActivity.this, HomeFragment.class));
                         return true;
                     case R.id.navigation_dashboard:
-                        Intent intent2 = new Intent(AccesoriosActivity.this, DashboardFragment.class);
-                        startActivity(intent2);
+                        startActivity(new Intent(AccesoriosActivity.this, DashboardFragment.class));
                         return true;
                     case R.id.carruselFragment:
-                        Intent intent3 = new Intent(AccesoriosActivity.this, CarruselFragment.class);
-                        startActivity(intent3);
+                        startActivity(new Intent(AccesoriosActivity.this, CarruselFragment.class));
                         return true;
                     case R.id.navigation_notifications:
-                        Intent intent4 = new Intent(AccesoriosActivity.this, NotificationsFragment.class);
-                        startActivity(intent4);
+                        startActivity(new Intent(AccesoriosActivity.this, NotificationsFragment.class));
                         return true;
                 }
                 return false;
             }
         });
 
-         */
 
     }
 

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.proyectofinal_frame1.database.ProyectoDatabaseHelper;
@@ -29,11 +31,16 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.proyectofinal_frame1.databinding.ActivityMainBinding;
 
 //  implements View.OnClickListener
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private Toolbar myToolbar;
     private ActivityMainBinding binding;
 
+    private ImageButton imageButtonArriba;
+    private ImageButton imageButtonAbajo;
+    private ImageButton imageButtonZapatos;
+    private ImageButton imageButtonComplem;
+    private ImageButton imageButtonAccesorios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,43 @@ public class MainActivity extends AppCompatActivity{
         // para que se muestre nuestra barra superior:
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
+        imageButtonArriba = (ImageButton) findViewById(R.id.imageButtonArriba);
+        imageButtonAbajo = (ImageButton) findViewById(R.id.imageButtonAbajo);
+        imageButtonZapatos = (ImageButton) findViewById(R.id.imageButtonZapatos);
+        imageButtonComplem = (ImageButton) findViewById(R.id.imageButtonComplem);
+        imageButtonAccesorios = (ImageButton) findViewById(R.id.imageButtonAccesorios);
+
+        imageButtonArriba.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toPArriba();
+            }
+        });
+        imageButtonAbajo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toPArriba();
+            }
+        });
+        imageButtonZapatos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toPAbajo();
+            }
+        });
+        imageButtonComplem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toZapatos();
+            }
+        });
+        imageButtonAccesorios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toAccesorios();
+            }
+        });
 
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -86,23 +130,52 @@ public class MainActivity extends AppCompatActivity{
     }
 
     // funcionalidad botones categorias
-    public void toPArriba(View view) {
+    /*
+    @Override
+    public void onClick(View view) {
+        Intent intent = null;
+        switch (view.getId()) {
+            case R.id.imageButtonArriba:
+                intent = new Intent(this, RopaSuperiorActivity.class);
+                break;
+            case R.id.imageButtonAbajo:
+                // hacer cuando se haga clic en el imageButtonAbajo
+                intent = new Intent(this, RopaInferiorActivity.class);
+                break;
+            case R.id.imageButtonZapatos:
+                intent = new Intent(this, ZapatosActivity.class);
+                break;
+            case R.id.imageButtonComplem:
+                intent = new Intent(this, ComplementosActivity.class);
+                break;
+            case R.id.imageButtonAccesorios:
+                intent = new Intent(this, AccesoriosActivity.class);
+                break;
+        }
+        if (intent != null) {
+            startActivity(intent);
+        }
+    }
+    */
+
+    public void toPArriba() {
         Intent intent = new Intent(this, RopaSuperiorActivity.class);
         startActivity(intent);
     }
 
-    public void toPAbajo(View view) {
+    public void toPAbajo() {
         Intent intent = new Intent(this, RopaInferiorActivity.class);
         startActivity(intent);
     }
 
-    public void toZapatos(View view) {
+    public void toZapatos() {
         Intent intent = new Intent(this, ZapatosActivity.class);
         startActivity(intent);
     }
 
-    public void toAccesorios(View view) {
+    public void toAccesorios() {
         Intent intent = new Intent(this, AccesoriosActivity.class);
         startActivity(intent);
     }
+
 }

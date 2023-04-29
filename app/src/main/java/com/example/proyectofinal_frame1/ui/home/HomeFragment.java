@@ -20,7 +20,7 @@ import com.example.proyectofinal_frame1.RopaSuperiorActivity;
 import com.example.proyectofinal_frame1.ZapatosActivity;
 import com.example.proyectofinal_frame1.databinding.FragmentHomeBinding;
 
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
@@ -31,12 +31,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
+        /*
         binding.imageButtonArriba.setOnClickListener(this);
         binding.imageButtonAbajo.setOnClickListener(this);
         binding.imageButtonZapatos.setOnClickListener(this);
         binding.imageButtonComplem.setOnClickListener(this);
         binding.imageButtonAccesorios.setOnClickListener(this);
 
+
+         */
         View root = binding.getRoot();
         /*
         final TextView textView = binding.textHome;
@@ -52,6 +55,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         binding = null;
     }
 
+    /*
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -76,4 +80,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             startActivity(intent);
         }
     }
+
+     */
 }
