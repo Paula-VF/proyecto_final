@@ -32,24 +32,24 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#8bb8ef"
+            android:backgroundTint="@color/ourBlue"
             android:onClick="toPulseras"
-            android:text="@string/pulseras"
+            android:text="@string/camisetas"
             tools:ignore="UsingOnClickInXml" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#8bb8ef"
-            android:text="@string/anillos" />
+            android:backgroundTint="@color/ourBlue"
+            android:text="@string/sudaderas" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#8bb8ef"
-            android:text="@string/colgantes" />
+            android:backgroundTint="@color/ourBlue"
+            android:text="@string/jerseys" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                app:backgroundTint="#c28bef"
+                app:backgroundTint="@color/ourPurple"
                 android:layout_margin="10dp"
                 android:gravity="right"
                 android:layout_alignParentBottom="true"

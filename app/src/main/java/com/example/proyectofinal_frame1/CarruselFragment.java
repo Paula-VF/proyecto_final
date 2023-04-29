@@ -4,12 +4,18 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CarruselFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -31,6 +37,8 @@ public class CarruselFragment extends Fragment {
 
         CarruselAdapter adapter = new CarruselAdapter(getActivity(), imagenes);
         recyclerView.setAdapter(adapter);
+
+
 
         return view;
     }

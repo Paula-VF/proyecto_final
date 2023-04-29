@@ -32,21 +32,21 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#8bb8ef"
+        android:backgroundTint="@color/ourBlue"
         android:text="@string/fulares" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#8bb8ef"
+        android:backgroundTint="@color/ourBlue"
         android:text="@string/bolsos" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#8bb8ef"
+        android:backgroundTint="@color/ourBlue"
         android:text="@string/gafas_de_sol" />
 
         <FrameLayout
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                app:backgroundTint="#c28bef"
+                app:backgroundTint="@color/ourPurple"
                 android:layout_margin="10dp"
                 android:gravity="right"
                 android:layout_alignParentBottom="true"
