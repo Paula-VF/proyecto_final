@@ -58,35 +58,40 @@ public class MainActivity extends AppCompatActivity {
         imageButtonZapatos = (ImageButton) findViewById(R.id.imageButtonZapatos);
         imageButtonComplem = (ImageButton) findViewById(R.id.imageButtonComplem);
         imageButtonAccesorios = (ImageButton) findViewById(R.id.imageButtonAccesorios);
-
+        // funcionalidad botones categorias
         imageButtonArriba.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toPArriba();
+                Intent intent = new Intent(MainActivity.this, RopaSuperiorActivity.class);
+                startActivity(intent);
             }
         });
         imageButtonAbajo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toPArriba();
+                Intent intent = new Intent(MainActivity.this, RopaInferiorActivity.class);
+                startActivity(intent);
             }
         });
         imageButtonZapatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toPAbajo();
+                Intent intent = new Intent(MainActivity.this, ZapatosActivity.class);
+                startActivity(intent);
             }
         });
         imageButtonComplem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toZapatos();
+                Intent intent = new Intent(MainActivity.this, ComplementosActivity.class);
+                startActivity(intent);
             }
         });
         imageButtonAccesorios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toAccesorios();
+                Intent intent = new Intent(MainActivity.this, AccesoriosActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -101,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
 
         //Creación de la base de datos
         ProyectoDatabaseHelper proyectoDBHelper = new ProyectoDatabaseHelper(MainActivity.this);
@@ -129,53 +135,5 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    // funcionalidad botones categorias
-    /*
-    @Override
-    public void onClick(View view) {
-        Intent intent = null;
-        switch (view.getId()) {
-            case R.id.imageButtonArriba:
-                intent = new Intent(this, RopaSuperiorActivity.class);
-                break;
-            case R.id.imageButtonAbajo:
-                // hacer cuando se haga clic en el imageButtonAbajo
-                intent = new Intent(this, RopaInferiorActivity.class);
-                break;
-            case R.id.imageButtonZapatos:
-                intent = new Intent(this, ZapatosActivity.class);
-                break;
-            case R.id.imageButtonComplem:
-                intent = new Intent(this, ComplementosActivity.class);
-                break;
-            case R.id.imageButtonAccesorios:
-                intent = new Intent(this, AccesoriosActivity.class);
-                break;
-        }
-        if (intent != null) {
-            startActivity(intent);
-        }
-    }
-    */
-
-    public void toPArriba() {
-        Intent intent = new Intent(this, RopaSuperiorActivity.class);
-        startActivity(intent);
-    }
-
-    public void toPAbajo() {
-        Intent intent = new Intent(this, RopaInferiorActivity.class);
-        startActivity(intent);
-    }
-
-    public void toZapatos() {
-        Intent intent = new Intent(this, ZapatosActivity.class);
-        startActivity(intent);
-    }
-
-    public void toAccesorios() {
-        Intent intent = new Intent(this, AccesoriosActivity.class);
-        startActivity(intent);
-    }
 
 }

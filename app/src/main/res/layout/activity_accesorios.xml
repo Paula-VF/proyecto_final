@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/accesoriosLayout"
     tools:context=".AccesoriosActivity">
 
     <include
@@ -50,6 +51,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ourBlue"
             android:text="@string/colgantes" />
+
 
         <FrameLayout
             android:layout_width="match_parent"
