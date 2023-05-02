@@ -108,4 +108,41 @@
         android:textColor="#000000"
         android:textSize="16sp" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:orientation="horizontal"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="61dp">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="78dp"
+            android:layout_height="57dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.09"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.619"
+            app:srcCompat="@drawable/dma" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="292dp"
+            android:layout_height="61dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.352"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.764"
+            app:srcCompat="@drawable/dress_me_app" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </RelativeLayout>
