@@ -104,15 +104,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Pruebas de la base de datos
-        TablaPrenda prenda = new TablaPrenda(this);
-        TablaCategoria categoria = new TablaCategoria(this);
-        TablaUsuario user = new TablaUsuario(this);
-
-        String rutaImagen = "https://www.trajesguzman.com/media/1624/camisa-basica-blanca.jpg";
-        long idCategoria = categoria.insertarCategoria("superior");
-        long idUser = user.insertarUsuario("emely", "mijij", "okey");
-        long id= prenda.insertarPrenda("Camisa", rutaImagen, "verano", idCategoria, idUser);
-        long id2= prenda.insertarPrenda("Camisa", "https://hmperu.vtexassets.com/arquivos/ids/3024520-483-725/Pantalon-de-buzo---Rosado---H-M-PE.jpg?v=637983998116170000", "verano", idCategoria, idUser);
+//        TablaPrenda prenda = new TablaPrenda(this);
+//        TablaCategoria categoria = new TablaCategoria(this);
+//        TablaUsuario user = new TablaUsuario(this);
+//
+//        String rutaImagen = "https://www.trajesguzman.com/media/1624/camisa-basica-blanca.jpg";
+//        long idCategoria = categoria.insertarCategoria("superior");
+//        long idUser = user.insertarUsuario("emely", "mijij", "okey");
+//        long id= prenda.insertarPrenda("Camisa", rutaImagen, "verano", idCategoria, idUser);
+//        long id2= prenda.insertarPrenda("Camisa", "https://hmperu.vtexassets.com/arquivos/ids/3024520-483-725/Pantalon-de-buzo---Rosado---H-M-PE.jpg?v=637983998116170000", "verano", idCategoria, idUser);
 
         //
 
