@@ -8,15 +8,36 @@
 
     <TextView
         android:id="@+id/text_notifications"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="370dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:textAlignment="center"
+        android:gravity="left"
+        android:text="Aplicación creada por Emely Aguilar y Paula Vallespín."
+        android:textAlignment="gravity"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.112" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dma"
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="282dp" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dress_me_app"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="473dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
