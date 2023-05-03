@@ -29,7 +29,7 @@ public class ProyectoDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLA_PRENDA+ "(\n" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "nombre TEXT NOT NULL,\n" +
-                "imagen BLOB NOT NULL,\n" +
+                "imagen TEXT NOT NULL,\n" +
                 "etiquetas TEXT,\n" +
                 "categoria INTEGER,\n" +
                 "usuario INTEGER NOT NULL,\n" +

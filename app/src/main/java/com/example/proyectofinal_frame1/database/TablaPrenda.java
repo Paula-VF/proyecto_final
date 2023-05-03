@@ -2,11 +2,16 @@ package com.example.proyectofinal_frame1.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TablaPrenda extends ProyectoDatabaseHelper{
     Context context;
@@ -15,25 +20,53 @@ public class TablaPrenda extends ProyectoDatabaseHelper{
         this.context=context;
     }
 
-    public long insertarPrenda(String nombre, Blob imagenPasada, String etiquetas, int categoria, int usuario){
+    public long insertarPrenda(String nombre, String rutaImagen, String etiquetas, long categoria, long usuario) {
         long id = 0;
 
-        try{
-            byte[] imagen = imagenPasada.getBytes(1, (int)imagenPasada.length());
+        try {
+            // Obtener la base de datos en modo escritura
             ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+            // Crear los valores a insertar
             ContentValues values = new ContentValues();
             values.put("nombre", nombre);
-            values.put("imagen", imagen);
+            values.put("imagen", rutaImagen);
             values.put("etiquetas", etiquetas);
-
-            //modificar código. Hay relaciones, sacar info de las tablas relacionadas
             values.put("categoria", categoria);
             values.put("usuario", usuario);
+
+            // Insertar el registro en la tabla
             id = db.insert(TABLA_PRENDA, null, values);
-        }catch (Exception ex){
+
+            // Cerrar la base de datos
+            db.close();
+        } catch (Exception ex) {
             ex.toString();
         }
         return id;
+    }
+
+    public List<String> obtenerRutasImagenes() {
+        List<String> rutasImagenes = new ArrayList<>();
+        try {
+            ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            Cursor cursor = db.rawQuery("SELECT imagen FROM " + TABLA_PRENDA, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    int columnaImagen = cursor.getColumnIndex("imagen");
+                    if (columnaImagen >= 0) {
+                        String rutaImagen = cursor.getString(columnaImagen);
+                        rutasImagenes.add(rutaImagen);
+                    }
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception ex) {
+            ex.toString();
+        }
+        return rutasImagenes;
     }
 }

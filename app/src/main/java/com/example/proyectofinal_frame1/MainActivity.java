@@ -3,6 +3,7 @@ package com.example.proyectofinal_frame1;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,9 @@ import com.example.proyectofinal_frame1.database.ProyectoDatabaseHelper;
 //import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 //import com.denzcoskun.imageslider.models.SlideModel;
 
+import com.example.proyectofinal_frame1.database.TablaCategoria;
+import com.example.proyectofinal_frame1.database.TablaPrenda;
+import com.example.proyectofinal_frame1.database.TablaUsuario;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -90,6 +94,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Creación de la base de datos
+        ProyectoDatabaseHelper proyectoDBHelper = new ProyectoDatabaseHelper(MainActivity.this);
+        SQLiteDatabase db = proyectoDBHelper.getWritableDatabase();
+        if(db!=null){
+            Toast.makeText(MainActivity.this, "Base de datos creada", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(MainActivity.this, "Error al crear la base de datos", Toast.LENGTH_SHORT).show();
+        }
+
+        //Pruebas de la base de datos
+        TablaPrenda prenda = new TablaPrenda(this);
+        TablaCategoria categoria = new TablaCategoria(this);
+        TablaUsuario user = new TablaUsuario(this);
+
+        String rutaImagen = "https://www.trajesguzman.com/media/1624/camisa-basica-blanca.jpg";
+        long idCategoria = categoria.insertarCategoria("superior");
+        long idUser = user.insertarUsuario("emely", "mijij", "okey");
+        long id= prenda.insertarPrenda("Camisa", rutaImagen, "verano", idCategoria, idUser);
+
+        //
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -101,11 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
-        //Creación de la base de datos
-        ProyectoDatabaseHelper proyectoDBHelper = new ProyectoDatabaseHelper(MainActivity.this);
-        SQLiteDatabase db = proyectoDBHelper.getWritableDatabase();
-
     }
 
     // para que aparezcan los iconos de toolbar_prendas en el toolbar
