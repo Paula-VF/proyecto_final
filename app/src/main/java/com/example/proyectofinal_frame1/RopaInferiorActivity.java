@@ -15,6 +15,6 @@ public class RopaInferiorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ropa_superior);
+        setContentView(R.layout.activity_ropa_inferior);
     }
 }
