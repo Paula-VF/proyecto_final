@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         long idCategoria = categoria.insertarCategoria("superior");
         long idUser = user.insertarUsuario("emely", "mijij", "okey");
         long id= prenda.insertarPrenda("Camisa", rutaImagen, "verano", idCategoria, idUser);
+        long id2= prenda.insertarPrenda("Camisa", "https://hmperu.vtexassets.com/arquivos/ids/3024520-483-725/Pantalon-de-buzo---Rosado---H-M-PE.jpg?v=637983998116170000", "verano", idCategoria, idUser);
 
         //
 
