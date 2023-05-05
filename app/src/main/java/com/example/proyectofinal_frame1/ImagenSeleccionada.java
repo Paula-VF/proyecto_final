@@ -71,6 +71,7 @@ public class ImagenSeleccionada extends AppCompatActivity {
     }
 
     /*
+
     Dialog with 2 options (https://stackoverflow.com/questions/10165302/dialog-to-pick-image-from-gallery-or-from-camera)
 
     Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -118,9 +119,9 @@ public class ImagenSeleccionada extends AppCompatActivity {
             }else if(resultCode == PngImage.PNG_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Exception error = result.getError();
             }
-        }
-         */
 
-    }
+        }
+        */
+
 
 }
