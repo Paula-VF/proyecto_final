@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar myToolbar;
     public static final int PICK_IMAGE = 1; // para saber cuando el usuario elige una foto
+    static final int REQUEST_IMAGE_CAPTURE = 1; // para saber cuando el usuario toma una foto
     ActivityResultLauncher<Intent> resultLauncher;
     private ImageView imagen;
     private ActivityMainBinding binding;
@@ -149,6 +150,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+
+
     // para que aparezcan los iconos de toolbar_prendas en el toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -163,26 +166,27 @@ public class MainActivity extends AppCompatActivity {
 
         if(id == R.id.AddBtn){
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            View dView = getLayoutInflater().inflate(R.layout.fragment_seleccionar_imagen, null);
+            View dView = getLayoutInflater().inflate(R.layout.seleccionar_imagen, null);
             Button camara = (Button) dView.findViewById(R.id.btnCamara);
             Button galeria = (Button) dView.findViewById(R.id.btnGaleria);
             camara.setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.M)
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onClick(View v) {
-                    pickImage();
-                    /*if(!checkCameraPermission()){
+                    if(!checkCameraPermission()){
                         requestCameraPermission();
-                    }else pickImage(); */
+                    }else takePicture();
                 }
             });
             galeria.setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.M)
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onClick(View v) {
+                    pickImage();
+                    /*
                     if(!checkStoragePermission()){
                         requestStoragePermission();
-                    }else pickImage();
+                    }else pickImage(); */
                 }
             });
 
@@ -208,12 +212,12 @@ public class MainActivity extends AppCompatActivity {
         return res2;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void requestCameraPermission(){
         requestPermissions(new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void requestStoragePermission(){
         requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
@@ -240,16 +244,13 @@ public class MainActivity extends AppCompatActivity {
     private void pickImage(){
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
-        intent.putExtra("crop", "true");
-        intent.putExtra("scale", true);
-        intent.putExtra("outputX", 256);
-        intent.putExtra("outputY", 256);
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        intent.putExtra("return-data", true);
         resultLauncher.launch(intent);
     }
 
-
+    private void takePicture(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.setType("image/*");
+        resultLauncher.launch(intent);
+    }
 
 }
