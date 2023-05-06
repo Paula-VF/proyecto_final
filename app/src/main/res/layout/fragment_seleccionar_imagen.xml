@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/dialogo"
+    android:padding="5dp"
     tools:context=".SeleccionarImagenFragment">
 
     <LinearLayout
@@ -10,20 +12,21 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <Button
             android:id="@+id/btnCamara"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cámara" />
+            android:text="Cámara"
+            android:textAlignment="textStart" />
 
         <Button
             android:id="@+id/btnGaleria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Galería" />
+            android:text="Galería"
+            android:textAlignment="textStart" />
     </LinearLayout>
 
 </FrameLayout>
