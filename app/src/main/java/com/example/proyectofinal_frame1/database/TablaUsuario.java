@@ -2,6 +2,7 @@ package com.example.proyectofinal_frame1.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
@@ -32,5 +33,28 @@ public class TablaUsuario extends ProyectoDatabaseHelper{
             ex.toString();
         }
         return id;
+    }
+
+    public boolean existeUsuario(String email) {
+        boolean existe = false;
+
+        try {
+            ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+            String[] projection = {"email"};
+            String selection = "email = ?";
+            String[] selectionArgs = {email};
+
+            Cursor cursor = db.query(TABLA_USUARIO, projection, selection, selectionArgs, null, null, null);
+
+            if (cursor.moveToFirst()) {
+                existe = true;
+            }
+            cursor.close();
+        } catch (Exception ex) {
+            ex.toString();
+        }
+        return existe;
     }
 }
