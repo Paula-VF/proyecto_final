@@ -21,11 +21,26 @@ public class ProyectoDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Código para crear las tablas de la base de datos
+        //Tabla categorías
         db.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLA_CATEGORIA +"(\n" +
                 "id	INTEGER PRIMARY KEY AUTOINCREMENT,\n"+
                 "nombre	TEXT NOT NULL UNIQUE)"
         );
 
+
+
+        //tabla usuarios
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLA_USUARIO+ "(\n" +
+                "user_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "nombre TEXT NOT NULL,\n" +
+                "emailTEXT NOT NULL UNIQUE,\n" +
+                "contraseña TEXT NOT NULL UNIQUE)"
+        );
+
+        //inserción de categorías por defecto
+        db.execSQL("INSERT INTO " + TABLA_CATEGORIA + " (nombre) VALUES ('Parte de arriba'), ('Parte de abajo'), ('Zapatos'), ('Complementos'), ('Accesorios')");
+
+        //tabla prendas
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLA_PRENDA+ "(\n" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "nombre TEXT NOT NULL,\n" +
@@ -37,26 +52,21 @@ public class ProyectoDatabaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(usuario) REFERENCES usuario(user_id) ON DELETE CASCADE)"
         );
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLA_USUARIO+ "(\n" +
-                "user_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                "nombre TEXT NOT NULL,\n" +
-                "emailTEXT NOT NULL UNIQUE,\n" +
-                "contraseña TEXT NOT NULL UNIQUE)"
+        //tabla conjuntos
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLA_CONJUNTO+ "(\n" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "nombre TEXT NOT NULL UNIQUE,\n" +
+                "usuario INTEGER NOT NULL,\n" +
+                "FOREIGN KEY(usuario) REFERENCES usuario(user_id) ON DELETE CASCADE)"
         );
 
+        //tabla prendasXConjuntos
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLA_PRENDASXCONJUNTOS+ "(\n" +
                 "id_prenda INTEGER NOT NULL,\n" +
                 "id_conjunto INTEGER NOT NULL,\n" +
                 "PRIMARY KEY(id_prenda,id_conjunto),\n" +
                 "FOREIGN KEY(id_conjunto) REFERENCES conjunto(id) ON DELETE CASCADE,\n" +
                 "FOREIGN KEY(id_prenda) REFERENCES prenda(id) ON DELETE CASCADE)"
-        );
-
-        db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLA_CONJUNTO+ "(\n" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                "nombre TEXT NOT NULL UNIQUE,\n" +
-                "usuario INTEGER NOT NULL,\n" +
-                "FOREIGN KEY(usuario) REFERENCES usuario(user_id) ON DELETE CASCADE)"
         );
     }
 
