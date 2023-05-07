@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar myToolbar;
     public static final int PICK_IMAGE = 1; // para saber cuando el usuario elige una foto
     static final int REQUEST_IMAGE_CAPTURE = 1; // para saber cuando el usuario toma una foto
+    private static final int CAMERA_REQUEST = 1;
     ActivityResultLauncher<Intent> resultLauncher;
     private ImageView imagen;
     private ActivityMainBinding binding;
@@ -175,18 +178,20 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if(!checkCameraPermission()){
                         requestCameraPermission();
-                    }else takePicture();
+                    }else{
+                        takePicture();
+                    }
                 }
             });
             galeria.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onClick(View v) {
-                    pickImage();
-                    /*
                     if(!checkStoragePermission()){
                         requestStoragePermission();
-                    }else pickImage(); */
+                    }else{
+                        pickImage();
+                    }
                 }
             });
 
@@ -203,24 +208,24 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean checkCameraPermission(){
         boolean res1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)== PackageManager.PERMISSION_GRANTED;
-        boolean res2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED;
+        boolean res2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES)== PackageManager.PERMISSION_GRANTED;
         return res1 && res2;
     }
 
     private boolean checkStoragePermission(){
-        boolean res2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED;
+        boolean res2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES)== PackageManager.PERMISSION_GRANTED;
         return res2;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void requestCameraPermission(){
-        requestPermissions(new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+        requestPermissions(new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.READ_MEDIA_IMAGES}, 100);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void requestStoragePermission(){
-        requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
-        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
+        requestPermissions(new String[]{android.Manifest.permission.READ_MEDIA_IMAGES}, 100);
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES)== PackageManager.PERMISSION_GRANTED){
             pickImage();
         }
     }
@@ -234,6 +239,9 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             Uri uri = result.getData().getData();
                             imagen.setImageURI(uri);
+                            Intent intent = new Intent(MainActivity.this, ImagenSeleccionada.class);
+                            intent.setData(uri);
+                            startActivity(intent);
                         } catch (Exception e) {
                             Toast.makeText(MainActivity.this, "Ninguna imagen seleccionada", Toast.LENGTH_SHORT).show();
                         }
@@ -247,10 +255,53 @@ public class MainActivity extends AppCompatActivity {
         resultLauncher.launch(intent);
     }
 
+    /*
+    private void registerResultCamara(Intent intentCamara){
+        resultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        try {
+                            if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+                                Bundle extras = data.getExtras();
+                                Bitmap photo = (Bitmap) intentCamara.getExtras().get("data");
+                                imagen.setImageBitmap(photo);
+                                Intent intent = new Intent(MainActivity.this, ImagenSeleccionada.class);
+                                // intent.setData(photo);
+                                startActivity(intent);
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(MainActivity.this, "Ninguna imagen seleccionada", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+    */
+
+
     private void takePicture(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.setType("image/*");
-        resultLauncher.launch(intent);
     }
+
+    /*
+    @Override
+        public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            try {
+                if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+                    Bundle extras = data.getExtras();
+                    Bitmap photo = (Bitmap) extras.get("data");
+                    imagen.setImageBitmap(photo);
+                    Intent intent = new Intent(MainActivity.this, ImagenSeleccionada.class);
+                    // intent.setData(photo);
+                    startActivity(intent);
+                }
+            } catch (Exception e) {
+                Toast.makeText(MainActivity.this, "Ninguna imagen seleccionada", Toast.LENGTH_SHORT).show();
+            }
+        }
+     */
 
 }

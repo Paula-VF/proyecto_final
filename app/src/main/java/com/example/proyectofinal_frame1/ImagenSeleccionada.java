@@ -20,6 +20,7 @@ import java.io.InputStream;
 public class ImagenSeleccionada extends AppCompatActivity {
 
     ImageView imagen;
+    String imageRetrieved = getIntent().getData().toString();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
