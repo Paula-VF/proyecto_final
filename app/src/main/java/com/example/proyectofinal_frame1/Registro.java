@@ -27,11 +27,20 @@ public class Registro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
+        txtLinkCuenta = (TextView) findViewById(R.id.txtLinkCuenta);
         nombreField = findViewById(R.id.nombreField);
         correoField = findViewById(R.id.correoField);
         contrasenaField = findViewById(R.id.contrasenaField);
         repiteContrasenaField = findViewById(R.id.repiteContrasenaField);
         btnCrearCuenta = findViewById(R.id.btnCrearCuenta);
+
+        txtLinkCuenta.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View view) {
+                 Intent intent = new Intent(Registro.this, Acceso.class);
+                 txtLinkCuenta.setTextColor(Color.parseColor("#7E7E7E"));
+                 startActivity(intent);
+             }
+        });
 
         btnCrearCuenta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,10 +67,10 @@ public class Registro extends AppCompatActivity {
                     }else {// Si todos los campos son válidos, crear la cuenta del usuario
                         // crear la cuenta del usuario
                         crearCuenta(nombre, correo, contrasena);
-
                     }
                 }
             }
+
         });
 
     }
@@ -70,6 +79,7 @@ public class Registro extends AppCompatActivity {
         Intent intent = new Intent(Registro.this, MainActivity.class);
         startActivity(intent);
     }
+
     private void crearCuenta(String nombre, String correo, String contrasena) {
         id = tablaUsuario.insertarUsuario(nombre, correo, contrasena);
         if (id != 0) {
@@ -80,4 +90,6 @@ public class Registro extends AppCompatActivity {
             Toast.makeText(Registro.this, "Error al registrar usuario", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }

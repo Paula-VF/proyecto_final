@@ -3,6 +3,7 @@ package com.example.proyectofinal_frame1;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -13,17 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.proyectofinal_frame1.database.ProyectoDatabaseHelper;
-
-//import com.denzcoskun.imageslider.ImageSlider;
-//import com.denzcoskun.imageslider.constants.AnimationTypes;
-//import com.denzcoskun.imageslider.constants.ScaleTypes;
-//import com.denzcoskun.imageslider.interfaces.ItemClickListener;
-//import com.denzcoskun.imageslider.models.SlideModel;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -45,6 +41,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.proyectofinal_frame1.databinding.ActivityMainBinding;
 
+import java.io.File;
+
 //  implements View.OnClickListener
 public class MainActivity extends AppCompatActivity {
 
@@ -61,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton imageButtonZapatos;
     private ImageButton imageButtonComplem;
     private ImageButton imageButtonAccesorios;
+
+    FrameLayout frameLayout; // https://abhiandroid.com/programming/camera
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -236,21 +236,49 @@ public class MainActivity extends AppCompatActivity {
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        try {
-                            Uri uri = result.getData().getData();
-                            imagen.setImageURI(uri);
-                            Intent intent = new Intent(MainActivity.this, ImagenSeleccionada.class);
-                            intent.setData(uri);
-                            startActivity(intent);
-                        } catch (Exception e) {
-                            Toast.makeText(MainActivity.this, "Ninguna imagen seleccionada", Toast.LENGTH_SHORT).show();
+                        if(result.getResultCode() == Activity.RESULT_OK) {
+                            try {
+                                Uri uri = result.getData().getData();
+                                /*
+                                final String path = getPathFromUri(uri);
+                                if(path!=null){
+                                    File f = new File(path);
+                                    uri = Uri.fromFile(f);
+                                }
+                                */
+
+                                //imagen.setImageURI(uri);
+                                Intent intent = new Intent(MainActivity.this,  ImagenSeleccionada.class);
+                                intent.putExtra("imageUri", uri.toString());
+                                //intent.setData(uri);
+                                //intent.setType("image/*");
+                                //intent.setAction(Intent.ACTION_GET_CONTENT);
+                                startActivity(intent);
+                            } catch (Exception e) {
+                                Toast.makeText(MainActivity.this, "Ninguna imagen seleccionada", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 });
     }
 
+    public String getPathFromUri(Uri uri){
+        String res = null;
+        String[] proj ={MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri,proj,null,null,null);
+        if(cursor.moveToFirst()){
+            int colum_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            res = cursor.getString(colum_index);
+        }
+        cursor.close();
+
+        return res;
+    }
+
     private void pickImage(){
         Intent intent = new Intent(Intent.ACTION_PICK);
+        //Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        //intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
         resultLauncher.launch(intent);
     }
@@ -262,9 +290,10 @@ public class MainActivity extends AppCompatActivity {
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
+                        super.onActivityResult(requestCode, resultCode, data);
                         try {
                             if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-                                Bundle extras = data.getExtras();
+                                Bundle extras = result.getData().getExtras();
                                 Bitmap photo = (Bitmap) intentCamara.getExtras().get("data");
                                 imagen.setImageBitmap(photo);
                                 Intent intent = new Intent(MainActivity.this, ImagenSeleccionada.class);
@@ -277,31 +306,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-    */
 
+     */
 
     private void takePicture(){
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         intent.setType("image/*");
     }
 
-    /*
-    @Override
-        public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-            try {
-                if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-                    Bundle extras = data.getExtras();
-                    Bitmap photo = (Bitmap) extras.get("data");
-                    imagen.setImageBitmap(photo);
-                    Intent intent = new Intent(MainActivity.this, ImagenSeleccionada.class);
-                    // intent.setData(photo);
-                    startActivity(intent);
-                }
-            } catch (Exception e) {
-                Toast.makeText(MainActivity.this, "Ninguna imagen seleccionada", Toast.LENGTH_SHORT).show();
-            }
-        }
-     */
 
 }
