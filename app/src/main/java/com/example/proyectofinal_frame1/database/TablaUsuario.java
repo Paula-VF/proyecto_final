@@ -17,7 +17,7 @@ public class TablaUsuario extends ProyectoDatabaseHelper{
         this.context=context;
     }
 
-    public long insertarUsuario(String nombre, String email, String contraseña){
+    public long insertarUsuario(String nombre, String email, String contrasena){
         long id = 0;
 
         try{
@@ -27,7 +27,7 @@ public class TablaUsuario extends ProyectoDatabaseHelper{
             values.put("nombre", nombre);
             values.put("email", email);
             //Modificar código. Contraseña segura
-            values.put("contraseña", contraseña);
+            values.put("contrasena", contrasena);
             id = db.insert(TABLA_USUARIO, null, values);
         }catch (Exception ex){
             ex.toString();
@@ -41,19 +41,14 @@ public class TablaUsuario extends ProyectoDatabaseHelper{
         try {
             ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
             SQLiteDatabase db = dbHelper.getReadableDatabase();
+            String[] params = {email};
+            Cursor cursor = db.rawQuery("SELECT * FROM usuario WHERE email= ?", params);
 
-            String[] projection = {"email"};
-            String selection = "email = ?";
-            String[] selectionArgs = {email};
-
-            Cursor cursor = db.query(TABLA_USUARIO, projection, selection, selectionArgs, null, null, null);
-
-            if (cursor.moveToFirst()) {
-                existe = true;
-            }
+            existe = cursor.moveToNext();
             cursor.close();
         } catch (Exception ex) {
             ex.toString();
+            existe = false;
         }
         return existe;
     }

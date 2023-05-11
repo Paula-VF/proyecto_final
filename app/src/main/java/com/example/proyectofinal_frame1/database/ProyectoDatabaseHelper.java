@@ -13,6 +13,7 @@ public class ProyectoDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLA_USUARIO = "usuario";
     public static final String TABLA_PRENDASXCONJUNTOS = "prendasXConjuntos";
     public static final String TABLA_CONJUNTO = "conjunto";
+    public static final String SALT = "salt";
 
     public ProyectoDatabaseHelper(Context context){
         super(context, DATABASE_NOMBRE, null, DATABASE_VERSION);
@@ -33,7 +34,7 @@ public class ProyectoDatabaseHelper extends SQLiteOpenHelper {
                 "user_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "nombre TEXT NOT NULL,\n" +
                 "emailTEXT NOT NULL UNIQUE,\n" +
-                "contraseña TEXT NOT NULL UNIQUE)"
+                "contrasena TEXT NOT NULL UNIQUE)"
         );
 
         //inserción de categorías por defecto
@@ -68,6 +69,12 @@ public class ProyectoDatabaseHelper extends SQLiteOpenHelper {
                 "PRIMARY KEY(id_prenda,id_conjunto),\n" +
                 "FOREIGN KEY(id_conjunto) REFERENCES conjunto(id) ON DELETE CASCADE,\n" +
                 "FOREIGN KEY(id_prenda) REFERENCES prenda(id) ON DELETE CASCADE)"
+        );
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+ SALT +"(\n" +
+                "id	INTEGER PRIMARY KEY AUTOINCREMENT,\n"+
+                "user_id INTEGER NOT NULL UNIQUE,\n"+
+                "salt TEXT NOT NULL)"
         );
     }
 

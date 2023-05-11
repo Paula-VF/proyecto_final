@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.proyectofinal_frame1.database.TablaSalt;
 import com.example.proyectofinal_frame1.database.TablaUsuario;
 
 public class Registro extends AppCompatActivity {
@@ -20,7 +22,8 @@ public class Registro extends AppCompatActivity {
     private EditText nombreField, correoField, contrasenaField, repiteContrasenaField;
     private Button btnCrearCuenta;
     TablaUsuario tablaUsuario = new TablaUsuario(this);
-    private long id = 0;
+    TablaSalt tablaSalt;
+    private long idUser = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +61,6 @@ public class Registro extends AppCompatActivity {
                     if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
                         correoField.setError("Por favor ingrese una dirección de correo electrónico válida");
                         correoField.requestFocus();
-                    }else if (tablaUsuario.existeUsuario(correo)) {
-                        correoField.setError("Este correo electrónico ya está registrado");
-                        correoField.requestFocus();
                     }else if (!contrasena.equals(repiteContrasena)) { // Validar que las contraseñas coincidan
                         repiteContrasenaField.setError("Las contraseñas no coinciden");
                         repiteContrasenaField.requestFocus();
@@ -72,7 +72,6 @@ public class Registro extends AppCompatActivity {
             }
 
         });
-
     }
 
     public void toMain() {
@@ -81,15 +80,26 @@ public class Registro extends AppCompatActivity {
     }
 
     private void crearCuenta(String nombre, String correo, String contrasena) {
-        id = tablaUsuario.insertarUsuario(nombre, correo, contrasena);
-        if (id != 0) {
-            Toast.makeText(Registro.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
-            // redirigir al usuario a la página de inicio de sesión
-            toMain();
-        } else {
-            Toast.makeText(Registro.this, "Error al registrar usuario", Toast.LENGTH_SHORT).show();
+        if (tablaUsuario.existeUsuario(correo)) {
+            correoField.setError("Este correo electrónico ya está registrado");
+            correoField.requestFocus();
+        }else{
+            //Salt. El valor generado puede ser almacenado en DB.
+            String salt = ContrasenaUtils.getSalt(30);
+            Log.d("---->>>SALT: " , salt);
+
+            String contrasenaSegura = ContrasenaUtils.generateSecurePassword(contrasena, salt);
+            TablaSalt tablaSalt = new TablaSalt(this);
+
+            idUser = tablaUsuario.insertarUsuario(nombre, correo, contrasenaSegura);
+            long idSalt= tablaSalt.insertarSalt(idUser, salt);
+            if (idUser != 0) {
+                Toast.makeText(Registro.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
+                // redirigir al usuario a la página de inicio de sesión
+                toMain();
+            } else {
+                Toast.makeText(Registro.this, "Error al registrar usuario", Toast.LENGTH_SHORT).show();
+            }
         }
     }
-
-
 }

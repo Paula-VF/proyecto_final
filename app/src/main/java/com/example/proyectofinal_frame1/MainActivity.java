@@ -130,11 +130,6 @@ public class MainActivity extends AppCompatActivity {
         //Creación de la base de datos
         ProyectoDatabaseHelper proyectoDBHelper = new ProyectoDatabaseHelper(MainActivity.this);
         SQLiteDatabase db = proyectoDBHelper.getWritableDatabase();
-        if(db!=null){
-            Toast.makeText(MainActivity.this, "Base de datos creada", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(MainActivity.this, "Error al crear la base de datos", Toast.LENGTH_SHORT).show();
-        }
 
         //Pruebas de la base de datos
 //        TablaPrenda prenda = new TablaPrenda(this);
