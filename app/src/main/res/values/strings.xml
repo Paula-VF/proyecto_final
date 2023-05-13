@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">proyectoFinal_frame1</string>
+    <string name="app_name">Dress Me App</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -20,4 +20,5 @@
     <string name="camisetas">Camisetas</string>
     <string name="sudaderas">Sudaderas</string>
     <string name="jerseys">Jerseys</string>
+    <string name="CreatedBy">Aplicación creada por Emely Aguilar y Paula Vallespín.</string>
 </resources>

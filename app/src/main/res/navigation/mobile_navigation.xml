@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.proyectofinal_frame1.ui.notifications.NotificationsFragment"
-        android:label="Otras opciones"
+        android:label="Acerca de"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/carruselFragment"

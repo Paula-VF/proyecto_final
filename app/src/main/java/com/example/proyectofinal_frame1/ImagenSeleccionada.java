@@ -35,12 +35,12 @@ public class ImagenSeleccionada extends AppCompatActivity {
             imagen.setImageURI(uri);
 
         }
-        */
+
 
         Bundle extras = getIntent().getExtras();
         Uri myUri = Uri.parse(extras.getString("imageUri"));
         imagen.setImageURI(myUri);
-        
+        */
 
 
     }

@@ -1,8 +1,6 @@
 package com.example.proyectofinal_frame1;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -51,7 +49,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.proyectofinal_frame1.databinding.ActivityMainBinding;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -70,10 +67,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton imageButtonZapatos;
     private ImageButton imageButtonComplem;
     private ImageButton imageButtonAccesorios;
-
-    TablaPrenda prenda;
-    TablaCategoria categoria;
-    TablaUsuario user;
 
     FrameLayout frameLayout; // https://abhiandroid.com/programming/camera
 
@@ -137,12 +130,17 @@ public class MainActivity extends AppCompatActivity {
         //Creación de la base de datos
         ProyectoDatabaseHelper proyectoDBHelper = new ProyectoDatabaseHelper(MainActivity.this);
         SQLiteDatabase db = proyectoDBHelper.getWritableDatabase();
+        if(db!=null){
+            Toast.makeText(MainActivity.this, "Base de datos creada", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(MainActivity.this, "Error al crear la base de datos", Toast.LENGTH_SHORT).show();
+        }
 
         //Pruebas de la base de datos
-        prenda = new TablaPrenda(this);
-        categoria = new TablaCategoria(this);
-        user = new TablaUsuario(this);
-
+//        TablaPrenda prenda = new TablaPrenda(this);
+//        TablaCategoria categoria = new TablaCategoria(this);
+//        TablaUsuario user = new TablaUsuario(this);
+//
 //        String rutaImagen = "https://www.trajesguzman.com/media/1624/camisa-basica-blanca.jpg";
 //        long idUser = user.insertarUsuario("emely", "mijij", "okey");
 //        long id= prenda.insertarPrenda("Camisa", rutaImagen, "verano", 1, idUser);
@@ -162,6 +160,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    public static final int PICK_IMAGE = 2; // para saber cuando el usuario elige una foto
+    static final int REQUEST_IMAGE_CAPTURE = 1; // para saber cuando el usuario toma una foto
+    Bitmap bitmap;
     // para que aparezcan los iconos de toolbar_prendas en el toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -215,8 +216,6 @@ public class MainActivity extends AppCompatActivity {
             if(result.getResultCode()==RESULT_OK){
                 Bundle extras = result.getData().getExtras();
                 Bitmap imgBitmap = (Bitmap) extras.get("data");
-                String rutaImagen = guardarImagenEnAlmacenamientoInterno(imgBitmap);
-                prenda.insertarPrenda("nombre", rutaImagen, "etiqueta1, etiqueta2", 1, 1);
                 imagen.setImageBitmap(imgBitmap);
             }
         }
@@ -225,62 +224,32 @@ public class MainActivity extends AppCompatActivity {
     ActivityResultLauncher<String> galeriaLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
         @Override
         public void onActivityResult(Uri result) {
-            String rutaImagen = obtenerRutaDeImagen(result);
-            prenda.insertarPrenda("nombreG", rutaImagen, "etiquetas", 1,1);
             imagen.setImageURI(result);
         }
     });
 
-    private boolean checkCameraPermission(){
-        boolean res1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)== PackageManager.PERMISSION_GRANTED;
-        return res1;
-    }
-
-    private boolean checkStoragePermission(){
-        boolean res2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES)== PackageManager.PERMISSION_GRANTED;
-        return res2;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void requestCameraPermission(){
-        requestPermissions(new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.READ_MEDIA_IMAGES}, 100);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void requestStoragePermission(){
-        requestPermissions(new String[]{android.Manifest.permission.READ_MEDIA_IMAGES}, 100);
-    }
-
-    private String guardarImagenEnAlmacenamientoInterno(Bitmap bitmap) {
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        File directory = cw.getDir("imagenes", Context.MODE_PRIVATE);
-        String fileName = "imagen_" + System.currentTimeMillis() + ".jpg";
-        File myPath = new File(directory, fileName);
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(myPath);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return myPath.getAbsolutePath();
-    }
-
-    private String obtenerRutaDeImagen(Uri uri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String filePath = cursor.getString(column_index);
-        cursor.close();
-        return filePath;
-    }
+//    private boolean checkCameraPermission(){
+//        boolean res1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)== PackageManager.PERMISSION_GRANTED;
+//        boolean res2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES)== PackageManager.PERMISSION_GRANTED;
+//        return res1 && res2;
+//    }
+//
+//    private boolean checkStoragePermission(){
+//        boolean res2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES)== PackageManager.PERMISSION_GRANTED;
+//        return res2;
+//    }
+//
+//    @RequiresApi(api = Build.VERSION_CODES.O)
+//    private void requestCameraPermission(){
+//        requestPermissions(new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.READ_MEDIA_IMAGES}, 100);
+//    }
+//
+//    @RequiresApi(api = Build.VERSION_CODES.O)
+//    private void requestStoragePermission(){
+//        requestPermissions(new String[]{android.Manifest.permission.READ_MEDIA_IMAGES}, 100);
+//        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES)== PackageManager.PERMISSION_GRANTED){
+//            pickImage();
+//        }
+//    }
 
 }
