@@ -27,6 +27,9 @@ import com.example.proyectofinal_frame1.database.ProyectoDatabaseHelper;
 import com.example.proyectofinal_frame1.database.TablaCategoria;
 import com.example.proyectofinal_frame1.database.TablaPrenda;
 import com.example.proyectofinal_frame1.database.TablaUsuario;
+import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
+import com.example.proyectofinal_frame1.ui.home.HomeFragment;
+import com.example.proyectofinal_frame1.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.activity.result.ActivityResult;
@@ -41,6 +44,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -57,16 +63,12 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar myToolbar;
+    private Toolbar myBottomMenu;
 
     ActivityResultLauncher<Intent> resultLauncher;
     private ImageView imagen;
     private ActivityMainBinding binding;
 
-    private ImageButton imageButtonArriba;
-    private ImageButton imageButtonAbajo;
-    private ImageButton imageButtonZapatos;
-    private ImageButton imageButtonComplem;
-    private ImageButton imageButtonAccesorios;
 
     FrameLayout frameLayout; // https://abhiandroid.com/programming/camera
 
@@ -77,55 +79,39 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // replaceFragment(new HomeFragment());
+
+        binding.navView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.navigation_home:
+                    replaceFragment(new HomeFragment());
+                    break;
+                case R.id.navigation_dashboard:
+                    replaceFragment(new DashboardFragment());
+                    break;
+                case R.id.armarConjuntosFragment:
+                    replaceFragment(new CarruselFragment());
+                    break;
+                case R.id.navigation_notifications:
+                    replaceFragment(new NotificationsFragment());
+                    break;
+            }
+            return true;
+        });
+
+
         // para que se muestre nuestra barra superior:
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        // para que se muestre nuestra barra inferior:
+       // myBottomMenu = (Toolbar) findViewById(R.id.my_bottom_menu);
+        //setSupportActionBar(myBottomMenu);
+
         imagen = (ImageView) findViewById(R.id.imagen);
 //        registerResult(); Esto creo que se tiene que borrar
 
-        // categorías
-        imageButtonArriba = (ImageButton) findViewById(R.id.imageButtonArriba);
-        imageButtonAbajo = (ImageButton) findViewById(R.id.imageButtonAbajo);
-        imageButtonZapatos = (ImageButton) findViewById(R.id.imageButtonZapatos);
-        imageButtonComplem = (ImageButton) findViewById(R.id.imageButtonComplem);
-        imageButtonAccesorios = (ImageButton) findViewById(R.id.imageButtonAccesorios);
-        // funcionalidad botones categorias
-        imageButtonArriba.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RopaSuperiorActivity.class);
-                startActivity(intent);
-            }
-        });
-        imageButtonAbajo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RopaInferiorActivity.class);
-                startActivity(intent);
-            }
-        });
-        imageButtonZapatos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ZapatosActivity.class);
-                startActivity(intent);
-            }
-        });
-        imageButtonComplem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ComplementosActivity.class);
-                startActivity(intent);
-            }
-        });
-        imageButtonAccesorios.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AccesoriosActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
         //Creación de la base de datos
         ProyectoDatabaseHelper proyectoDBHelper = new ProyectoDatabaseHelper(MainActivity.this);
@@ -149,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        /*
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -158,11 +145,25 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+         */
+
+    }
+
+
+
+
+    protected void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment);
+        fragmentTransaction.commit();
     }
 
     public static final int PICK_IMAGE = 2; // para saber cuando el usuario elige una foto
     static final int REQUEST_IMAGE_CAPTURE = 1; // para saber cuando el usuario toma una foto
     Bitmap bitmap;
+
     // para que aparezcan los iconos de toolbar_prendas en el toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -171,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // funcionalidad botón toolbar_prendas
     String currentPhotoPath;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -202,10 +204,6 @@ public class MainActivity extends AppCompatActivity {
             builder.setView(dView);
             AlertDialog dialog = builder.create();
             dialog.show();
-        } else if(id == R.id.FilterBtn){
-            Toast.makeText(this, "Filtrar", Toast.LENGTH_SHORT).show();
-        } else if(id == R.id.SearchBtn){
-            Toast.makeText(this, "Buscar", Toast.LENGTH_SHORT).show();
         }
         return true;
     }

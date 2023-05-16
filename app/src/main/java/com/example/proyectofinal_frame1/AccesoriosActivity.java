@@ -4,6 +4,7 @@ import static com.google.android.material.internal.ContextUtils.getActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -23,6 +24,8 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class AccesoriosActivity extends AppCompatActivity {
 
+    MainActivity main = new MainActivity();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,28 +37,21 @@ public class AccesoriosActivity extends AppCompatActivity {
             @SuppressLint("ResourceType")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                switch(id){
+                switch (item.getItemId()){
                     case R.id.navigation_home:
-                        startActivity(new Intent(AccesoriosActivity.this, MainActivity.class));
-                        return true;
+                        main.replaceFragment(new HomeFragment());
+                        break;
                     case R.id.navigation_dashboard:
-                        FragmentManager fm = getSupportFragmentManager();
-                        FragmentTransaction ft = fm.beginTransaction();
-                        ft.replace(R.id.accesoriosLayout, new DashboardFragment());
-                        ft.commit();
-                        return true;
-                    case R.id.carruselFragment:
-                        finish();
-                        startActivity(new Intent(AccesoriosActivity.this, CarruselFragment.class));
-                        return true;
+                        main.replaceFragment(new DashboardFragment());
+                        break;
+                    case R.id.armarConjuntosFragment:
+                        main.replaceFragment(new CarruselFragment());
+                        break;
                     case R.id.navigation_notifications:
-                        finish();
-                        startActivity(new Intent(AccesoriosActivity.this, NotificationsFragment.class));
-                        return true;
-                    default:
-                        return false;
+                        main.replaceFragment(new NotificationsFragment());
+                        break;
                 }
+                return true;
             }
         });
 

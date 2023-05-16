@@ -12,6 +12,7 @@
         android:layout_margin="10dp"
         android:background="@color/ourBlue"
         android:text="Cámara"
+        android:drawableLeft="@drawable/camara"
         android:padding="5dp"
         android:textAlignment="textStart" />
 
@@ -23,6 +24,7 @@
         android:layout_weight="1"
         android:background="@color/ourBlue"
         android:text="Galería"
+        android:drawableLeft="@drawable/galeria"
         android:padding="5dp"
         android:textAlignment="textStart" />
 
