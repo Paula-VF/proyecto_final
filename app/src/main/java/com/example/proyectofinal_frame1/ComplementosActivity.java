@@ -2,6 +2,7 @@ package com.example.proyectofinal_frame1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
+import com.example.proyectofinal_frame1.ui.home.HomeFragment;
 import com.example.proyectofinal_frame1.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -22,35 +24,39 @@ public class ComplementosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complementos);
 
-        // funcionalidad bottom nav menu
+        // funcionalidad bottom_nav_menu
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        //navView.setSelectedItemId(R.id.nav_host_fragment_activity_main);
         navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("ResourceType")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                switch(id){
+                switch (item.getItemId()){
                     case R.id.navigation_home:
-                        startActivity(new Intent(ComplementosActivity.this, MainActivity.class));
-                        return true;
+                        replaceFragment(new HomeFragment());
+                        break;
                     case R.id.navigation_dashboard:
-                        FragmentManager fm = getSupportFragmentManager();
-                        FragmentTransaction ft = fm.beginTransaction();
-                        ft.add(R.id.complemLayout, new DashboardFragment());
-                        ft.commit();
-                        return true;
-                    case R.id.carruselFragment:
-                        finish();
-                        startActivity(new Intent(ComplementosActivity.this, CarruselFragment.class));
-                        return true;
+                        replaceFragment(new DashboardFragment());
+                        break;
+                    case R.id.armarConjuntosFragment:
+                        replaceFragment(new CarruselFragment());
+                        break;
                     case R.id.navigation_notifications:
-                        finish();
-                        startActivity(new Intent(ComplementosActivity.this, NotificationsFragment.class));
-                        return true;
-                    default:
-                        return false;
+                        replaceFragment(new NotificationsFragment());
+                        break;
                 }
+                return true;
             }
         });
     }
+
+    protected void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.accesoriosLayout, fragment); // creo que el fallo está aquí
+        // si se pone R.id.accesoriosLayout se ven los activity pero sin el toolbar
+        fragmentTransaction.commit();
+    }
+
+
 }

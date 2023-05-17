@@ -1,5 +1,6 @@
 package com.example.proyectofinal_frame1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -53,6 +54,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.proyectofinal_frame1.databinding.ActivityMainBinding;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,12 +65,14 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar myToolbar;
-    private Toolbar myBottomMenu;
 
     ActivityResultLauncher<Intent> resultLauncher;
     private ImageView imagen;
     private ActivityMainBinding binding;
 
+    public MainActivity(){
+
+    }
 
     FrameLayout frameLayout; // https://abhiandroid.com/programming/camera
 
@@ -79,8 +83,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // replaceFragment(new HomeFragment());
-
+        /*
         binding.navView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.navigation_home:
@@ -98,15 +101,12 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+         */
 
 
         // para que se muestre nuestra barra superior:
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-
-        // para que se muestre nuestra barra inferior:
-       // myBottomMenu = (Toolbar) findViewById(R.id.my_bottom_menu);
-        //setSupportActionBar(myBottomMenu);
 
         imagen = (ImageView) findViewById(R.id.imagen);
 //        registerResult(); Esto creo que se tiene que borrar
@@ -133,23 +133,19 @@ public class MainActivity extends AppCompatActivity {
 //        long id2= prenda.insertarPrenda("Camisa", "https://hmperu.vtexassets.com/arquivos/ids/3024520-483-725/Pantalon-de-buzo---Rosado---H-M-PE.jpg?v=637983998116170000", "verano", 1, idUser);
 
 
-
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        /*
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.armarConjuntosFragment, R.id.navigation_notifications)
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.armarConjuntosFragment, R.id.navigation_notifications,
+                R.id.accesoriosLayout)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-         */
-
     }
-
 
 
 
