@@ -47,12 +47,12 @@ public class TablaPrenda extends ProyectoDatabaseHelper{
         return id;
     }
 
-    public List<String> obtenerRutasImagenes() {
+    public List<String> obtenerRutasImagenes(int numCategoría) {
         List<String> rutasImagenes = new ArrayList<>();
         try {
             ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
             SQLiteDatabase db = dbHelper.getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT imagen FROM " + TABLA_PRENDA, null);
+            Cursor cursor = db.rawQuery("SELECT imagen FROM " + TABLA_PRENDA+ " WHERE categoria = ?", new String[]{String.valueOf(numCategoría)});
             if (cursor.moveToFirst()) {
                 do {
                     int columnaImagen = cursor.getColumnIndex("imagen");

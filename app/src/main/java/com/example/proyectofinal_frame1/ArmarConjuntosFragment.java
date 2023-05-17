@@ -87,9 +87,9 @@ public class ArmarConjuntosFragment extends Fragment {
         CarruselFragment carrusel1, carrusel2, carrusel3;
         FragmentManager fragmentManager = getChildFragmentManager();
 
-        carrusel1 = new CarruselFragment();
-        carrusel2 = new CarruselFragment();
-        carrusel3 = new CarruselFragment();
+        carrusel1 = new CarruselFragment(1);
+        carrusel2 = new CarruselFragment(2);
+        carrusel3 = new CarruselFragment(3);
 
         fragmentManager.beginTransaction()
                 .replace(R.id.contenedorCarrusel1, carrusel1)
