@@ -7,6 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
@@ -24,38 +28,68 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class AccesoriosActivity extends AppCompatActivity {
 
-    MainActivity main = new MainActivity();
+    // private ActivityAccesoriosBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accesorios);
 
-        // funcionalidad bottom nav menu
+        /*
+        binding = ActivityAccesoriosBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+         */
+
+
+        // funcionalidad bottom_nav_menu
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        //navView.setSelectedItemId(R.id.nav_host_fragment_activity_main);
         navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("ResourceType")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.navigation_home:
-                        main.replaceFragment(new HomeFragment());
+                        startActivity(new Intent(AccesoriosActivity.this, MainActivity.class));
                         break;
                     case R.id.navigation_dashboard:
-                        main.replaceFragment(new DashboardFragment());
+                        replaceFragment(new DashboardFragment());
                         break;
                     case R.id.armarConjuntosFragment:
-                        main.replaceFragment(new CarruselFragment());
+                        replaceFragment(new CarruselFragment());
                         break;
                     case R.id.navigation_notifications:
-                        main.replaceFragment(new NotificationsFragment());
+                        replaceFragment(new NotificationsFragment());
                         break;
                 }
                 return true;
             }
         });
 
+        /*
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+        R.id.navigation_home, R.id.navigation_dashboard, R.id.armarConjuntosFragment,
+        R.id.accesoriosLayout)
+        .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
 
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
+
+         */
+
+    }
+
+    protected void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment); // creo que el fallo está aquí
+        // si se pone R.id.accesoriosLayout se ven los activity pero sin el toolbar
+        fragmentTransaction.commit();
     }
 
 

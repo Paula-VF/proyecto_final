@@ -1,92 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context=".Conjunto">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="173dp"
-        android:layout_height="227dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="203dp"
-        android:layout_marginBottom="485dp"
-        app:srcCompat="@drawable/prenda2"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="61dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="169dp"
-        android:layout_height="245dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="204dp"
-        android:layout_marginBottom="233dp"
-        app:srcCompat="@drawable/prenda3"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="288dp" />
+        <FrameLayout
+            android:id="@+id/imagePArriba"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            app:srcCompat="@drawable/prenda2" />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="179dp"
-        android:layout_height="114dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="192dp"
-        android:layout_marginBottom="111dp"
-        app:srcCompat="@drawable/prenda5"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="533dp" />
+        <FrameLayout
+            android:id="@+id/imagePAbajo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            app:srcCompat="@drawable/prenda3" />
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="159dp"
-        android:layout_height="129dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="566dp"
-        app:srcCompat="@drawable/prenda8"
-        tools:layout_editor_absoluteX="212dp"
-        tools:layout_editor_absoluteY="61dp" />
+        <FrameLayout
+            android:id="@+id/imageZapatos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/prenda5" />
+    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="134dp"
-        android:layout_height="137dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="426dp"
-        app:srcCompat="@drawable/prenda7"
-        tools:layout_editor_absoluteX="228dp"
-        tools:layout_editor_absoluteY="190dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="129dp"
-        android:layout_height="146dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="280dp"
-        app:srcCompat="@drawable/prenda10"
-        tools:layout_editor_absoluteX="233dp"
-        tools:layout_editor_absoluteY="327dp" />
+        <FrameLayout
+            android:id="@+id/imageAccesorios1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/prenda8" />
 
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="167dp"
-        android:layout_height="221dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="58dp"
-        app:srcCompat="@drawable/prenda9"
-        tools:layout_editor_absoluteX="212dp"
-        tools:layout_editor_absoluteY="473dp" />
-</RelativeLayout>
+        <FrameLayout
+            android:id="@+id/imageAccesorios2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/prenda7" />
+
+        <FrameLayout
+            android:id="@+id/imageComplementos1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/prenda10"/>
+
+        <FrameLayout
+            android:id="@+id/imageComplementos2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/prenda9" />
+    </LinearLayout>
+</LinearLayout>
