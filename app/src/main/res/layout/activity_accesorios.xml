@@ -23,10 +23,10 @@
     <!-->
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="411dp"
-        android:layout_height="729dp"
+        android:layout_width="412dp"
+        android:layout_height="673dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -83,7 +83,7 @@
         </FrameLayout>
     </LinearLayout>
 
-    <!-->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
@@ -98,7 +98,6 @@
         app:itemIconSize="35dp"
         app:itemIconTint="@drawable/bottom_navigation_selector"
         />
-    <!-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

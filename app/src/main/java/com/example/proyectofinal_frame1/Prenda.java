@@ -13,6 +13,9 @@ public class Prenda {
         this.etiquetas = etiquetas;
     }
 
+    public Prenda() {
+    }
+
     public String getNombre() {
         return nombre;
     }

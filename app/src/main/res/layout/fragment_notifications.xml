@@ -20,15 +20,13 @@
     <TextView
         android:id="@+id/created_by"
         android:layout_width="wrap_content"
-        android:layout_height="97dp"
-        android:layout_alignBottom="@+id/nombre"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="380dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
         android:gravity="left"
         android:text="Aplicación creada por Emely Aguilar y Paula Vallespín"
         android:textAlignment="gravity"
@@ -71,6 +69,29 @@
         android:src="@drawable/dress_me_app"
         tools:layout_editor_absoluteX="67dp"
         tools:layout_editor_absoluteY="473dp" />
+
+    <!-->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="30dp"
+        android:text="Aplicación creada por Emely Aguilar y Paula Vallespín"
+        android:textAlignment="gravity"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.112" />
+    <!-->
 
     <!-->
     <com.google.android.material.bottomnavigation.BottomNavigationView

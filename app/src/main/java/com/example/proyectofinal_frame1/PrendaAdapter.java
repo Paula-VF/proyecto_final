@@ -68,4 +68,7 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
             }
         }
     }
+
+
+
 }

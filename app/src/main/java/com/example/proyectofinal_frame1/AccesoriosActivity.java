@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.proyectofinal_frame1.databinding.ActivityAccesoriosBinding;
 import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
 import com.example.proyectofinal_frame1.ui.home.HomeFragment;
 import com.example.proyectofinal_frame1.ui.notifications.NotificationsFragment;
@@ -28,30 +29,28 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class AccesoriosActivity extends AppCompatActivity {
 
-    // private ActivityAccesoriosBinding binding;
+    private ActivityAccesoriosBinding binding;
+    MainActivity main = new MainActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accesorios);
 
-        /*
         binding = ActivityAccesoriosBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-         */
 
 
         // funcionalidad bottom_nav_menu
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        //navView.setSelectedItemId(R.id.nav_host_fragment_activity_main);
-        navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        // main.getNavView().setSelectedItemId(R.id.nav_host_fragment_activity_main);
+        binding.navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("ResourceType")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.navigation_home:
-                        startActivity(new Intent(AccesoriosActivity.this, MainActivity.class));
+                        replaceFragment(new HomeFragment());
                         break;
                     case R.id.navigation_dashboard:
                         replaceFragment(new DashboardFragment());
@@ -67,8 +66,8 @@ public class AccesoriosActivity extends AppCompatActivity {
             }
         });
 
+
         /*
-        BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -78,8 +77,7 @@ public class AccesoriosActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
-
+        NavigationUI.setupWithNavController(main.getBinding().navView, navController);
          */
 
     }
@@ -87,7 +85,7 @@ public class AccesoriosActivity extends AppCompatActivity {
     protected void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment); // creo que el fallo está aquí
+        fragmentTransaction.replace(R.id.accesoriosLayout, fragment); // creo que el fallo está aquí
         // si se pone R.id.accesoriosLayout se ven los activity pero sin el toolbar
         fragmentTransaction.commit();
     }

@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar myToolbar;
 
-    private Toolbar myBottomMenu;
     TablaPrenda prenda;
     TablaCategoria categoria;
     TablaUsuario user;
@@ -77,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
     ActivityResultLauncher<Intent> resultLauncher;
     private ImageView imagen;
     private ActivityMainBinding binding;
+
+    private BottomNavigationView navView;
 
     public MainActivity(){
 
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 //        long id2= prenda.insertarPrenda("Camisa", "https://hmperu.vtexassets.com/arquivos/ids/3024520-483-725/Pantalon-de-buzo---Rosado---H-M-PE.jpg?v=637983998116170000", "verano", 1, idUser);
 
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -147,6 +148,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+    }
+
+    public ActivityMainBinding getBinding() {
+        return binding;
+    }
+
+    public BottomNavigationView getNavView() {
+        return navView;
     }
 
     protected void replaceFragment(Fragment fragment){
