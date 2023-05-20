@@ -31,6 +31,9 @@ public class RopaSuperiorActivity extends AppCompatActivity {
 
     private FloatingActionButton floatBtn;
 
+    private EditText writeName;
+    private Button btnAdded;
+
     Context context;
 
     @Override
@@ -40,13 +43,15 @@ public class RopaSuperiorActivity extends AppCompatActivity {
 
         context = getApplicationContext();
 
+        writeName = findViewById(R.id.write_name);
+        btnAdded = findViewById(R.id.btn_added);
+
         floatBtn = (FloatingActionButton) findViewById(R.id.float_btn);
 
         floatBtn.setOnClickListener(new View.OnClickListener() {
             // @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                EditText writeName = findViewById(R.id.write_name);
                 writeName.setVisibility(View.VISIBLE);
                 writeName.requestFocus();
                 showKeyboard(); // abrir teclado
@@ -57,7 +62,6 @@ public class RopaSuperiorActivity extends AppCompatActivity {
                         if (!hasFocus) {
                             // al pinchar fuera del teclado o de writeName
                             closeKeyboard();
-                            Button btnAdded = findViewById(R.id.btn_added);
                             btnAdded.setText(writeName.getText().toString().toUpperCase());// cambio texto de botón
                             btnAdded.setVisibility(View.VISIBLE);
                             writeName.setVisibility(View.GONE);
@@ -75,7 +79,7 @@ public class RopaSuperiorActivity extends AppCompatActivity {
                                 (keyCode == KeyEvent.KEYCODE_ENTER)) {
                             // acciones a realizar al presionar enter
                             closeKeyboard();
-                            Button btnAdded = findViewById(R.id.btn_added);
+                            btnAdded = findViewById(R.id.btn_added);
                             btnAdded.setText(writeName.getText().toString().toUpperCase());// cambio texto de botón
                             btnAdded.setVisibility(View.VISIBLE);
                             writeName.setVisibility(View.GONE);
@@ -89,6 +93,54 @@ public class RopaSuperiorActivity extends AppCompatActivity {
 
             }
         });
+
+
+        // al mantener un botón de subcategoría pulsado
+        btnAdded.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View v) {
+                btnAdded.setVisibility(View.INVISIBLE);
+                writeName.setVisibility(View.VISIBLE);
+                writeName.requestFocus();
+                showKeyboard(); // abrir teclado
+
+                writeName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (!hasFocus) {
+                            // al pinchar fuera del teclado o de writeName
+                            closeKeyboard();
+                            btnAdded.setText(writeName.getText().toString().toUpperCase());// cambio texto de botón
+                            btnAdded.setVisibility(View.VISIBLE);
+                            writeName.setVisibility(View.GONE);
+                            writeName.setText(null);
+                            // añadir nueva subcategoría a la bd
+                        }
+                    }
+                });
+
+
+                writeName.setOnKeyListener(new View.OnKeyListener() {
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        // If the event is a key-down event on the "enter" button
+                        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                                (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                            // acciones a realizar al presionar enter
+                            closeKeyboard();
+                            btnAdded.setText(writeName.getText().toString().toUpperCase());// cambio texto de botón
+                            btnAdded.setVisibility(View.VISIBLE);
+                            writeName.setVisibility(View.GONE);
+                            writeName.setText(null);
+                            // añadir nueva subcategoría a la bd
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                return true;
+            }
+        });
+
 
     }
 

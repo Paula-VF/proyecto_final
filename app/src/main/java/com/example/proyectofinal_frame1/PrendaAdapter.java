@@ -36,6 +36,7 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
         return prendas.size();
     }
 
+    // ViewHolder
     public static class PrendaViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageView;

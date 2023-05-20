@@ -31,7 +31,7 @@
         app:navGraph="@navigation/mobile_navigation">
 
         <Button
-            android:id="@+id/btn_camisetas"
+            android:id="@+id/btn1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ourBlue"
@@ -40,14 +40,14 @@
             tools:ignore="UsingOnClickInXml" />
 
         <Button
-            android:id="@+id/btn_sudaderas"
+            android:id="@+id/btn2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ourBlue"
             android:text="@string/sudaderas" />
 
         <Button
-            android:id="@+id/btn_jerseys"
+            android:id="@+id/btn3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ourBlue"
