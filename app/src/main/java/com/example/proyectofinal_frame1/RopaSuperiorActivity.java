@@ -17,8 +17,12 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -27,12 +31,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class RopaSuperiorActivity extends AppCompatActivity {
+public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatActivity {
 
     private FloatingActionButton floatBtn;
+    private Toolbar toolbar;
 
     private EditText writeName;
     private Button btnAdded;
+    private ImageButton btnDelete;
 
     Context context;
 
@@ -45,7 +51,10 @@ public class RopaSuperiorActivity extends AppCompatActivity {
 
         writeName = findViewById(R.id.write_name);
         btnAdded = findViewById(R.id.btn_added);
+        btnDelete = findViewById(R.id.btn_delete);
 
+        toolbar = findViewById(R.id.my_toolbar);
+        toolbar.setTitle("Parte de arriba");
         floatBtn = (FloatingActionButton) findViewById(R.id.float_btn);
 
         floatBtn.setOnClickListener(new View.OnClickListener() {
@@ -78,12 +87,11 @@ public class RopaSuperiorActivity extends AppCompatActivity {
                         if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                                 (keyCode == KeyEvent.KEYCODE_ENTER)) {
                             // acciones a realizar al presionar enter
-                            closeKeyboard();
-                            btnAdded = findViewById(R.id.btn_added);
                             btnAdded.setText(writeName.getText().toString().toUpperCase());// cambio texto de botón
                             btnAdded.setVisibility(View.VISIBLE);
                             writeName.setVisibility(View.GONE);
                             writeName.setText(null);
+                            closeKeyboard();
                             // añadir nueva subcategoría a la bd
                             return true;
                         }
@@ -137,23 +145,37 @@ public class RopaSuperiorActivity extends AppCompatActivity {
                     }
                 });
 
+
+                // icono delete
+                btnDelete.setVisibility(View.VISIBLE);
+
+
                 return true;
             }
         });
 
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                writeName.setVisibility(View.GONE);
+                btnAdded.setVisibility(View.GONE);
+                btnDelete.setVisibility(View.INVISIBLE);
+            }
+        });
 
     }
 
-
+    // mostrar teclado
     public void showKeyboard(){
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
-
+    // cerrar teclado
     public void closeKeyboard(){
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
+
 
 
 }
