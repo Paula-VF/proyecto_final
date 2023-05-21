@@ -1,7 +1,5 @@
 package com.example.proyectofinal_frame1;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -9,30 +7,23 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.proyectofinal_frame1.database.ProyectoDatabaseHelper;
 
 import com.example.proyectofinal_frame1.database.TablaCategoria;
 import com.example.proyectofinal_frame1.database.TablaPrenda;
 import com.example.proyectofinal_frame1.database.TablaUsuario;
-import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
-import com.example.proyectofinal_frame1.ui.home.HomeFragment;
-import com.example.proyectofinal_frame1.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.activity.result.ActivityResult;
@@ -40,13 +31,11 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -56,13 +45,10 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.proyectofinal_frame1.databinding.ActivityMainBinding;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 //  implements View.OnClickListener
 public class MainActivity extends AppCompatActivity {
@@ -73,7 +59,10 @@ public class MainActivity extends AppCompatActivity {
     TablaCategoria categoria;
     TablaUsuario user;
 
-    ActivityResultLauncher<Intent> resultLauncher;
+    String rutaImagen;
+    ImageView imagenViewPrenda;
+    Bitmap imgBitmap;
+
     private ImageView imagen;
     private ActivityMainBinding binding;
 
@@ -200,11 +189,11 @@ public class MainActivity extends AppCompatActivity {
                     camaraLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
                 }
             });
+
             galeria.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onClick(View v) {
-                    if(!checkStoragePermission()) requestStoragePermission();
                     galeriaLauncher.launch("image/*");
                 }
             });
@@ -221,10 +210,9 @@ public class MainActivity extends AppCompatActivity {
         public void onActivityResult(ActivityResult result) {
             if(result.getResultCode()==RESULT_OK){
                 Bundle extras = result.getData().getExtras();
-                Bitmap imgBitmap = (Bitmap) extras.get("data");
-                String rutaImagen = guardarImagenEnAlmacenamientoInterno(imgBitmap);
-                prenda.insertarPrenda("nombre", rutaImagen, "etiqueta1, etiqueta2", 1, 1);
-                imagen.setImageBitmap(imgBitmap);
+                imgBitmap = (Bitmap) extras.get("data");
+                rutaImagen = guardarImagenEnAlmacenamientoInterno(imgBitmap);
+                imagenViewPrenda.setImageBitmap(imgBitmap);
             }
         }
     });
@@ -288,6 +276,24 @@ public class MainActivity extends AppCompatActivity {
         String filePath = cursor.getString(column_index);
         cursor.close();
         return filePath;
+    }
+    private void abrirDialogDatos(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        View dView = getLayoutInflater().inflate(R.layout.insercion_datos_prenda, null);
+        EditText nombrePrenda = dView.findViewById(R.id.nombrePrenda);
+        EditText etiquetasPrenda = dView.findViewById(R.id.etiquetasPrenda);
+        ImageView imagenPrendaDialog = dView.findViewById(R.id.imagenPrenda);
+        imagenPrendaDialog.setImageBitmap(imgBitmap);
+
+        String nombre = nombrePrenda.getText().toString();
+        String etiquetas = etiquetasPrenda.getText().toString();
+
+        builder.setView(dView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        prenda.insertarPrenda(nombre, rutaImagen, etiquetas, 1, 1);
+
     }
 
 }
