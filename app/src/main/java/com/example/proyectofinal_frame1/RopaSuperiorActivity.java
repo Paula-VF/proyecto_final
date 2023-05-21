@@ -34,7 +34,7 @@ import java.util.Locale;
 public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatActivity {
 
     private FloatingActionButton floatBtn;
-    private Toolbar toolbar;
+    //private Toolbar toolbar;
 
     private EditText writeName;
     private Button btnAdded;
@@ -53,8 +53,8 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
         btnAdded = findViewById(R.id.btn_added);
         btnDelete = findViewById(R.id.btn_delete);
 
-        toolbar = findViewById(R.id.my_toolbar);
-        toolbar.setTitle("Parte de arriba");
+        // toolbar = findViewById(R.id.my_toolbar);
+        // toolbar.setTitle("  Parte de arriba");
         floatBtn = (FloatingActionButton) findViewById(R.id.float_btn);
 
         floatBtn.setOnClickListener(new View.OnClickListener() {

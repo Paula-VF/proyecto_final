@@ -41,6 +41,7 @@ public class AccesoriosActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
+        /*
         // funcionalidad bottom_nav_menu
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // main.getNavView().setSelectedItemId(R.id.nav_host_fragment_activity_main);
@@ -67,7 +68,7 @@ public class AccesoriosActivity extends AppCompatActivity {
         });
 
 
-        /*
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
