@@ -181,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     camaraLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
-
                 }
             });
 
@@ -208,6 +207,8 @@ public class MainActivity extends AppCompatActivity {
                 imgBitmap = (Bitmap) extras.get("data");
                 rutaImagen = guardarImagenEnAlmacenamientoInterno(imgBitmap);
                 imagenViewPrenda.setImageBitmap(imgBitmap);
+                Intent intent2 = new Intent(MainActivity.this, AniadirDatosdePrendaActivity.class);
+                startActivity(intent2);
             }
         }
     });
@@ -272,22 +273,4 @@ public class MainActivity extends AppCompatActivity {
         cursor.close();
         return filePath;
     }
-    private void abrirDialogDatos(){
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        View dView = getLayoutInflater().inflate(R.layout.insercion_datos_prenda, null);
-        EditText nombrePrenda = dView.findViewById(R.id.nombrePrenda);
-        ImageView imagenPrendaDialog = dView.findViewById(R.id.imagenPrenda);
-        imagenPrendaDialog.setImageBitmap(imgBitmap);
-
-        String nombre = nombrePrenda.getText().toString();
-        //chip con subcategorias
-
-        builder.setView(dView);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        //prenda.insertarPrenda(nombre, rutaImagen, 1, 1);
-
-    }
-
 }
