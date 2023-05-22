@@ -180,13 +180,8 @@ public class MainActivity extends AppCompatActivity {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onClick(View v) {
-//                    if(!checkCameraPermission()) {
-//                        requestCameraPermission();
-//                    }
-//                    if(!checkStoragePermission()){
-//                        requestStoragePermission();
-//                    }
                     camaraLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
+
                 }
             });
 
