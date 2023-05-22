@@ -277,17 +277,16 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         View dView = getLayoutInflater().inflate(R.layout.insercion_datos_prenda, null);
         EditText nombrePrenda = dView.findViewById(R.id.nombrePrenda);
-        EditText etiquetasPrenda = dView.findViewById(R.id.etiquetasPrenda);
         ImageView imagenPrendaDialog = dView.findViewById(R.id.imagenPrenda);
         imagenPrendaDialog.setImageBitmap(imgBitmap);
 
         String nombre = nombrePrenda.getText().toString();
-        String etiquetas = etiquetasPrenda.getText().toString();
+        //chip con subcategorias
 
         builder.setView(dView);
         AlertDialog dialog = builder.create();
         dialog.show();
-        prenda.insertarPrenda(nombre, rutaImagen, etiquetas, 1, 1);
+        //prenda.insertarPrenda(nombre, rutaImagen, 1, 1);
 
     }
 

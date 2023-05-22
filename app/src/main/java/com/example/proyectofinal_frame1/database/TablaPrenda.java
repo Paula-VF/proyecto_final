@@ -20,7 +20,7 @@ public class TablaPrenda extends ProyectoDatabaseHelper{
         this.context=context;
     }
 
-    public long insertarPrenda(String nombre, String rutaImagen, String etiquetas, long categoria, long usuario) {
+    public long insertarPrenda(String nombre, String rutaImagen, long subcategoria, long usuario) {
         long id = 0;
 
         try {
@@ -32,8 +32,7 @@ public class TablaPrenda extends ProyectoDatabaseHelper{
             ContentValues values = new ContentValues();
             values.put("nombre", nombre);
             values.put("imagen", rutaImagen);
-            values.put("etiquetas", etiquetas);
-            values.put("categoria", categoria);
+            values.put("subcategoria", subcategoria);
             values.put("usuario", usuario);
 
             // Insertar el registro en la tabla

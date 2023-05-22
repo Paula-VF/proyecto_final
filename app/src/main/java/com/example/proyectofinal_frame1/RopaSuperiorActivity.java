@@ -62,6 +62,7 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
             }
         });
 
+        //boton añadir subcategoria
         floatBtn = (FloatingActionButton) findViewById(R.id.float_btn);
 
         floatBtn.setOnClickListener(new View.OnClickListener() {

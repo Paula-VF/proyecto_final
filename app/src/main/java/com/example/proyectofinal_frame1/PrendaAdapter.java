@@ -41,32 +41,15 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
 
         private ImageView imageView;
         private TextView nombreTextView;
-        private TextView textViewEtiqueta1;
-        private TextView textViewEtiqueta2;
-        private TextView textViewEtiqueta3;
-
         public PrendaViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewPrenda);
             nombreTextView = itemView.findViewById(R.id.textViewNombrePrenda);
-            textViewEtiqueta1 = itemView.findViewById(R.id.textViewEtiqueta1);
-            textViewEtiqueta2 = itemView.findViewById(R.id.textViewEtiqueta2);
-            textViewEtiqueta3 = itemView.findViewById(R.id.textViewEtiqueta3);
         }
 
         public void bind(Prenda prenda) {
             imageView.setImageResource(prenda.getUrlImagen());
             nombreTextView.setText(prenda.getNombre());
-            List<String> etiquetas = prenda.getEtiquetas();
-            if (etiquetas.size() > 0) {
-                textViewEtiqueta1.setText(etiquetas.get(0));
-            }
-            if (etiquetas.size() > 1) {
-                textViewEtiqueta2.setText(etiquetas.get(1));
-            }
-            if (etiquetas.size() > 2) {
-                textViewEtiqueta3.setText(etiquetas.get(2));
-            }
         }
     }
 

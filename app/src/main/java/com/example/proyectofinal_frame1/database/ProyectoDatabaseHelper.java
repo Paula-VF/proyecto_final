@@ -9,6 +9,7 @@ public class ProyectoDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NOMBRE = "proyectoFinal";
     private static final int DATABASE_VERSION = 1;
     public static final String TABLA_CATEGORIA = "categoria";
+    public static final String TABLA_SUBCATEGORIA = "subcategoria";
     public static final String TABLA_PRENDA = "prenda";
     public static final String TABLA_USUARIO = "usuario";
     public static final String TABLA_PRENDASXCONJUNTOS = "prendasXConjuntos";
@@ -27,7 +28,16 @@ public class ProyectoDatabaseHelper extends SQLiteOpenHelper {
                 "id	INTEGER PRIMARY KEY AUTOINCREMENT,\n"+
                 "nombre	TEXT NOT NULL UNIQUE)"
         );
+        //inserción de categorías por defecto
+        db.execSQL("INSERT INTO " + TABLA_CATEGORIA + " (nombre) VALUES ('Parte de arriba'), ('Parte de abajo'), ('Zapatos'), ('Complementos'), ('Accesorios')");
 
+        //Tabla categorías
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLA_SUBCATEGORIA +"(\n" +
+                "id	INTEGER PRIMARY KEY AUTOINCREMENT,\n"+
+                "nombre	TEXT NOT NULL UNIQUE,\n" +
+                "categoria INTEGER,\n" +
+                "FOREIGN KEY(categoria) REFERENCES categoria(id) ON DELETE SET NULL)"
+        );
 
         //tabla usuarios
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLA_USUARIO+ "(\n" +
@@ -37,19 +47,14 @@ public class ProyectoDatabaseHelper extends SQLiteOpenHelper {
                 "contrasena TEXT NOT NULL UNIQUE)"
         );
 
-        //inserción de categorías por defecto
-        db.execSQL("INSERT INTO " + TABLA_CATEGORIA + " (nombre) VALUES ('Parte de arriba'), ('Parte de abajo'), ('Zapatos'), ('Complementos'), ('Accesorios')");
-
-
         //tabla prendas
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLA_PRENDA+ "(\n" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "nombre TEXT NOT NULL,\n" +
                 "imagen TEXT NOT NULL,\n" +
-                "etiquetas TEXT,\n" +
-                "categoria INTEGER,\n" +
+                "subcategoria INTEGER,\n" +
                 "usuario INTEGER NOT NULL,\n" +
-                "FOREIGN KEY(categoria) REFERENCES categoria(id) ON DELETE SET NULL,\n" +
+                "FOREIGN KEY(subcategoria) REFERENCES subcategoria(id) ON DELETE SET NULL,\n" +
                 "FOREIGN KEY(usuario) REFERENCES usuario(user_id) ON DELETE CASCADE)"
         );
 
