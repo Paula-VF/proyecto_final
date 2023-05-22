@@ -1,4 +1,4 @@
-package com.example.proyectofinal_frame1.ui;
+package com.example.proyectofinal_frame1;
 
 import android.content.Context;
 import android.view.KeyEvent;
@@ -8,23 +8,19 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.proyectofinal_frame1.Prenda;
-import com.example.proyectofinal_frame1.PrendaAdapter;
-import com.example.proyectofinal_frame1.R;
 
 import java.util.List;
 
 public class SubcategoriaAdapter extends RecyclerView.Adapter<SubcategoriaAdapter.SubcategoriaViewHolder>{
     private List<Subcategoria> subcategorias;
+    private Context context;
 
     public SubcategoriaAdapter(List<Subcategoria> subcategorias) {
         this.subcategorias = subcategorias;
+        this.context = context;
     }
 
     // view/layout a visualizar
@@ -32,7 +28,7 @@ public class SubcategoriaAdapter extends RecyclerView.Adapter<SubcategoriaAdapte
     @Override
     public SubcategoriaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.subcategoria, parent, false);
-        return new SubcategoriaAdapter.SubcategoriaViewHolder(view);
+        return new SubcategoriaViewHolder(view);
     }
 
     @Override
@@ -59,23 +55,26 @@ public class SubcategoriaAdapter extends RecyclerView.Adapter<SubcategoriaAdapte
             writeName = itemView.findViewById(R.id.write_name);
             btnAdded = itemView.findViewById(R.id.btn_added);
 
+            btnAdded.setVisibility(View.VISIBLE);
+
             // al mantener un botón de subcategoría pulsado
             btnAdded.setOnLongClickListener(new View.OnLongClickListener() {
                 public boolean onLongClick(View v) {
+                    btnAdded.setVisibility(View.INVISIBLE);
                     writeName.setVisibility(View.VISIBLE);
                     writeName.requestFocus();
-                    showKeyboard();
+                    //showKeyboard();
 
                     writeName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                         @Override
                         public void onFocusChange(View v, boolean hasFocus) {
                             if (!hasFocus) {
                                 // al pinchar fuera del teclado o de writeName
-                                closeKeyboard();
+                                //closeKeyboard();
                                 btnAdded.setText(writeName.getText().toString().toUpperCase());// cambio texto de botón
                                 btnAdded.setVisibility(View.VISIBLE);
-                                writeName.setVisibility(View.GONE);
-                                writeName.setText(null);
+                                writeName.setVisibility(View.INVISIBLE);
+                                writeName.setText(btnAdded.getText().toString().toUpperCase());
                                 // añadir nueva subcategoría a la bd
                             }
                         }
@@ -88,11 +87,11 @@ public class SubcategoriaAdapter extends RecyclerView.Adapter<SubcategoriaAdapte
                             if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                                     (keyCode == KeyEvent.KEYCODE_ENTER)) {
                                 // acciones a realizar al presionar enter
-                                closeKeyboard();
+                                //closeKeyboard();
                                 btnAdded.setText(writeName.getText().toString().toUpperCase());// cambio texto de botón
                                 btnAdded.setVisibility(View.VISIBLE);
                                 writeName.setVisibility(View.GONE);
-                                writeName.setText(null);
+                                writeName.setText(btnAdded.getText().toString().toUpperCase());
                                 // añadir nueva subcategoría a la bd
                                 return true;
                             }
@@ -106,8 +105,6 @@ public class SubcategoriaAdapter extends RecyclerView.Adapter<SubcategoriaAdapte
         }
 
         public void bind(Subcategoria subcategoria) {
-            writeName.setText(subcategoria.getWriteName());
-            btnAdded.setText(subcategoria.getBtnAdded());
         }
 
         // mostrar teclado

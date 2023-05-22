@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -34,10 +35,10 @@ import java.util.Locale;
 public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatActivity {
 
     private FloatingActionButton floatBtn;
-    //private Toolbar toolbar;
 
     private EditText writeName;
     private Button btnAdded;
+    private ImageView btnBack;
     private ImageButton btnDelete;
 
     Context context;
@@ -52,9 +53,15 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
         writeName = findViewById(R.id.write_name);
         btnAdded = findViewById(R.id.btn_added);
         btnDelete = findViewById(R.id.btn_delete);
+        btnBack = findViewById(R.id.btn_back);
+        // funcionalidad al clicar en btnBack
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSupportNavigateUp();
+            }
+        });
 
-        // toolbar = findViewById(R.id.my_toolbar);
-        // toolbar.setTitle("  Parte de arriba");
         floatBtn = (FloatingActionButton) findViewById(R.id.float_btn);
 
         floatBtn.setOnClickListener(new View.OnClickListener() {
@@ -154,6 +161,7 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
             }
         });
 
+        // funcionalidad al clicar en btnDelete
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,6 +170,7 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
                 btnDelete.setVisibility(View.INVISIBLE);
             }
         });
+
 
     }
 
@@ -176,6 +185,11 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
 
-
+    // para volver a la pantalla anterior
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
 }

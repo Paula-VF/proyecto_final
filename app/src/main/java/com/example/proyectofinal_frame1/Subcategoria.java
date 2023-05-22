@@ -1,4 +1,4 @@
-package com.example.proyectofinal_frame1.ui;
+package com.example.proyectofinal_frame1;
 
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,12 +21,20 @@ public class Subcategoria {
     }
 
 
-    // getters
+    // getters and setters
     public String getWriteName() {
         return writeName;
     }
 
+    public void setWriteName(String writeName) {
+        this.writeName = writeName;
+    }
+
     public String getBtnAdded() {
         return btnAdded;
+    }
+
+    public void setBtnAdded(String btnAdded) {
+        this.btnAdded = btnAdded;
     }
 }
