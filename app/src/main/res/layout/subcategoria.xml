@@ -35,6 +35,6 @@
         android:backgroundTint="@color/ourBlue"
         android:text=""
         android:contentDescription="Button to see the items related"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
 </RelativeLayout>

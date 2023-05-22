@@ -21,12 +21,20 @@ public class Subcategoria {
     }
 
 
-    // getters
+    // getters and setters
     public String getWriteName() {
         return writeName;
     }
 
+    public void setWriteName(String writeName) {
+        this.writeName = writeName;
+    }
+
     public String getBtnAdded() {
         return btnAdded;
+    }
+
+    public void setBtnAdded(String btnAdded) {
+        this.btnAdded = btnAdded;
     }
 }

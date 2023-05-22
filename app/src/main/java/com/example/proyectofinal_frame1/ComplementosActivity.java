@@ -12,6 +12,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
 import com.example.proyectofinal_frame1.ui.home.HomeFragment;
@@ -29,10 +31,21 @@ public class ComplementosActivity extends AppCompatActivity {
     private SubcategoriaAdapter subcategoriaAdapter;
     private List<Subcategoria> subcategorias;
 
+    private ImageView btnBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complementos);
+
+        btnBack = findViewById(R.id.btn_back);
+        // funcionalidad al clicar en btnBack
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSupportNavigateUp();
+            }
+        });
 
         recyclerViewSubcategorias = findViewById(R.id.recycler_subcategorias);
         recyclerViewSubcategorias.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1));
@@ -45,6 +58,13 @@ public class ComplementosActivity extends AppCompatActivity {
         subcategoriaAdapter = new SubcategoriaAdapter(subcategorias);
         recyclerViewSubcategorias.setAdapter(subcategoriaAdapter);
 
+    }
+
+    // para volver a la pantalla anterior
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 

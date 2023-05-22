@@ -55,23 +55,26 @@ public class SubcategoriaAdapter extends RecyclerView.Adapter<SubcategoriaAdapte
             writeName = itemView.findViewById(R.id.write_name);
             btnAdded = itemView.findViewById(R.id.btn_added);
 
+            btnAdded.setVisibility(View.VISIBLE);
+
             // al mantener un botón de subcategoría pulsado
             btnAdded.setOnLongClickListener(new View.OnLongClickListener() {
                 public boolean onLongClick(View v) {
+                    btnAdded.setVisibility(View.INVISIBLE);
                     writeName.setVisibility(View.VISIBLE);
                     writeName.requestFocus();
-                    showKeyboard();
+                    //showKeyboard();
 
                     writeName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                         @Override
                         public void onFocusChange(View v, boolean hasFocus) {
                             if (!hasFocus) {
                                 // al pinchar fuera del teclado o de writeName
-                                closeKeyboard();
+                                //closeKeyboard();
                                 btnAdded.setText(writeName.getText().toString().toUpperCase());// cambio texto de botón
                                 btnAdded.setVisibility(View.VISIBLE);
-                                writeName.setVisibility(View.GONE);
-                                writeName.setText(null);
+                                writeName.setVisibility(View.INVISIBLE);
+                                writeName.setText(btnAdded.getText().toString().toUpperCase());
                                 // añadir nueva subcategoría a la bd
                             }
                         }
@@ -84,11 +87,11 @@ public class SubcategoriaAdapter extends RecyclerView.Adapter<SubcategoriaAdapte
                             if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                                     (keyCode == KeyEvent.KEYCODE_ENTER)) {
                                 // acciones a realizar al presionar enter
-                                closeKeyboard();
+                                //closeKeyboard();
                                 btnAdded.setText(writeName.getText().toString().toUpperCase());// cambio texto de botón
                                 btnAdded.setVisibility(View.VISIBLE);
                                 writeName.setVisibility(View.GONE);
-                                writeName.setText(null);
+                                writeName.setText(btnAdded.getText().toString().toUpperCase());
                                 // añadir nueva subcategoría a la bd
                                 return true;
                             }

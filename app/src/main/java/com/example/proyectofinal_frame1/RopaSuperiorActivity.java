@@ -54,6 +54,13 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
         btnAdded = findViewById(R.id.btn_added);
         btnDelete = findViewById(R.id.btn_delete);
         btnBack = findViewById(R.id.btn_back);
+        // funcionalidad al clicar en btnBack
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSupportNavigateUp();
+            }
+        });
 
         floatBtn = (FloatingActionButton) findViewById(R.id.float_btn);
 
@@ -161,14 +168,6 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
                 writeName.setVisibility(View.GONE);
                 btnAdded.setVisibility(View.GONE);
                 btnDelete.setVisibility(View.INVISIBLE);
-            }
-        });
-
-        // funcionalidad al clicar en btnBack
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSupportNavigateUp();
             }
         });
 
