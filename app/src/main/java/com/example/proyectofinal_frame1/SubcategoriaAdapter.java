@@ -1,4 +1,4 @@
-package com.example.proyectofinal_frame1.ui;
+package com.example.proyectofinal_frame1;
 
 import android.content.Context;
 import android.view.KeyEvent;
@@ -8,23 +8,19 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.proyectofinal_frame1.Prenda;
-import com.example.proyectofinal_frame1.PrendaAdapter;
-import com.example.proyectofinal_frame1.R;
 
 import java.util.List;
 
 public class SubcategoriaAdapter extends RecyclerView.Adapter<SubcategoriaAdapter.SubcategoriaViewHolder>{
     private List<Subcategoria> subcategorias;
+    private Context context;
 
     public SubcategoriaAdapter(List<Subcategoria> subcategorias) {
         this.subcategorias = subcategorias;
+        this.context = context;
     }
 
     // view/layout a visualizar
@@ -32,7 +28,7 @@ public class SubcategoriaAdapter extends RecyclerView.Adapter<SubcategoriaAdapte
     @Override
     public SubcategoriaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.subcategoria, parent, false);
-        return new SubcategoriaAdapter.SubcategoriaViewHolder(view);
+        return new SubcategoriaViewHolder(view);
     }
 
     @Override
@@ -106,8 +102,6 @@ public class SubcategoriaAdapter extends RecyclerView.Adapter<SubcategoriaAdapte
         }
 
         public void bind(Subcategoria subcategoria) {
-            writeName.setText(subcategoria.getWriteName());
-            btnAdded.setText(subcategoria.getBtnAdded());
         }
 
         // mostrar teclado

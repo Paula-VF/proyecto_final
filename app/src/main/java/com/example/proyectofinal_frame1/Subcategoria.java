@@ -1,4 +1,4 @@
-package com.example.proyectofinal_frame1.ui;
+package com.example.proyectofinal_frame1;
 
 import android.widget.Button;
 import android.widget.EditText;
