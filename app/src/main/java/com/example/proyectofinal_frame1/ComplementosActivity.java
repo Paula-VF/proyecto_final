@@ -2,6 +2,7 @@ package com.example.proyectofinal_frame1;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -34,16 +35,21 @@ public class ComplementosActivity extends AppCompatActivity {
         });
 
         recyclerViewSubcategorias = findViewById(R.id.recycler_subcategorias);
-        recyclerViewSubcategorias.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1));
+        recyclerViewSubcategorias.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         subcategorias = new ArrayList<>();
-        subcategorias.add(new Subcategoria("", "BOLSOS"));
-        subcategorias.add(new Subcategoria("", "FULARES"));
-        subcategorias.add(new Subcategoria("", "GAFAS DE SOL"));
+        subcategorias.add(new Subcategoria("BOLSOS"));
+        /*
+        subcategorias.add(new Subcategoria("FULARES"));
+        subcategorias.add(new Subcategoria("GAFAS DE SOL"));
 
+         */
         subcategoriaAdapter = new SubcategoriaAdapter(subcategorias);
         recyclerViewSubcategorias.setAdapter(subcategoriaAdapter);
 
+        for (int i = 0; subcategorias.size() >i; i++){
+            subcategorias.get(i).getBtnAdded();
+        }
     }
 
     // para volver a la pantalla anterior
