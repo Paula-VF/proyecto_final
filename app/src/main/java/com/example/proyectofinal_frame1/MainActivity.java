@@ -4,15 +4,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -170,6 +166,9 @@ public class MainActivity extends AppCompatActivity {
         //Añadir foto
 
         if(id == R.id.AddBtn){
+            Intent intent = new Intent(MainActivity.this, AniadirActivity.class);
+            startActivity(intent);
+            return true;
 //            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 //            View dView = getLayoutInflater().inflate(R.layout.seleccionar_imagen, null);
 //            Button camara = (Button) dView.findViewById(R.id.btnCamara);
@@ -196,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 //            alertDialogSeleccionCamGal = builder.create();
 //            alertDialogSeleccionCamGal.show();
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
 //    ActivityResultLauncher<Intent> camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -261,6 +260,11 @@ public class MainActivity extends AppCompatActivity {
 //        prenda.insertarPrenda(nombre, rutaImagen, 1, 1);
 //
 //    }
+
+    public void toAniadirImagen(View view){
+        Intent intent = new Intent(MainActivity.this, AniadirActivity.class);
+        startActivity(intent);
+    }
 
 
 

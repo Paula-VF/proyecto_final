@@ -19,19 +19,22 @@
 
     <EditText
         android:id="@+id/nombrePrenda"
-        android:layout_width="376dp"
-        android:layout_height="58dp"
+        android:layout_width="235dp"
+        android:layout_height="62dp"
         android:layout_below="@+id/textView2"
-        android:layout_marginTop="5dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:paddingStart="10dp" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/nombrePrenda"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="25dp"
         android:paddingStart="10dp"
         android:text="Selecciona la categoría"
         android:textSize="16sp" />
@@ -42,7 +45,8 @@
         android:layout_height="61dp"
         android:layout_below="@+id/textView3"
         android:layout_marginTop="10dp"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:paddingStart="10dp">
 
         <com.google.android.material.chip.ChipGroup
             android:layout_width="wrap_content"
@@ -58,7 +62,8 @@
                 android:layout_marginBottom="8dp"
                 android:padding="12dp"
                 android:text="Parte superior"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:theme="@style/Theme.MaterialComponents.Light"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipParteInferior"
@@ -68,7 +73,8 @@
                 android:layout_marginBottom="8dp"
                 android:padding="12dp"
                 android:text="Parte inferior"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:theme="@style/Theme.MaterialComponents.Light"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipZapatos"
@@ -78,7 +84,8 @@
                 android:layout_marginBottom="8dp"
                 android:padding="12dp"
                 android:text="Zapatos"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:theme="@style/Theme.MaterialComponents.Light"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipComplementos"
@@ -88,7 +95,8 @@
                 android:layout_marginBottom="8dp"
                 android:padding="12dp"
                 android:text="Complementos"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:theme="@style/Theme.MaterialComponents.Light"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipAccesorios"
@@ -98,7 +106,8 @@
                 android:layout_marginBottom="8dp"
                 android:padding="12dp"
                 android:text="Accesorios"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:theme="@style/Theme.MaterialComponents.Light"/>
 
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
@@ -109,7 +118,8 @@
         android:layout_height="61dp"
         android:layout_below="@+id/horizontalScrollCat"
         android:layout_marginTop="5dp"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:paddingStart="10dp">
 
         <com.google.android.material.chip.ChipGroup
             android:layout_width="wrap_content"
@@ -125,7 +135,8 @@
                 android:layout_marginBottom="8dp"
                 android:padding="12dp"
                 android:text="subCategoria1"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:theme="@style/Theme.MaterialComponents.Light"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipSubCategoria2"
@@ -135,7 +146,8 @@
                 android:layout_marginBottom="8dp"
                 android:padding="12dp"
                 android:text="subCategoria2"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:theme="@style/Theme.MaterialComponents.Light"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipSubCategoria3"
@@ -145,15 +157,16 @@
                 android:layout_marginBottom="8dp"
                 android:padding="12dp"
                 android:text="subCategoria3"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:theme="@style/Theme.MaterialComponents.Light"/>
 
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
 
     <Button
         android:id="@+id/btnCamara"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="148dp"
+        android:layout_height="74dp"
         android:layout_below="@+id/horizontalScrollsubCate"
         android:layout_alignParentStart="true"
         android:layout_marginStart="40dp"
@@ -170,12 +183,13 @@
 
     <Button
         android:id="@+id/btnGaleria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="148dp"
+        android:layout_height="74dp"
         android:layout_below="@+id/horizontalScrollsubCate"
-        android:layout_marginStart="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="33dp"
+        android:layout_marginEnd="39dp"
         android:layout_marginBottom="10dp"
         android:layout_toEndOf="@+id/btnCamara"
         android:layout_weight="1"
@@ -192,9 +206,26 @@
         android:layout_below="@+id/btnCamara"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="71dp"
+        android:layout_marginStart="68dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="66dp"
-        app:srcCompat="@android:drawable/ic_menu_gallery" />
+        android:layout_marginEnd="69dp"
+        app:srcCompat="@android:drawable/ic_menu_gallery"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="154dp"
+        android:layout_height="69dp"
+        android:layout_below="@+id/imagenPrenda"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="129dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="128dp"
+        android:background="@color/ourBlue"
+        android:backgroundTint="@color/ourBlue"
+        android:text="Guardar"
+        app:icon="@drawable/baseline_save_24"
+        android:visibility="invisible"/>
 
 </RelativeLayout>

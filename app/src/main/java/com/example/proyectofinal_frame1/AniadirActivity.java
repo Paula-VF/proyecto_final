@@ -12,6 +12,8 @@ import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.chip.ChipGroup;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,12 +21,13 @@ import java.io.IOException;
 public class AniadirActivity extends AppCompatActivity {
     EditText nombrePrenda;
     Button btnCamara, btnGaleria;
+    ChipGroup subCategoriaChipGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aniadir);
-
+        //String nombre = nombrePrenda.getText().toString();
     }
 
 
