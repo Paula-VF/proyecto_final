@@ -1,10 +1,7 @@
 package com.example.proyectofinal_frame1;
 
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -45,10 +42,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.proyectofinal_frame1.databinding.ActivityMainBinding;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 //  implements View.OnClickListener
 public class MainActivity extends AppCompatActivity {
@@ -161,6 +154,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //AlertDialogs
+    private AlertDialog alertDialogSeleccionCamGal;
+    private AlertDialog alertDialogAniadirDatosPrenda;
+
+    //camara
+    private static final int CAMERA_REQUEST_CODE = 1;
 
     // funcionalidad botón toolbar_prendas
     String currentPhotoPath;
@@ -171,55 +170,59 @@ public class MainActivity extends AppCompatActivity {
         //Añadir foto
 
         if(id == R.id.AddBtn){
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            View dView = getLayoutInflater().inflate(R.layout.seleccionar_imagen, null);
-            Button camara = (Button) dView.findViewById(R.id.btnCamara);
-            Button galeria = (Button) dView.findViewById(R.id.btnGaleria);
-
-            camara.setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void onClick(View v) {
-                    camaraLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
-
-                }
-            });
-
-            galeria.setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void onClick(View v) {
-                    galeriaLauncher.launch("image/*");
-                }
-            });
-
-            builder.setView(dView);
-            AlertDialog dialog = builder.create();
-            dialog.show();
+//            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+//            View dView = getLayoutInflater().inflate(R.layout.seleccionar_imagen, null);
+//            Button camara = (Button) dView.findViewById(R.id.btnCamara);
+//            Button galeria = (Button) dView.findViewById(R.id.btnGaleria);
+//
+//            camara.setOnClickListener(new View.OnClickListener() {
+//                @RequiresApi(api = Build.VERSION_CODES.O)
+//                @Override
+//                public void onClick(View v) {
+//                    camaraLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
+//                    abrirDialogDatos();
+//                }
+//            });
+//
+//            galeria.setOnClickListener(new View.OnClickListener() {
+//                @RequiresApi(api = Build.VERSION_CODES.O)
+//                @Override
+//                public void onClick(View v) {
+//                    galeriaLauncher.launch("image/*");
+//                }
+//            });
+//
+//            builder.setView(dView);
+//            alertDialogSeleccionCamGal = builder.create();
+//            alertDialogSeleccionCamGal.show();
         }
         return true;
     }
 
-    ActivityResultLauncher<Intent> camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-        @Override
-        public void onActivityResult(ActivityResult result) {
-            if(result.getResultCode()==RESULT_OK){
-                Bundle extras = result.getData().getExtras();
-                imgBitmap = (Bitmap) extras.get("data");
-                rutaImagen = guardarImagenEnAlmacenamientoInterno(imgBitmap);
-                imagenViewPrenda.setImageBitmap(imgBitmap);
-            }
-        }
-    });
+//    ActivityResultLauncher<Intent> camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+//        @Override
+//        public void onActivityResult(ActivityResult result) {
+//            if(result.getResultCode()==RESULT_OK){
+//                Bundle extras = result.getData().getExtras();
+//                imgBitmap = (Bitmap) extras.get("data");
+//                rutaImagen = guardarImagenEnAlmacenamientoInterno(imgBitmap);
+//                imagenViewPrenda.setImageBitmap(imgBitmap);
+//
+//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(intent);
+//            }
+//        }
+//    });
 
-    ActivityResultLauncher<String> galeriaLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
-        @Override
-        public void onActivityResult(Uri result) {
-            String rutaImagen = obtenerRutaDeImagen(result);
-            //prenda.insertarPrenda("nombreG", rutaImagen, "etiquetas", 1,1);
-            imagen.setImageURI(result);
-        }
-    });
+//    ActivityResultLauncher<String> galeriaLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+//        @Override
+//        public void onActivityResult(Uri result) {
+//            String rutaImagen = obtenerRutaDeImagen(result);
+//            //prenda.insertarPrenda("nombreG", rutaImagen, "etiquetas", 1,1);
+//            imagen.setImageURI(result);
+//        }
+//    });
 
     private boolean checkCameraPermission(){
         boolean res1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)== PackageManager.PERMISSION_GRANTED;
@@ -241,53 +244,24 @@ public class MainActivity extends AppCompatActivity {
         requestPermissions(new String[]{android.Manifest.permission.READ_MEDIA_IMAGES}, 100);
     }
 
-    private String guardarImagenEnAlmacenamientoInterno(Bitmap bitmap) {
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        File directory = cw.getDir("imagenes", Context.MODE_PRIVATE);
-        String fileName = "imagen_" + System.currentTimeMillis() + ".jpg";
-        File myPath = new File(directory, fileName);
+//    private void abrirDialogDatos(){
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+//        View dView = getLayoutInflater().inflate(R.layout.insercion_datos_prenda, null);
+//        EditText nombrePrenda = dView.findViewById(R.id.nombrePrenda);
+//        ImageView imagenPrendaDialog = dView.findViewById(R.id.imagenPrenda);
+//        imagenPrendaDialog.setImageBitmap(imgBitmap);
+//
+//        String nombre = nombrePrenda.getText().toString();
+//        //chip con subcategorias
+//
+//        builder.setView(dView);
+//        alertDialogAniadirDatosPrenda = builder.create();
+//        alertDialogAniadirDatosPrenda.show();
+//        prenda.insertarPrenda(nombre, rutaImagen, 1, 1);
+//
+//    }
 
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(myPath);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return myPath.getAbsolutePath();
-    }
 
-    private String obtenerRutaDeImagen(Uri uri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String filePath = cursor.getString(column_index);
-        cursor.close();
-        return filePath;
-    }
-    private void abrirDialogDatos(){
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        View dView = getLayoutInflater().inflate(R.layout.insercion_datos_prenda, null);
-        EditText nombrePrenda = dView.findViewById(R.id.nombrePrenda);
-        ImageView imagenPrendaDialog = dView.findViewById(R.id.imagenPrenda);
-        imagenPrendaDialog.setImageBitmap(imgBitmap);
-
-        String nombre = nombrePrenda.getText().toString();
-        //chip con subcategorias
-
-        builder.setView(dView);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        //prenda.insertarPrenda(nombre, rutaImagen, 1, 1);
-
-    }
 
 }
