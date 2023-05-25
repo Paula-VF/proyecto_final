@@ -34,6 +34,7 @@ import java.io.IOException;
 public class AniadirActivity extends AppCompatActivity {
     EditText nombrePrenda;
     Button btnCamara, btnGaleria;
+
     ChipGroup CategoriaChipGroup;
     String rutaImagen;
     ImageView imagenViewPrenda;
@@ -47,7 +48,10 @@ public class AniadirActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aniadir);
+        //String nombre = nombrePrenda.getText().toString();
+
         btnBack = findViewById(R.id.btn_back);
+        // funcionalidad al clicar en btnBack
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,12 +90,7 @@ public class AniadirActivity extends AppCompatActivity {
             }
         });
     }
-    // para volver a la pantalla anterior
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
+
     ActivityResultLauncher<Intent> camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
@@ -149,4 +148,10 @@ public class AniadirActivity extends AppCompatActivity {
         return filePath;
     }
 
+    // para volver a la pantalla anterior
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }
