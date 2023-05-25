@@ -1,8 +1,10 @@
 package com.example.proyectofinal_frame1;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,8 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.proyectofinal_frame1.database.TablaPrenda;
+import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
 
 import java.util.List;
 
@@ -38,6 +44,7 @@ public class CarruselFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_carrusel, container, false);
 
+
         recyclerView = view.findViewById(R.id.recyclerViewCarruselFragment);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
@@ -50,5 +57,8 @@ public class CarruselFragment extends Fragment {
 
         return view;
     }
+
+
+
 
 }

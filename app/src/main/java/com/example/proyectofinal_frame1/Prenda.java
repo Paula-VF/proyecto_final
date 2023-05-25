@@ -7,14 +7,14 @@ public class Prenda {
     private String nombre;
     private int urlImagen;
 
-    // constructor con parámetros
-    public Prenda(String nombre, int imagen, List<String> etiquetas) {
-        this.nombre = nombre;
-        this.urlImagen = imagen;
-    }
-
     // constructor vacío
     public Prenda() {
+    }
+
+    // constructor con parámetros
+    public Prenda(String nombre, int imagen) {
+        this.nombre = nombre;
+        this.urlImagen = imagen;
     }
 
 

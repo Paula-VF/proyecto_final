@@ -36,10 +36,10 @@ public class AccesoriosPulseras extends AppCompatActivity {
         recyclerViewPrendas.setLayoutManager(new GridLayoutManager(this, 2));
 
         listaPrendas = new ArrayList<>();
-        listaPrendas.add(new Prenda("Brazalete dorado", R.drawable.ic_baseline_photo_camera_back_24, Arrays.asList("Formal", "Blanco")));
-        listaPrendas.add(new Prenda("Multicolor", R.drawable.ic_baseline_photo_camera_back_24, Arrays.asList("Informal", "Azul")));
-        listaPrendas.add(new Prenda("Piedras moradas", R.drawable.ic_baseline_photo_camera_back_24, Arrays.asList("Formal", "Rojo", "Verano")));
-        listaPrendas.add(new Prenda("Pulsera de la suerte", R.drawable.ic_baseline_photo_camera_back_24, Arrays.asList("Informal", "Azul")));
+        listaPrendas.add(new Prenda("Brazalete dorado", R.drawable.ic_baseline_photo_camera_back_24));
+        listaPrendas.add(new Prenda("Multicolor", R.drawable.ic_baseline_photo_camera_back_24));
+        listaPrendas.add(new Prenda("Piedras moradas", R.drawable.ic_baseline_photo_camera_back_24));
+        listaPrendas.add(new Prenda("Pulsera de la suerte", R.drawable.ic_baseline_photo_camera_back_24));
 
         prendaAdapter = new PrendaAdapter(listaPrendas);
         recyclerViewPrendas.setAdapter(prendaAdapter);

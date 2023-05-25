@@ -64,6 +64,7 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
 
         context = getApplicationContext();
 
+        floatBtn = (FloatingActionButton) findViewById(R.id.float_btn);
         btnBack = findViewById(R.id.btn_back);
         btnDelete = findViewById(R.id.btn_delete);
         btnEdit = findViewById(R.id.btn_edit);
@@ -125,18 +126,12 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
             }
         });
 
-
-        //boton añadir subcategoria (Adición, edición y borrado de subcategorías)
-        
-        floatBtn = (FloatingActionButton) findViewById(R.id.float_btn);
         // funcionalidad al clicar en el botón flotante
         floatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 insertarNombre();
             }
-
-
         });
 
     }
@@ -153,13 +148,17 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String subcategoria = nombre.getText().toString().toUpperCase();
-                nuevoBtn = new Subcategoria(subcategoria);
-                // subcategorias.get(position).setBtnAdded(subcategoria);
-                subcategorias.add(nuevoBtn);
-                arrayAdapter.notifyDataSetChanged();
-                dialogo.cancel();
-                Toast.makeText(getApplicationContext(), "Subcategoría " + subcategoria + " añadida.", Toast.LENGTH_SHORT).show();
+                if(nombre!=null) {
+                    String subcategoria = nombre.getText().toString().toUpperCase();
+                    nuevoBtn = new Subcategoria(subcategoria);
+                    // subcategorias.get(position).setBtnAdded(subcategoria);
+                    subcategorias.add(nuevoBtn);
+                    arrayAdapter.notifyDataSetChanged();
+                    dialogo.cancel();
+                    Toast.makeText(getApplicationContext(), "Subcategoría " + subcategoria + " añadida.", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, "Introduce un nombre.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -188,11 +187,15 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String subcategoria = nombre.getText().toString().toUpperCase();
-                subcategorias.get(position).setBtnAdded(subcategoria);
-                arrayAdapter.notifyDataSetChanged();
-                dialogo.cancel();
-                Toast.makeText(getApplicationContext(), "Nuevo nombre: " + subcategoria, Toast.LENGTH_SHORT).show();
+                if(nombre != null) {
+                    String subcategoria = nombre.getText().toString().toUpperCase();
+                    subcategorias.get(position).setBtnAdded(subcategoria);
+                    arrayAdapter.notifyDataSetChanged();
+                    dialogo.cancel();
+                    Toast.makeText(getApplicationContext(), "Nuevo nombre: " + subcategoria, Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, "Introduce un nombre.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
