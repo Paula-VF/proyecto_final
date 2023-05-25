@@ -48,9 +48,7 @@ public class MainActivity extends AppCompatActivity {
     TablaCategoria categoria;
     TablaUsuario user;
 
-    String rutaImagen;
-    ImageView imagenViewPrenda;
-    Bitmap imgBitmap;
+
 
     private ImageView imagen;
     private ActivityMainBinding binding;
@@ -198,21 +196,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    ActivityResultLauncher<Intent> camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-//        @Override
-//        public void onActivityResult(ActivityResult result) {
-//            if(result.getResultCode()==RESULT_OK){
-//                Bundle extras = result.getData().getExtras();
-//                imgBitmap = (Bitmap) extras.get("data");
-//                rutaImagen = guardarImagenEnAlmacenamientoInterno(imgBitmap);
-//                imagenViewPrenda.setImageBitmap(imgBitmap);
 //
-//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(intent);
-//            }
-//        }
-//    });
 
 //    ActivityResultLauncher<String> galeriaLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
 //        @Override

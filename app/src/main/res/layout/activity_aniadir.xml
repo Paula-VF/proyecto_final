@@ -4,27 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="412dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/ourPurple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Añadir prenda"
+        app:titleMarginStart="60dp"
+        app:titleTextColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="9dp"
+        app:layout_constraintBottom_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_baseline_arrow_left_24" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="5dp"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_marginTop="44dp"
         android:paddingStart="10dp"
-        android:text="Inserta el nombre de la prenda"
+        android:text="Inserta un nombre descriptivo para la prenda"
         android:textSize="16sp" />
 
     <EditText
         android:id="@+id/nombrePrenda"
-        android:layout_width="235dp"
-        android:layout_height="62dp"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:paddingStart="10dp" />
@@ -34,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/nombrePrenda"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:paddingStart="10dp"
         android:text="Selecciona la categoría"
         android:textSize="16sp" />
@@ -112,65 +144,14 @@
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollsubCate"
-        android:layout_width="match_parent"
-        android:layout_height="61dp"
-        android:layout_below="@+id/horizontalScrollCat"
-        android:layout_marginTop="5dp"
-        android:scrollbars="none"
-        android:paddingStart="10dp">
-
-        <com.google.android.material.chip.ChipGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:singleLine="true"
-            app:singleSelection="true">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipSubCategoria1"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:padding="12dp"
-                android:text="subCategoria1"
-                android:textAlignment="center"
-                android:theme="@style/Theme.MaterialComponents.Light"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipSubCategoria2"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:padding="12dp"
-                android:text="subCategoria2"
-                android:textAlignment="center"
-                android:theme="@style/Theme.MaterialComponents.Light"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipSubCategoria3"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:padding="12dp"
-                android:text="subCategoria3"
-                android:textAlignment="center"
-                android:theme="@style/Theme.MaterialComponents.Light"/>
-
-        </com.google.android.material.chip.ChipGroup>
-    </HorizontalScrollView>
-
     <Button
         android:id="@+id/btnCamara"
         android:layout_width="148dp"
         android:layout_height="74dp"
-        android:layout_below="@+id/horizontalScrollsubCate"
+        android:layout_below="@+id/horizontalScrollCat"
         android:layout_alignParentStart="true"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
@@ -185,10 +166,10 @@
         android:id="@+id/btnGaleria"
         android:layout_width="148dp"
         android:layout_height="74dp"
-        android:layout_below="@+id/horizontalScrollsubCate"
+        android:layout_below="@+id/imagenPrenda"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="-335dp"
         android:layout_marginEnd="39dp"
         android:layout_marginBottom="10dp"
         android:layout_toEndOf="@+id/btnCamara"
@@ -202,15 +183,15 @@
     <ImageView
         android:id="@+id/imagenPrenda"
         android:layout_width="wrap_content"
-        android:layout_height="272dp"
+        android:layout_height="236dp"
         android:layout_below="@+id/btnCamara"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="68dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="69dp"
-        app:srcCompat="@android:drawable/ic_menu_gallery"
-        android:visibility="invisible"/>
+        android:visibility="visible"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
 
     <Button
         android:id="@+id/button4"
@@ -220,12 +201,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="129dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="128dp"
         android:background="@color/ourBlue"
         android:backgroundTint="@color/ourBlue"
         android:text="Guardar"
-        app:icon="@drawable/baseline_save_24"
-        android:visibility="invisible"/>
+        android:visibility="visible"
+        app:icon="@drawable/baseline_save_24" />
 
 </RelativeLayout>
