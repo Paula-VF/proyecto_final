@@ -1,13 +1,17 @@
 package com.example.proyectofinal_frame1;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,13 +20,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,12 +45,17 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
 
     private FloatingActionButton floatBtn;
 
-    private EditText writeName;
-    private Button btnAdded;
     private ImageView btnBack;
     private ImageButton btnDelete;
+    private ImageButton btnEdit;
+    private ListView listView;
+    private ArrayList<Subcategoria> subcategorias;
+    private ArrayAdapter<Subcategoria> arrayAdapter;
 
-    Context context;
+    private AlertDialog dialogo;
+    private Subcategoria nuevoBtn;
+
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +64,59 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
 
         context = getApplicationContext();
 
-        writeName = findViewById(R.id.write_name);
-        btnAdded = findViewById(R.id.btn_added);
-        btnDelete = findViewById(R.id.btn_delete);
         btnBack = findViewById(R.id.btn_back);
+        btnDelete = findViewById(R.id.btn_delete);
+        btnEdit = findViewById(R.id.btn_edit);
+
+        // para mostrar las subcategorías añadidas
+        subcategorias = new ArrayList<>();
+        listView = findViewById(R.id.list_view);
+        arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, subcategorias);
+        listView.setAdapter(arrayAdapter);
+        // funcionalidad al clicar en una subcategoría
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // funcionalidad al clicar en una subcategoria
+            }
+        });
+
+        // funcionalidad al mantener pulsado en una subcategoría
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                btnDelete.setVisibility(View.VISIBLE);
+                // funcionalidad al clicar btnDelete
+                btnDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //parent.getItemAtPosition(position);
+                        nuevoBtn = null;
+                        subcategorias.remove(position);
+                        arrayAdapter.notifyDataSetChanged();
+                        btnDelete.setVisibility(View.INVISIBLE);
+                        btnEdit.setVisibility(View.INVISIBLE);
+                        //listView.refreshDrawableState();
+                        Toast.makeText(getApplicationContext(), "Subcategoría " + subcategorias.get(position).toString().toString() + " eliminada.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+                btnEdit.setVisibility(View.VISIBLE);
+                // funcionalidad al clicar btnEdit
+                btnEdit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        cambiarNombre(position);
+                        btnDelete.setVisibility(View.INVISIBLE);
+                        btnEdit.setVisibility(View.INVISIBLE);
+                    }
+                });
+                return false;
+            }
+        });
+
+
         // funcionalidad al clicar en btnBack
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,129 +125,89 @@ public class RopaSuperiorActivity<newCheckbox, mCheckboxes> extends AppCompatAct
             }
         });
 
-        //boton añadir subcategoria
+
+        //boton añadir subcategoria (Adición, edición y borrado de subcategorías)
+        
         floatBtn = (FloatingActionButton) findViewById(R.id.float_btn);
-
+        // funcionalidad al clicar en el botón flotante
         floatBtn.setOnClickListener(new View.OnClickListener() {
-            // @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                writeName.setVisibility(View.VISIBLE);
-                writeName.requestFocus();
-                showKeyboard(); // abrir teclado
-
-                writeName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View v, boolean hasFocus) {
-                        if (!hasFocus) {
-                            // al pinchar fuera del teclado o de writeName
-                            closeKeyboard();
-                            btnAdded.setText(writeName.getText().toString().toUpperCase());// cambio texto de botón
-                            btnAdded.setVisibility(View.VISIBLE);
-                            writeName.setVisibility(View.GONE);
-                            writeName.setText(null);
-                            // añadir nueva subcategoría a la bd
-                        }
-                    }
-                });
-
-
-                writeName.setOnKeyListener(new View.OnKeyListener() {
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        // If the event is a key-down event on the "enter" button
-                        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                                (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                            // acciones a realizar al presionar enter
-                            btnAdded.setText(writeName.getText().toString().toUpperCase());// cambio texto de botón
-                            btnAdded.setVisibility(View.VISIBLE);
-                            writeName.setVisibility(View.GONE);
-                            writeName.setText(null);
-                            closeKeyboard();
-                            // añadir nueva subcategoría a la bd
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-
+                insertarNombre();
             }
+
+
         });
 
-
-        // al mantener un botón de subcategoría pulsado
-        btnAdded.setOnLongClickListener(new View.OnLongClickListener() {
-            public boolean onLongClick(View v) {
-                btnAdded.setVisibility(View.INVISIBLE);
-                writeName.setVisibility(View.VISIBLE);
-                writeName.requestFocus();
-                showKeyboard(); // abrir teclado
-
-                writeName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View v, boolean hasFocus) {
-                        if (!hasFocus) {
-                            // al pinchar fuera del teclado o de writeName
-                            closeKeyboard();
-                            btnAdded.setText(writeName.getText().toString().toUpperCase());// cambio texto de botón
-                            btnAdded.setVisibility(View.VISIBLE);
-                            writeName.setVisibility(View.GONE);
-                            writeName.setText(null);
-                            // añadir nueva subcategoría a la bd
-                        }
-                    }
-                });
+    }
 
 
-                writeName.setOnKeyListener(new View.OnKeyListener() {
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        // If the event is a key-down event on the "enter" button
-                        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                                (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                            // acciones a realizar al presionar enter
-                            closeKeyboard();
-                            btnAdded.setText(writeName.getText().toString().toUpperCase());// cambio texto de botón
-                            btnAdded.setVisibility(View.VISIBLE);
-                            writeName.setVisibility(View.GONE);
-                            writeName.setText(null);
-                            // añadir nueva subcategoría a la bd
-                            return true;
-                        }
-                        return false;
-                    }
-                });
+    private void insertarNombre() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(RopaSuperiorActivity.this);
+        View dView = getLayoutInflater().inflate(R.layout.dialogo_subcategoria, null);
+        TextView titulo = dView.findViewById(R.id.titulo);
+        EditText nombre = dView.findViewById(R.id.nombre);
+        Button addBtn = dView.findViewById(R.id.btn_add);
+        Button cancelBtn = dView.findViewById(R.id.btn_cancel);
 
-
-                // icono delete
-                btnDelete.setVisibility(View.VISIBLE);
-
-
-                return true;
-            }
-        });
-
-        // funcionalidad al clicar en btnDelete
-        btnDelete.setOnClickListener(new View.OnClickListener() {
+        addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                writeName.setVisibility(View.GONE);
-                btnAdded.setVisibility(View.GONE);
-                btnDelete.setVisibility(View.INVISIBLE);
+                String subcategoria = nombre.getText().toString().toUpperCase();
+                nuevoBtn = new Subcategoria(subcategoria);
+                // subcategorias.get(position).setBtnAdded(subcategoria);
+                subcategorias.add(nuevoBtn);
+                arrayAdapter.notifyDataSetChanged();
+                dialogo.cancel();
+                Toast.makeText(getApplicationContext(), "Subcategoría " + subcategoria + " añadida.", Toast.LENGTH_SHORT).show();
             }
         });
 
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogo.cancel();
+            }
+        });
 
+        dialog.setView(dView);
+        dialogo = dialog.create();
+        dialogo.show();
     }
 
-    // mostrar teclado
-    public void showKeyboard(){
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+    private void cambiarNombre(int position) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(RopaSuperiorActivity.this);
+        View dView = getLayoutInflater().inflate(R.layout.dialogo_subcategoria, null);
+        TextView titulo = dView.findViewById(R.id.titulo);
+        EditText nombre = dView.findViewById(R.id.nombre);
+        Button addBtn = dView.findViewById(R.id.btn_add);
+        Button cancelBtn = dView.findViewById(R.id.btn_cancel);
+        titulo.setText("Nuevo nombre de subcategoría:");
+        addBtn.setText("EDITAR");
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String subcategoria = nombre.getText().toString().toUpperCase();
+                subcategorias.get(position).setBtnAdded(subcategoria);
+                arrayAdapter.notifyDataSetChanged();
+                dialogo.cancel();
+                Toast.makeText(getApplicationContext(), "Nuevo nombre: " + subcategoria, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogo.cancel();
+            }
+        });
+
+        dialog.setView(dView);
+        dialogo = dialog.create();
+        dialogo.show();
     }
-    // cerrar teclado
-    public void closeKeyboard(){
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-    }
+
 
     // para volver a la pantalla anterior
     @Override

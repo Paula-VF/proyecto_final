@@ -48,7 +48,7 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="300dp"
         android:src="@drawable/ic_baseline_arrow_right_24"
-        android:tint="#A9A9A9" />
+        app:tint="#A9A9A9" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -58,7 +58,7 @@
         android:layout_marginEnd="211dp"
         android:layout_marginBottom="300dp"
         android:src="@drawable/ic_baseline_arrow_left_24"
-        android:tint="#A9A9A9" />
+        app:tint="#A9A9A9" />
 
     <ImageView
         android:id="@+id/imageView10"

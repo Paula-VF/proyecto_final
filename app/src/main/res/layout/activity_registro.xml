@@ -7,15 +7,13 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="400dp"
+        android:layout_height="391dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="50dp"
         android:layout_marginTop="123dp"
-        android:layout_marginEnd="49dp"
-        android:layout_marginBottom="208dp"
+        android:layout_marginEnd="50dp"
         android:orientation="vertical">
 
         <TextView
@@ -23,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginBottom="5dp"
             android:gravity="center_vertical"
             android:text="Nombre*"
             android:textColor="#000000"
@@ -34,6 +33,7 @@
             android:id="@+id/nombreField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:layout_weight="1"
             android:ems="5"
             android:gravity="center_vertical"
@@ -42,21 +42,11 @@
             tools:layout_editor_absoluteY="126dp" />
 
         <TextView
-            android:id="@+id/txtVacio"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="82dp"
-            tools:layout_editor_absoluteY="81dp" />
-
-        <TextView
             android:id="@+id/txtCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginBottom="5dp"
             android:gravity="center_vertical"
             android:text="Correo electrónico*"
             android:textColor="#000000"
@@ -68,26 +58,17 @@
             android:id="@+id/correoField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:layout_weight="1"
             android:ems="5"
             android:inputType="textEmailAddress" />
-
-        <TextView
-            android:id="@+id/txtVacio2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="82dp"
-            tools:layout_editor_absoluteY="81dp" />
 
         <TextView
             android:id="@+id/txtContrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginBottom="5dp"
             android:gravity="center_vertical"
             android:text="Contraseña*"
             android:textColor="#000000"
@@ -99,26 +80,17 @@
             android:id="@+id/contrasenaField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:layout_weight="1"
             android:ems="5"
             android:inputType="textPassword" />
-
-        <TextView
-            android:id="@+id/txtVacio3"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="82dp"
-            tools:layout_editor_absoluteY="81dp" />
 
         <TextView
             android:id="@+id/txtRepiteContrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginBottom="5dp"
             android:gravity="center_vertical"
             android:text="Repite la contraseña*"
             android:textColor="#000000"
@@ -130,6 +102,7 @@
             android:id="@+id/repiteContrasenaField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:layout_weight="1"
             android:ems="5"
             android:inputType="textPassword"
@@ -160,7 +133,7 @@
     <TextView
         android:id="@+id/txtLinkCuenta"
         android:layout_width="wrap_content"
-        android:layout_height="33dp"
+        android:layout_height="55dp"
         android:layout_alignStart="@+id/btnCrearCuenta"
         android:layout_alignTop="@+id/btnCrearCuenta"
         android:layout_alignEnd="@+id/btnCrearCuenta"
