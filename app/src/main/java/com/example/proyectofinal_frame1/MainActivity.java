@@ -68,32 +68,12 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        /*
-        binding.navView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()){
-                case R.id.navigation_home:
-                    replaceFragment(new HomeFragment());
-                    break;
-                case R.id.navigation_dashboard:
-                    replaceFragment(new DashboardFragment());
-                    break;
-                case R.id.armarConjuntosFragment:
-                    replaceFragment(new ArmarConjuntosFragment());
-                    break;
-                case R.id.navigation_notifications:
-                    replaceFragment(new NotificationsFragment());
-                    break;
-            }
-            return true;
-        });
-         */
-
 
         // para que se muestre nuestra barra superior:
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        imagen = (ImageView) findViewById(R.id.imagen);
+        imagen = (ImageView) findViewById(R.id.imagenPrenda);
 //        registerResult(); Esto creo que se tiene que borrar
 
 
@@ -134,12 +114,6 @@ public class MainActivity extends AppCompatActivity {
         return navView;
     }
 
-    protected void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment);
-        fragmentTransaction.commit();
-    }
 
     // para que aparezcan los iconos de toolbar_prendas en el toolbar
     @Override

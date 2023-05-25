@@ -32,13 +32,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class AniadirActivity extends AppCompatActivity {
-    EditText nombrePrenda;
-    Button btnCamara, btnGaleria;
+    private EditText nombrePrenda;
+    private Button btnCamara, btnGaleria;
 
-    ChipGroup CategoriaChipGroup;
-    String rutaImagen;
-    ImageView imagenViewPrenda;
-    Bitmap imgBitmap;
+    private ChipGroup categoriaChipGroup;
+    private String rutaImagen;
+    private ImageView imagenViewPrenda;
+    private Bitmap imgBitmap;
     private ImageView btnBack;
 
     private ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
@@ -62,6 +62,7 @@ public class AniadirActivity extends AppCompatActivity {
         nombrePrenda= findViewById(R.id.nombrePrenda);
         btnCamara= findViewById(R.id.btnCamara);
         btnGaleria= findViewById(R.id.btnGaleria);
+        imagenViewPrenda = findViewById(R.id.imagenPrenda);
 
         btnCamara.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,7 +92,8 @@ public class AniadirActivity extends AppCompatActivity {
         });
     }
 
-    ActivityResultLauncher<Intent> camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+    ActivityResultLauncher<Intent> camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
             if(result.getResultCode()==RESULT_OK){
@@ -103,7 +105,8 @@ public class AniadirActivity extends AppCompatActivity {
         }
     });
 
-    ActivityResultLauncher<Intent> galeriaLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+    ActivityResultLauncher<Intent> galeriaLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
             if(result.getResultCode() == Activity.RESULT_OK){
@@ -147,6 +150,9 @@ public class AniadirActivity extends AppCompatActivity {
         cursor.close();
         return filePath;
     }
+
+
+
 
     // para volver a la pantalla anterior
     @Override

@@ -222,7 +222,7 @@
 
         <Button
             android:id="@+id/btnCamara"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="50dp"
             android:layout_below="@+id/horizontalScrollsubCate"
             android:layout_alignParentStart="true"
@@ -231,7 +231,6 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:background="@color/ourBlue"
             android:backgroundTint="@color/ourBlue"
             android:drawableLeft="@drawable/camera_icon"
             android:padding="5dp"
@@ -240,7 +239,7 @@
 
         <Button
             android:id="@+id/btnGaleria"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="50dp"
             android:layout_below="@+id/horizontalScrollsubCate"
             android:layout_alignParentEnd="true"
@@ -248,7 +247,7 @@
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:background="@color/ourBlue"
+            android:backgroundTint="@color/ourBlue"
             android:drawableLeft="@drawable/gallery_icon"
             android:padding="5dp"
             android:text="Galería"
@@ -279,7 +278,7 @@
             android:layout_marginStart="100dp"
             android:layout_marginTop="254dp"
             android:layout_marginEnd="100dp"
-            android:background="@color/ourPurple"
+            android:backgroundTint="@color/ourPurple"
             android:text="Guardar"
             android:textSize="16sp"
             android:visibility="visible"
