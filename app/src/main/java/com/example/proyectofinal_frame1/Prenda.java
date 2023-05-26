@@ -5,14 +5,17 @@ import java.util.List;
 public class Prenda {
     // atributos
     private String nombre;
-    private int urlImagen;
+    private String urlImagen;
+
+    private long categoria;
+    private long usuario;
 
     // constructor vacío
     public Prenda() {
     }
 
     // constructor con parámetros
-    public Prenda(String nombre, int imagen) {
+    public Prenda(String nombre, String imagen) {
         this.nombre = nombre;
         this.urlImagen = imagen;
     }
@@ -23,7 +26,31 @@ public class Prenda {
         return nombre;
     }
 
-    public int getUrlImagen() {
+    public String getUrlImagen() {
         return urlImagen;
+    }
+
+    public long getCategoria() {
+        return categoria;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setUrlImagen(String urlImagen) {
+        this.urlImagen = urlImagen;
+    }
+
+    public void setCategoria(long categoria) {
+        this.categoria = categoria;
+    }
+
+    public long getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(long usuario) {
+        this.usuario = usuario;
     }
 }

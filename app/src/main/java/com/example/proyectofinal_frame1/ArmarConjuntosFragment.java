@@ -136,7 +136,7 @@ public class ArmarConjuntosFragment extends Fragment {
                 if(nombre != null) {
                     String conjunto = nombre.getText().toString();
                     conjuntos = new DashboardFragment();
-                    conjuntos.getListaPrendas().add(new Prenda(conjunto, R.drawable.ic_baseline_photo_camera_back_24));
+                    //conjuntos.getListaPrendas().add(new Prenda(conjunto, R.drawable.ic_baseline_photo_camera_back_24));
                     //arrayAdapter.notifyDataSetChanged();
                     dialogo.cancel();
                     Toast.makeText(context, "Conjunto " + conjunto + " creado.", Toast.LENGTH_SHORT).show();

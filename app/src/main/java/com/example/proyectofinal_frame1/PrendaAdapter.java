@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaViewHolder>{
@@ -48,7 +50,9 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
         }
 
         public void bind(Prenda prenda) {
-            imageView.setImageResource(prenda.getUrlImagen());
+            Glide.with(itemView)
+                    .load(prenda.getUrlImagen())
+                    .into(imageView);
             nombreTextView.setText(prenda.getNombre());
         }
     }

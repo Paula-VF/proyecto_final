@@ -106,6 +106,8 @@
             android:scrollbars="none">
 
             <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupCat"
+                style="@style/Widget.MaterialComponents.ChipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:singleLine="true"
@@ -169,62 +171,11 @@
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
 
-        <HorizontalScrollView
-            android:id="@+id/horizontalScrollsubCate"
-            android:layout_width="match_parent"
-            android:layout_height="61dp"
-            android:layout_below="@+id/horizontalScrollCat"
-            android:layout_marginTop="5dp"
-            android:paddingStart="10dp"
-            android:scrollbars="none">
-
-            <com.google.android.material.chip.ChipGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:singleLine="true"
-                app:singleSelection="true">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipSubCategoria1"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:padding="12dp"
-                    android:text="subCategoria1"
-                    android:textAlignment="center"
-                    android:theme="@style/Theme.MaterialComponents.Light" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipSubCategoria2"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:padding="12dp"
-                    android:text="subCategoria2"
-                    android:textAlignment="center"
-                    android:theme="@style/Theme.MaterialComponents.Light" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipSubCategoria3"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:padding="12dp"
-                    android:text="subCategoria3"
-                    android:textAlignment="center"
-                    android:theme="@style/Theme.MaterialComponents.Light" />
-
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
-
         <Button
             android:id="@+id/btnCamara"
             android:layout_width="130dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/horizontalScrollsubCate"
+            android:layout_height="55dp"
+            android:layout_below="@+id/horizontalScrollCat"
             android:layout_alignParentStart="true"
             android:layout_marginStart="50dp"
             android:layout_marginTop="12dp"
@@ -240,8 +191,8 @@
         <Button
             android:id="@+id/btnGaleria"
             android:layout_width="130dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/horizontalScrollsubCate"
+            android:layout_height="55dp"
+            android:layout_below="@+id/horizontalScrollCat"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="50dp"
@@ -269,15 +220,15 @@
             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
         <Button
-            android:id="@+id/btn_guardar"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:id="@+id/btnGuardar"
+            android:layout_width="129dp"
+            android:layout_height="55dp"
             android:layout_alignTop="@+id/imagenPrenda"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="254dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginStart="135dp"
+            android:layout_marginTop="357dp"
+            android:layout_marginEnd="135dp"
             android:backgroundTint="@color/ourPurple"
             android:text="Guardar"
             android:textSize="16sp"

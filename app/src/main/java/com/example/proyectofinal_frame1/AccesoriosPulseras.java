@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.proyectofinal_frame1.database.TablaPrenda;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +20,7 @@ public class AccesoriosPulseras extends AppCompatActivity {
     private PrendaAdapter prendaAdapter;
     private List<Prenda> listaPrendas;
     private ImageView btnBack;
+    private TablaPrenda tablaPrenda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +38,12 @@ public class AccesoriosPulseras extends AppCompatActivity {
         recyclerViewPrendas = findViewById(R.id.recyclerViewPrendas);
         recyclerViewPrendas.setLayoutManager(new GridLayoutManager(this, 2));
 
-        listaPrendas = new ArrayList<>();
-        listaPrendas.add(new Prenda("Brazalete dorado", R.drawable.ic_baseline_photo_camera_back_24));
-        listaPrendas.add(new Prenda("Multicolor", R.drawable.ic_baseline_photo_camera_back_24));
-        listaPrendas.add(new Prenda("Piedras moradas", R.drawable.ic_baseline_photo_camera_back_24));
-        listaPrendas.add(new Prenda("Pulsera de la suerte", R.drawable.ic_baseline_photo_camera_back_24));
+        listaPrendas = tablaPrenda.obtenerPrendas(5);
+//        listaPrendas = new ArrayList<>();
+//        listaPrendas.add(new Prenda("Brazalete dorado", R.drawable.ic_baseline_photo_camera_back_24));
+//        listaPrendas.add(new Prenda("Multicolor", R.drawable.ic_baseline_photo_camera_back_24));
+//        listaPrendas.add(new Prenda("Piedras moradas", R.drawable.ic_baseline_photo_camera_back_24));
+//        listaPrendas.add(new Prenda("Pulsera de la suerte", R.drawable.ic_baseline_photo_camera_back_24));
 
         prendaAdapter = new PrendaAdapter(listaPrendas);
         recyclerViewPrendas.setAdapter(prendaAdapter);

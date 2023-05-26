@@ -1,5 +1,6 @@
 package com.example.proyectofinal_frame1.database;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -8,6 +9,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import com.example.proyectofinal_frame1.Prenda;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +23,7 @@ public class TablaPrenda extends ProyectoDatabaseHelper{
         this.context=context;
     }
 
-    public long insertarPrenda(String nombre, String rutaImagen, long subcategoria, long usuario) {
+    public long insertarPrenda(String nombre, String rutaImagen, long categoria, long usuario) {
         long id = 0;
 
         try {
@@ -32,7 +35,7 @@ public class TablaPrenda extends ProyectoDatabaseHelper{
             ContentValues values = new ContentValues();
             values.put("nombre", nombre);
             values.put("imagen", rutaImagen);
-            values.put("subcategoria", subcategoria);
+            values.put("categoria", categoria);
             values.put("usuario", usuario);
 
             // Insertar el registro en la tabla
@@ -68,4 +71,49 @@ public class TablaPrenda extends ProyectoDatabaseHelper{
         }
         return rutasImagenes;
     }
+
+    public List<Prenda> obtenerPrendas(long categoria) {
+        List<Prenda> prendas = new ArrayList<>();
+
+        try {
+            // Obtener la base de datos en modo lectura
+            ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+            // Definir las columnas que deseas recuperar
+            String[] columnas = {"nombre", "imagen", "categoria", "usuario"};
+            String filtrado = "categoria = ?";
+
+            String[] argumentos = {String.valueOf(categoria)};
+
+            // Realizar la consulta a la tabla de prendas
+            Cursor cursor = db.query(TABLA_PRENDA, columnas, filtrado, argumentos, null, null, null);
+
+            // Recorrer el cursor y obtener los datos de cada prenda
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    // Obtener los valores de cada columna
+                    @SuppressLint("Range") String nombre = cursor.getString(cursor.getColumnIndex("nombre"));
+                    @SuppressLint("Range") String rutaImagen = cursor.getString(cursor.getColumnIndex("imagen"));
+                    @SuppressLint("Range") long categoriaPrenda = cursor.getLong(cursor.getColumnIndex("categoria"));
+                    @SuppressLint("Range") long usuario = cursor.getLong(cursor.getColumnIndex("usuario"));
+
+                    // Crear una instancia de Prenda y agregarla a la lista
+                    Prenda prenda = new Prenda();
+                    prenda.setNombre(nombre);
+                    prenda.setUrlImagen(rutaImagen);
+                    prenda.setCategoria(categoriaPrenda);
+                    prenda.setUsuario(usuario);
+                    prendas.add(prenda);
+                } while (cursor.moveToNext());
+            }
+            // Cerrar el cursor y la base de datos
+            cursor.close();
+            db.close();
+        } catch (Exception ex) {
+            ex.toString();
+        }
+        return prendas;
+    }
+
 }
