@@ -25,7 +25,7 @@ public class PArribaCamisetas extends AppCompatActivity {
         listaPrendas = new ArrayList<>();
 
 
-        prendaAdapter = new PrendaAdapter(listaPrendas);
+        //prendaAdapter = new PrendaAdapter(listaPrendas, this);
         recyclerViewPrendas.setAdapter(prendaAdapter);
     }
 }

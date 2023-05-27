@@ -1,8 +1,9 @@
 package com.example.proyectofinal_frame1;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Prenda {
+public class Prenda implements Serializable {
     // atributos
     private String nombre;
     private String urlImagen;

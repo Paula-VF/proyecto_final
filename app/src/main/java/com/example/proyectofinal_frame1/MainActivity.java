@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -129,14 +130,13 @@ public class MainActivity extends AppCompatActivity {
     //camara
     private static final int CAMERA_REQUEST_CODE = 1;
 
-    // funcionalidad botón toolbar_prendas
+    // funcionalidad botones toolbar_prendas
     String currentPhotoPath;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        //Añadir foto
-
+        //Añadir prenda
         if(id == R.id.AddBtn){
             Intent intent = new Intent(MainActivity.this, AniadirActivity.class);
             startActivity(intent);
@@ -167,6 +167,14 @@ public class MainActivity extends AppCompatActivity {
 //            alertDialogSeleccionCamGal = builder.create();
 //            alertDialogSeleccionCamGal.show();
         }
+
+        // eliminar prenda/conjunto
+        if(id == R.id.btn_delete){
+            Button delete = findViewById(R.id.btn_delete);
+            delete.setVisibility(View.VISIBLE);
+        }
+
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -181,25 +189,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    });
 
-    private boolean checkCameraPermission(){
-        boolean res1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)== PackageManager.PERMISSION_GRANTED;
-        return res1;
-    }
 
-    private boolean checkStoragePermission(){
-        boolean res2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES)== PackageManager.PERMISSION_GRANTED;
-        return res2;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void requestCameraPermission(){
-        requestPermissions(new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.READ_MEDIA_IMAGES}, 100);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void requestStoragePermission(){
-        requestPermissions(new String[]{android.Manifest.permission.READ_MEDIA_IMAGES}, 100);
-    }
 
 //    private void abrirDialogDatos(){
 //
@@ -218,12 +208,5 @@ public class MainActivity extends AppCompatActivity {
 //        prenda.insertarPrenda(nombre, rutaImagen, 1, 1);
 //
 //    }
-
-    public void toAniadirImagen(View view){
-        Intent intent = new Intent(MainActivity.this, AniadirActivity.class);
-        startActivity(intent);
-    }
-
-
 
 }

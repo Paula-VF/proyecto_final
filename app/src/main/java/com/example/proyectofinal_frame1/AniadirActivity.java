@@ -4,12 +4,18 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -29,15 +35,21 @@ import java.io.IOException;
 
 public class AniadirActivity extends AppCompatActivity {
 
+
     private Prenda prenda;
-    private EditText nombrePrendaField;
-    private Button btnCamara, btnGaleria;
+    private EditText nombrePrenda;
+    private Button btnCamara, btnGaleria, btnGuardar;
 
     private ChipGroup categoriaChipGroup;
+    private ChipGroup subcategoriaChipGroup;
     private String rutaImagen;
     private ImageView imagenViewPrenda;
     private Bitmap imgBitmap;
     private ImageView btnBack;
+
+    private ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
+    private static final int REQUEST_CAMERA_PERMISSION_CODE = 1;
+    private static final int REQUEST_IMAGE_CAPTURE = 2;
 
 
     @Override
@@ -64,24 +76,115 @@ public class AniadirActivity extends AppCompatActivity {
         btnCamara= findViewById(R.id.btnCamara);
         btnGaleria= findViewById(R.id.btnGaleria);
         imagenViewPrenda = findViewById(R.id.imagenPrenda);
+        categoriaChipGroup = findViewById(R.id.chip_categorias);
+        subcategoriaChipGroup = findViewById(R.id.chip_subcategorias);
+        btnGuardar = findViewById(R.id.btn_guardar);
 
         btnCamara.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    camaraLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    onActivityResult(REQUEST_IMAGE_CAPTURE, RESULT_OK, intent);
+
+                    //permisoCamara();
+
                 }
-            });
+        });
 
         btnGaleria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                pickMedia.launch(new PickVisualMediaRequest());
+                /*
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 galeriaLauncher.launch(intent);
+                */
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    permisoGaleria();
+                }
+
             }
         });
+
+
+        categoriaChipGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subcategoriaChipGroup.setVisibility(v.VISIBLE);
+            }
+        });
+
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(imagenViewPrenda.getDrawable() == null){
+                    Toast.makeText(getApplicationContext(), "Ninguna imagen seleccionada", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /*
+        Bundle extras = data.getExtras();
+        Bitmap imageBitmap = (Bitmap) extras.get("data");
+        imagenViewPrenda.setImageBitmap(imageBitmap);
+        */
+
+        /*
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imagenViewPrenda.setImageBitmap(imageBitmap);
+        }
+         */
+
+        /*
+        try {
+            String mPath = getExternalStorageDirectory().toString() + "/" + fecha + ".png";
+            direccion_imagen = "/" + fecha + ".png";
+            View u = findViewById(R.id.constrain_screen);
+            u.setDrawingCacheEnabled(true);
+            u.buildDrawingCache(true);
+            Bitmap bitmap = Bitmap.createBitmap(u.getDrawingCache());
+            u.setDrawingCacheEnabled(false);
+
+            File imageFile = new File(mPath);
+
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            int quality = 100;
+            bitmap.compress(Bitmap.CompressFormat.PNG, quality, outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (Throwable e) {
+            Toast.makeText(this, "ERROR al intentar generar imagen .png", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+         */
+    }
+
+
+    ActivityResultLauncher<String> camaraPermission = registerForActivityResult(new ActivityResultContracts.RequestPermission(),
+            new ActivityResultCallback<Boolean>() {
+                @Override
+                public void onActivityResult(Boolean result) {
+                    if(result){
+                        //camaraLauncher.launch(intent);
+                    }else {
+                        Toast.makeText(getApplicationContext(), "Aceptar los permisos para introducir imágenes", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+
+
 
     ActivityResultLauncher<Intent> camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -100,11 +203,13 @@ public class AniadirActivity extends AppCompatActivity {
             new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
+            //ActivityCompat.shouldShowRequestPermissionRationale(this, com.example.proyectofinal_frame1.Manifest.permission.CAMERA)
+            new ActivityResultContracts.RequestPermission();
             if(result.getResultCode() == Activity.RESULT_OK){
                 Intent data = result.getData();
                 Uri imageUri = data.getData();
                 imagenViewPrenda.setImageURI(imageUri);
-                prenda.setUrlImagen(obtenerRutaDeImagen(imageUri);
+                prenda.setUrlImagen(obtenerRutaDeImagen(imageUri));
 
             }else {
                 Toast.makeText(AniadirActivity.this, "Canceled", Toast.LENGTH_SHORT).show();
@@ -144,6 +249,31 @@ public class AniadirActivity extends AppCompatActivity {
         return filePath;
     }
 
+
+    // permisos cámara y galería
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void permisoCamara(){
+        int permiso = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        if(permiso == PackageManager.PERMISSION_GRANTED){
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.setType("image/*");
+            camaraLauncher.launch(intent);
+        }else{
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void permisoGaleria(){
+        int permiso = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES);
+        if(permiso == PackageManager.PERMISSION_GRANTED){
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            galeriaLauncher.launch(intent);
+        }else {
+            requestPermissions(new String[]{android.Manifest.permission.READ_MEDIA_IMAGES}, 100);
+        }
+    }
 
 
 

@@ -45,7 +45,7 @@ public class AccesoriosPulseras extends AppCompatActivity {
 //        listaPrendas.add(new Prenda("Piedras moradas", R.drawable.ic_baseline_photo_camera_back_24));
 //        listaPrendas.add(new Prenda("Pulsera de la suerte", R.drawable.ic_baseline_photo_camera_back_24));
 
-        prendaAdapter = new PrendaAdapter(listaPrendas);
+        //prendaAdapter = new PrendaAdapter(listaPrendas, 9);
         recyclerViewPrendas.setAdapter(prendaAdapter);
     }
 
