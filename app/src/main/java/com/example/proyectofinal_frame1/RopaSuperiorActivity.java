@@ -68,7 +68,7 @@ public class RopaSuperiorActivity extends AppCompatActivity {
 
         listaPrendas = tablaPrenda.obtenerPrendas(1);
 
-        prendaAdapter = new PrendaAdapter(listaPrendas);
+        prendaAdapter = new PrendaAdapter(listaPrendas, findViewById(R.id.layout_ropa_superior));
         recyclerViewPrendas.setAdapter(prendaAdapter);
 
     }

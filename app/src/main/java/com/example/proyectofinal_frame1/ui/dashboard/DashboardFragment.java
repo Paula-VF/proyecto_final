@@ -11,10 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +24,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectofinal_frame1.Conjunto;
+import com.example.proyectofinal_frame1.ConjuntoAdapter;
+import com.example.proyectofinal_frame1.ConjuntoItem;
 import com.example.proyectofinal_frame1.Prenda;
 import com.example.proyectofinal_frame1.PrendaAdapter;
 import com.example.proyectofinal_frame1.R;
@@ -35,19 +35,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashboardFragment extends Fragment implements PrendaAdapter.OnPrendaListener {
+public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnConjuntoListener {
 
     private FragmentDashboardBinding binding;
     private Context context;
 
     private FloatingActionButton floatBtn;
     private RecyclerView recyclerViewPrendas;
-    private ListView listView;
-    private PrendaAdapter prendaAdapter;
-    private List<Prenda> listaPrendas;
-    private ArrayAdapter<Prenda> arrayAdapter;
+    private ConjuntoAdapter conjuntoAdapter;
+    private List<ConjuntoItem> listaConjuntos;
     private AlertDialog dialogo;
-    private Prenda nuevoConjunto;
+    private ConjuntoItem nuevoConjunto;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -64,15 +62,15 @@ public class DashboardFragment extends Fragment implements PrendaAdapter.OnPrend
         recyclerViewPrendas.setLayoutManager(new GridLayoutManager(context, 2));
 
 
-        listaPrendas = new ArrayList<>();
-        listaPrendas.add(new Prenda("Conjunto día de playa", R.drawable.ic_baseline_photo_camera_back_24));
-        listaPrendas.add(new Prenda("Conjunto boda", R.drawable.ic_baseline_photo_camera_back_24));
-        listaPrendas.add(new Prenda("Conjunto miércoles", R.drawable.ic_baseline_photo_camera_back_24));
-        listaPrendas.add(new Prenda("Conjunto casual", R.drawable.ic_baseline_photo_camera_back_24));
+        listaConjuntos = new ArrayList<>();
+        listaConjuntos.add(new ConjuntoItem("Conjunto día de playa", R.drawable.ic_baseline_photo_camera_back_24));
+        listaConjuntos.add(new ConjuntoItem("Conjunto boda", R.drawable.ic_baseline_photo_camera_back_24));
+        listaConjuntos.add(new ConjuntoItem("Conjunto miércoles", R.drawable.ic_baseline_photo_camera_back_24));
+        listaConjuntos.add(new ConjuntoItem("Conjunto casual", R.drawable.ic_baseline_photo_camera_back_24));
 
 
-        prendaAdapter = new PrendaAdapter(listaPrendas, this);
-        recyclerViewPrendas.setAdapter(prendaAdapter);
+        conjuntoAdapter = new ConjuntoAdapter(listaConjuntos, this);
+        recyclerViewPrendas.setAdapter(conjuntoAdapter);
 
         recyclerViewPrendas.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
@@ -88,30 +86,6 @@ public class DashboardFragment extends Fragment implements PrendaAdapter.OnPrend
                 return false;
             }
         });
-
-        /*
-        listView = root.findViewById(R.id.list_conjuntos);
-        arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_2, listaPrendas);
-        listView.setAdapter(arrayAdapter);
-
-        // funcionalidad al clicar en un conjunto
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Intent intent = new Intent(context, Conjunto.class);
-                //startActivity(intent);
-            }
-        });
-
-        // funcionalidad al mantener pulsado en un conjunto
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                abrirDialogo(position);
-                return false;
-            }
-        });
-         */
 
 
         floatBtn = (FloatingActionButton) root.findViewById(R.id.float_btn);
@@ -146,8 +120,8 @@ public class DashboardFragment extends Fragment implements PrendaAdapter.OnPrend
             public void onClick(View v) {
                 if(nombre != null) {
                     String conjunto = nombre.getText().toString();
-                    nuevoConjunto = new Prenda(conjunto, R.drawable.ic_baseline_photo_camera_back_24);
-                    listaPrendas.add(nuevoConjunto);
+                    nuevoConjunto = new ConjuntoItem(conjunto, R.drawable.ic_baseline_photo_camera_back_24);
+                    listaConjuntos.add(nuevoConjunto);
                     //arrayAdapter.notifyDataSetChanged();
                     dialogo.cancel();
                     Toast.makeText(context, "Conjunto " + conjunto + " creado.", Toast.LENGTH_SHORT).show();
@@ -169,8 +143,8 @@ public class DashboardFragment extends Fragment implements PrendaAdapter.OnPrend
         dialogo.show();
     }
 
-    public List<Prenda> getListaPrendas() {
-        return listaPrendas;
+    public List<ConjuntoItem> getListaConjuntos() {
+        return listaConjuntos;
     }
 
     @Override
@@ -188,10 +162,10 @@ public class DashboardFragment extends Fragment implements PrendaAdapter.OnPrend
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 nuevoConjunto = null;
-                listaPrendas.remove(position);
-                arrayAdapter.notifyDataSetChanged();
+                listaConjuntos.remove(position);
+                conjuntoAdapter.notifyDataSetChanged();
                 //listView.refreshDrawableState();
-                Toast.makeText(context, "Conjunto " + listaPrendas.get(position).toString().toString() + " eliminado.",
+                Toast.makeText(context, "Conjunto " + listaConjuntos.get(position).toString().toString() + " eliminado.",
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -206,12 +180,11 @@ public class DashboardFragment extends Fragment implements PrendaAdapter.OnPrend
         dialogo.show();
     }
 
-    @Override
-    public void onPrendaClick(int position) {
-        Log.d(TAG, "onPrendaClick: clicked " + position);
 
+    @Override
+    public void onConjuntoClick(int position) {
         Intent intent = new Intent(context, Conjunto.class);
-        intent.putExtra("Objeto_Conjunto", listaPrendas.get(position));
+        intent.putExtra("Objeto_Conjunto", listaConjuntos.get(position));
         startActivity(intent);
     }
 }

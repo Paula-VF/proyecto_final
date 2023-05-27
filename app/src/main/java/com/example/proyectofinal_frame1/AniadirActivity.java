@@ -3,6 +3,7 @@ package com.example.proyectofinal_frame1;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -19,6 +20,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -59,10 +61,6 @@ public class AniadirActivity extends AppCompatActivity {
         prenda = new Prenda();
 
 
-
-        categoriaChipGroup = findViewById(R.id.chipGroupCat);
-        int id = categoriaChipGroup.getCheckedChipId();
-
         btnBack = findViewById(R.id.btn_back);
         // funcionalidad al clicar en btnBack
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -72,13 +70,15 @@ public class AniadirActivity extends AppCompatActivity {
             }
         });
 
-        nombrePrendaField = findViewById(R.id.nombrePrenda);
+        nombrePrenda = findViewById(R.id.nombrePrenda);
         btnCamara= findViewById(R.id.btnCamara);
         btnGaleria= findViewById(R.id.btnGaleria);
         imagenViewPrenda = findViewById(R.id.imagenPrenda);
         categoriaChipGroup = findViewById(R.id.chip_categorias);
         subcategoriaChipGroup = findViewById(R.id.chip_subcategorias);
         btnGuardar = findViewById(R.id.btn_guardar);
+
+        int id = categoriaChipGroup.getCheckedChipId();
 
         btnCamara.setOnClickListener(new View.OnClickListener() {
                 @Override

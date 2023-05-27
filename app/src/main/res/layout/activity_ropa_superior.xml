@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:clickable="true"
     android:focusableInTouchMode="true"
+    android:id="@+id/layout_ropa_superior"
     tools:context=".RopaSuperiorActivity">
 
     <androidx.appcompat.widget.Toolbar
