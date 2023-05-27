@@ -271,7 +271,7 @@ public class AniadirActivity extends AppCompatActivity {
             intent.setType("image/*");
             galeriaLauncher.launch(intent);
         }else {
-            requestPermissions(new String[]{android.Manifest.permission.READ_MEDIA_IMAGES}, 100);
+            requestPermissions(new String[]{Manifest.permission.READ_MEDIA_IMAGES}, 100);
         }
     }
 

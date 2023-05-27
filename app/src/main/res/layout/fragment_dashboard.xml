@@ -22,22 +22,6 @@
         android:layout_marginBottom="2dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2" />
-    <!-->
-
-    <ListView
-        android:id="@+id/list_conjuntos"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        app:spanCount="2"/>
-    <!-->
 
     <FrameLayout
         android:layout_width="match_parent"

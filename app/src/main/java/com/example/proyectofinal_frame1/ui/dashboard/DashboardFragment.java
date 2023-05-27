@@ -72,6 +72,7 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
         conjuntoAdapter = new ConjuntoAdapter(listaConjuntos, this);
         recyclerViewPrendas.setAdapter(conjuntoAdapter);
 
+        /*
         recyclerViewPrendas.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,10 +83,13 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
         recyclerViewPrendas.setOnLongClickListener(new AdapterView.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                // abrirDialogo();
+                recyclerViewPrendas.get;
+                abrirDialogo();
                 return false;
             }
         });
+
+         */
 
 
         floatBtn = (FloatingActionButton) root.findViewById(R.id.float_btn);
@@ -94,7 +98,6 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
             @Override
             public void onClick(View v) {
                 nombrarConjunto();
-                //Conjunto.getInstance();
             }
         });
 
@@ -165,7 +168,7 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
                 listaConjuntos.remove(position);
                 conjuntoAdapter.notifyDataSetChanged();
                 //listView.refreshDrawableState();
-                Toast.makeText(context, "Conjunto " + listaConjuntos.get(position).toString().toString() + " eliminado.",
+                Toast.makeText(context, "Conjunto " + listaConjuntos.get(position) + " eliminado.",
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -186,5 +189,10 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
         Intent intent = new Intent(context, Conjunto.class);
         intent.putExtra("Objeto_Conjunto", listaConjuntos.get(position));
         startActivity(intent);
+    }
+
+    @Override
+    public void onConjuntoLongClick(int position) {
+        abrirDialogo(position);
     }
 }

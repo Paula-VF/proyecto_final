@@ -41,7 +41,7 @@ public class ConjuntoAdapter extends RecyclerView.Adapter<ConjuntoAdapter.Conjun
     }
 
     // ViewHolder
-    public static class ConjuntoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class ConjuntoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         private ImageView imageView;
         private TextView nombreTextView;
@@ -53,6 +53,7 @@ public class ConjuntoAdapter extends RecyclerView.Adapter<ConjuntoAdapter.Conjun
             this.conjuntoListener = conjuntoListener;
 
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         public void bind(ConjuntoItem prenda) {
@@ -66,11 +67,20 @@ public class ConjuntoAdapter extends RecyclerView.Adapter<ConjuntoAdapter.Conjun
         public void onClick(View v) {
             conjuntoListener.onConjuntoClick(getAdapterPosition());
         }
+
+        @Override
+        public boolean onLongClick(View v) {
+            conjuntoListener.onConjuntoLongClick(getAdapterPosition());
+            return false;
+        }
     }
 
 
     public interface OnConjuntoListener {
         void onConjuntoClick(int position);
+        void onConjuntoLongClick(int position);
     }
+
+
 
 }

@@ -33,14 +33,6 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
     public void onBindViewHolder(@NonNull PrendaViewHolder holder, int position) {
         Prenda prenda = prendas.get(position);
         holder.bind(prenda);
-        /*
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-         */
     }
 
     @Override
