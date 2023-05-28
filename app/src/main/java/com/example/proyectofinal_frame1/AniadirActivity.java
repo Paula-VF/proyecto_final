@@ -35,6 +35,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.proyectofinal_frame1.database.TablaPrenda;
 import com.google.android.material.chip.ChipGroup;
 import com.slowmac.autobackgroundremover.BackgroundRemover;
 import com.slowmac.autobackgroundremover.OnBackgroundChangeListener;
@@ -50,12 +51,11 @@ public class AniadirActivity extends AppCompatActivity {
     private Button btnCamara, btnGaleria, btnGuardar;
 
     private ChipGroup categoriaChipGroup;
-    private ChipGroup subcategoriaChipGroup;
     private String rutaImagen;
     private ImageView imagenViewPrenda;
     private Bitmap imgBitmap;
     private ImageView btnBack;
-    private long categoria;
+    private TablaPrenda tablaPrenda = new TablaPrenda(this);
 
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
@@ -98,8 +98,6 @@ public class AniadirActivity extends AppCompatActivity {
         categoriaChipGroup = findViewById(R.id.chipGroupCategorias);
         btnGuardar = findViewById(R.id.btn_guardar);
 
-        int chipId = categoriaChipGroup.getCheckedChipId();
-
         btnCamara.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -120,19 +118,32 @@ public class AniadirActivity extends AppCompatActivity {
             }
         });
 
-
-        categoriaChipGroup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                subcategoriaChipGroup.setVisibility(v.VISIBLE);
-            }
-        });
-
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(imagenViewPrenda.getDrawable() == null){
+                prenda.setNombre(nombrePrenda.getText().toString().trim());
+                int chipId = categoriaChipGroup.getCheckedChipId();
+                prenda.setCategoria(obtenerCategoria(chipId));
+                if (prenda.getNombre().isEmpty()) {
+                    nombrePrenda.setError("Por favor introduzca un nombre descriptivo a la prenda");
+                    nombrePrenda.requestFocus();
+                } else if(prenda.getUrlImagen()== null|| prenda.getUrlImagen().isEmpty()){
                     Toast.makeText(getApplicationContext(), "Ninguna imagen seleccionada", Toast.LENGTH_SHORT).show();
+                }else if(prenda.getCategoria()!=0 && prenda.getCategoria()>0){
+                    Toast.makeText(AniadirActivity.this, "Todo ok", Toast.LENGTH_SHORT).show();
+                    long idPrenda = tablaPrenda.insertarPrenda(prenda.getNombre(), prenda.getUrlImagen(), prenda.getCategoria(), 1);
+                    if (idPrenda!=0){
+                        Toast.makeText(AniadirActivity.this, "Prenda guardada", Toast.LENGTH_SHORT).show();
+                        nombrePrenda.getText().clear();
+                        categoriaChipGroup.clearCheck();
+                        imagenViewPrenda.setImageResource(android.R.drawable.ic_menu_gallery);
+                    }
+
+                    //Falta guardar la imagen en la bd. Porque falta terminar de finiquitar la funcionalidad de usuario
+
+                }else{
+                    Toast.makeText(AniadirActivity.this, "Selecciona una categoría. Categoria: "+ prenda.getCategoria()+ "chipID: " + chipId, Toast.LENGTH_SHORT).show();
+                    categoriaChipGroup.requestFocus();
                 }
             }
         });
@@ -219,6 +230,7 @@ public class AniadirActivity extends AppCompatActivity {
 
                  */
                 rutaImagen = guardarImagenEnAlmacenamientoInterno(imgBitmap);
+                prenda.setUrlImagen(rutaImagen);
                 imagenViewPrenda.setImageBitmap(imgBitmap);
             }
         }
@@ -234,7 +246,8 @@ public class AniadirActivity extends AppCompatActivity {
                 Intent data = result.getData();
                 Uri imageUri = data.getData();
                 imagenViewPrenda.setImageURI(imageUri);
-                prenda.setUrlImagen(obtenerRutaDeImagen(imageUri).toString()+"/remove-bg");
+                //prenda.setUrlImagen(obtenerRutaDeImagen(imageUri).toString()+"/remove-bg");
+                prenda.setUrlImagen(obtenerRutaDeImagen(imageUri));
             }else {
                 Toast.makeText(AniadirActivity.this, "Operación canceleda", Toast.LENGTH_SHORT).show();
             }
@@ -280,7 +293,6 @@ public class AniadirActivity extends AppCompatActivity {
     }
 
      */
-
 
     private String guardarImagenEnAlmacenamientoInterno(Bitmap bitmap) {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
@@ -340,6 +352,7 @@ public class AniadirActivity extends AppCompatActivity {
     }
 
     private long obtenerCategoria(int chipId){
+        long categoria;
         switch (chipId) {
             case R.id.chipParteSuperior:
                 categoria = 1;
@@ -357,7 +370,8 @@ public class AniadirActivity extends AppCompatActivity {
                 categoria = 5;
                 break;
             default:
-                Toast.makeText(AniadirActivity.this, "No se ha seleccionado categoria", Toast.LENGTH_SHORT).show();
+                categoria = 0;
+                break;
         }
         return categoria;
     }

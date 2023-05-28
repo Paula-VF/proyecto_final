@@ -86,17 +86,16 @@ public class MainActivity extends AppCompatActivity {
         prenda = new TablaPrenda(this);
         user = new TablaUsuario(this);
 
+        //TODO pasar estos ejemplos a TablaPrendas
         long idUser = user.insertarUsuario("emely", "mijij", "okey");
         prenda.insertarPrenda("Camisa", "https://www.trajesguzman.com/media/1624/camisa-basica-blanca.jpg", 1, idUser);
         prenda.insertarPrenda("Camiseta blanca", "https://www.disfracesantifaz.com/2038-large_default/camiseta-chica-blanca.jpg", 1, idUser);
         prenda.insertarPrenda("Blusa verde", "https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fcc%2Fdc%2Fccdcffa050547931b6cc535b6f4bef0d270e12ee.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bladies_shirtsblouses_blouses%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/main]", 1, idUser);
         prenda.insertarPrenda("Chandal rosa", "https://hmperu.vtexassets.com/arquivos/ids/3024520-483-725/Pantalon-de-buzo---Rosado---H-M-PE.jpg?v=637983998116170000", 2, idUser);
-        //prenda.insertarPrenda("vaqueros pitillo", "https://media.vogue.es/photos/5cc7367f92f813c7264e4eb6/master/w_1280,c_limit/pantalones_vaqueros_pitillo_mango_basicos_armario_2019_7371.jpg", 2, idUser);
+        prenda.insertarPrenda("vaqueros pitillo", "https://media.vogue.es/photos/5cc7367f92f813c7264e4eb6/master/w_1280,c_limit/pantalones_vaqueros_pitillo_mango_basicos_armario_2019_7371.jpg", 2, idUser);
         prenda.insertarPrenda("pantalones blancos", "https://media.vogue.es/photos/5cc750398f6f6723b65bea04/master/w_1280,c_limit/pantalones_blancos_929.jpg", 2, idUser);
         prenda.insertarPrenda("Converse blancas", "https://media.revistagq.com/photos/6093ca05235a5910299c929c/master/w_1280,c_limit/converse.jpeg", 3, idUser);
         prenda.insertarPrenda("Tacón lunares", "https://www.angari.es/wp-content/uploads/2018/09/zapatos-lunares-negros-con-lazos.jpg", 3, idUser);
-
-
 
         navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

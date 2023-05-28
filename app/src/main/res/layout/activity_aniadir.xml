@@ -63,7 +63,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:paddingStart="10dp"
-            android:text="Nombre de la prenda:"
+            android:text="Nombre descriptivo de la prenda:"
             android:textColor="#000000"
             android:textSize="20sp" />
 
@@ -122,7 +122,7 @@
                     android:padding="12dp"
                     android:text="Parte superior"
                     android:textAlignment="center"
-                    android:theme="@style/Theme.MaterialComponents.Light" />
+                    android:theme="@style/Theme.MaterialComponents.Light"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipParteInferior"

@@ -34,7 +34,7 @@ public class ProyectoDatabaseHelper extends SQLiteOpenHelper {
         //tabla usuarios
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLA_USUARIO+ "(\n" +
                 "user_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                "email TEXT PRIMARY KEY,\n" +
+                "email TEXT NOT NULL UNIQUE,\n" +
                 "nombre TEXT NOT NULL,\n" +
                 "contrasena TEXT NOT NULL UNIQUE)"
         );

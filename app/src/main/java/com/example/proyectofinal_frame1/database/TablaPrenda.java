@@ -25,7 +25,6 @@ public class TablaPrenda extends ProyectoDatabaseHelper{
 
     public long insertarPrenda(String nombre, String rutaImagen, long categoria, long usuario) {
         long id = 0;
-
         try {
             // Obtener la base de datos en modo escritura
             ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
