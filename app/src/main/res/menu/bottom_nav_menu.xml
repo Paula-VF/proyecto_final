@@ -19,7 +19,7 @@
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_baseline_menu_24"
-        android:title="Otras opciones" />
+        android:icon="@mipmap/info"
+        android:title="Información" />
 
 </menu>

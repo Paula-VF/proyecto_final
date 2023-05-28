@@ -43,8 +43,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class RopaSuperiorActivity extends AppCompatActivity {
-
-    private FloatingActionButton floatBtn;
     private RecyclerView recyclerViewPrendas;
     private PrendaAdapter prendaAdapter;
     private List<Prenda> listaPrendas;

@@ -11,6 +11,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
@@ -20,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.proyectofinal_frame1.database.TablaPrenda;
 import com.example.proyectofinal_frame1.databinding.ActivityAccesoriosBinding;
 import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
 import com.example.proyectofinal_frame1.ui.home.HomeFragment;
@@ -27,10 +30,16 @@ import com.example.proyectofinal_frame1.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.List;
+
 
 public class AccesoriosActivity extends AppCompatActivity {
 
+    private RecyclerView recyclerViewPrendas;
+    private PrendaAdapter prendaAdapter;
+    private List<Prenda> listaPrendas;
     private ImageView btnBack;
+    private TablaPrenda tablaPrenda = new TablaPrenda(AccesoriosActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +53,14 @@ public class AccesoriosActivity extends AppCompatActivity {
                 onSupportNavigateUp();
             }
         });
+        recyclerViewPrendas = findViewById(R.id.recyclerViewAccesorios);
+        recyclerViewPrendas.setLayoutManager(new GridLayoutManager(this, 2));
 
-    }
+        listaPrendas = tablaPrenda.obtenerPrendas(5);
 
-    public void toPulseras(View view) {
-        Intent intent = new Intent(AccesoriosActivity.this, AccesoriosPulseras.class);
-        startActivity(intent);
+        prendaAdapter = new PrendaAdapter(listaPrendas);
+        recyclerViewPrendas.setAdapter(prendaAdapter);
+
     }
 
     // para volver a la pantalla anterior

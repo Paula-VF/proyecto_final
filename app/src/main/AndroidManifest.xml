@@ -31,21 +31,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PArribaCamisetas"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".Conjunto"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".AccesoriosPulseras"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

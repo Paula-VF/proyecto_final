@@ -8,13 +8,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.proyectofinal_frame1.database.TablaPrenda;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class ZapatosActivity extends AppCompatActivity {
 
+    private RecyclerView recyclerViewPrendas;
+    private PrendaAdapter prendaAdapter;
+    private List<Prenda> listaPrendas;
     private ImageView btnBack;
+    private TablaPrenda tablaPrenda = new TablaPrenda(ZapatosActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,14 @@ public class ZapatosActivity extends AppCompatActivity {
                 onSupportNavigateUp();
             }
         });
+
+        recyclerViewPrendas = findViewById(R.id.recyclerViewZapatos);
+        recyclerViewPrendas.setLayoutManager(new GridLayoutManager(this, 2));
+
+        listaPrendas = tablaPrenda.obtenerPrendas(3);
+
+        prendaAdapter = new PrendaAdapter(listaPrendas);
+        recyclerViewPrendas.setAdapter(prendaAdapter);
     }
 
     // para volver a la pantalla anterior

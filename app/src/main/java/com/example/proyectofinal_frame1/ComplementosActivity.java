@@ -9,16 +9,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.proyectofinal_frame1.database.TablaPrenda;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ComplementosActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerViewSubcategorias;
-    private SubcategoriaAdapter subcategoriaAdapter;
-    private List<Subcategoria> subcategorias;
-
+    private RecyclerView recyclerViewPrendas;
+    private PrendaAdapter prendaAdapter;
+    private List<Prenda> listaPrendas;
     private ImageView btnBack;
+    private TablaPrenda tablaPrenda = new TablaPrenda(ComplementosActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +36,13 @@ public class ComplementosActivity extends AppCompatActivity {
             }
         });
 
-        recyclerViewSubcategorias = findViewById(R.id.recycler_subcategorias);
-        recyclerViewSubcategorias.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerViewPrendas = findViewById(R.id.recyclerViewComplementos);
+        recyclerViewPrendas.setLayoutManager(new GridLayoutManager(this, 2));
 
-        subcategorias = new ArrayList<>();
-        subcategorias.add(new Subcategoria("BOLSOS"));
-        /*
-        subcategorias.add(new Subcategoria("FULARES"));
-        subcategorias.add(new Subcategoria("GAFAS DE SOL"));
+        listaPrendas = tablaPrenda.obtenerPrendas(4);
 
-         */
-        subcategoriaAdapter = new SubcategoriaAdapter(subcategorias);
-        recyclerViewSubcategorias.setAdapter(subcategoriaAdapter);
-
-        for (int i = 0; subcategorias.size() >i; i++){
-            subcategorias.get(i).getBtnAdded();
-        }
+        prendaAdapter = new PrendaAdapter(listaPrendas);
+        recyclerViewPrendas.setAdapter(prendaAdapter);
     }
 
     // para volver a la pantalla anterior

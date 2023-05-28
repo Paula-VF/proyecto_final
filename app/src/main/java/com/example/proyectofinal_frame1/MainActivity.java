@@ -96,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
         prenda.insertarPrenda("pantalones blancos", "https://media.vogue.es/photos/5cc750398f6f6723b65bea04/master/w_1280,c_limit/pantalones_blancos_929.jpg", 2, idUser);
         prenda.insertarPrenda("Converse blancas", "https://media.revistagq.com/photos/6093ca05235a5910299c929c/master/w_1280,c_limit/converse.jpeg", 3, idUser);
         prenda.insertarPrenda("Tacón lunares", "https://www.angari.es/wp-content/uploads/2018/09/zapatos-lunares-negros-con-lazos.jpg", 3, idUser);
+        prenda.insertarPrenda("pulsera corazón", "https://asset.swarovski.com/images/$size_1450/t_swa103/b_rgb:ffffff,c_scale,dpr_auto,f_auto,w_auto/5524421_png/pulsera-swarovski-infinity--infinity-y-coraz%C3%B3n--blanca--ba%C3%B1o-de-rodio-swarovski-5524421.png", 5, idUser);
+        prenda.insertarPrenda("Bolso grande marrón", "https://monaur.com/wp-content/uploads/2020/12/bolso-shopper-piel-camel.jpg", 4, idUser);
 
         navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
