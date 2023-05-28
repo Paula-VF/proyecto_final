@@ -15,22 +15,16 @@ import java.util.List;
 
 public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaViewHolder>{
     private List<Prenda> prendas;
-    private OnPrendaListener mOnPrendaListener;
 
     public PrendaAdapter(List<Prenda> prendas){
         this.prendas= prendas;
-    }
-
-    public PrendaAdapter(List<Prenda> prendas, OnPrendaListener onPrendaListener) {
-        this.prendas = prendas;
-        this.mOnPrendaListener = onPrendaListener;
     }
 
     @NonNull
     @Override
     public PrendaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_prenda, parent, false);
-        return new PrendaViewHolder(view, mOnPrendaListener);
+        return new PrendaViewHolder(view);
     }
 
     @Override
@@ -45,18 +39,15 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
     }
 
     // ViewHolder
-    public static class PrendaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class PrendaViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageView;
         private TextView nombreTextView;
-        OnPrendaListener prendaListener;
-        public PrendaViewHolder(@NonNull View itemView, OnPrendaListener prendaListener) {
+
+        public PrendaViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewPrenda);
             nombreTextView = itemView.findViewById(R.id.textViewNombrePrenda);
-            this.prendaListener = prendaListener;
-
-            itemView.setOnClickListener(this);
         }
 
         public void bind(Prenda prenda) {
@@ -65,16 +56,5 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
                     .into(imageView);
             nombreTextView.setText(prenda.getNombre());
         }
-
-        @Override
-        public void onClick(View v) {
-            prendaListener.onPrendaClick(getAdapterPosition());
-        }
     }
-
-
-    public interface OnPrendaListener {
-        void onPrendaClick(int position);
-    }
-
 }

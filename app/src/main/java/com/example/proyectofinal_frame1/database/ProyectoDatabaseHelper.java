@@ -31,19 +31,11 @@ public class ProyectoDatabaseHelper extends SQLiteOpenHelper {
         //inserción de categorías por defecto
         db.execSQL("INSERT INTO " + TABLA_CATEGORIA + " (nombre) VALUES ('Parte de arriba'), ('Parte de abajo'), ('Zapatos'), ('Complementos'), ('Accesorios')");
 
-      //Tabla categorías
-//        db.execSQL("CREATE TABLE IF NOT EXISTS "+ TABLA_SUBCATEGORIA +"(\n" +
-//                "id	INTEGER PRIMARY KEY AUTOINCREMENT,\n"+
-//                "nombre	TEXT NOT NULL UNIQUE,\n" +
-//                "categoria INTEGER,\n" +
-//                "FOREIGN KEY(categoria) REFERENCES categoria(id) ON DELETE SET NULL)"
-//        );
-
         //tabla usuarios
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLA_USUARIO+ "(\n" +
                 "user_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "email TEXT PRIMARY KEY,\n" +
                 "nombre TEXT NOT NULL,\n" +
-                "emailTEXT NOT NULL UNIQUE,\n" +
                 "contrasena TEXT NOT NULL UNIQUE)"
         );
 
@@ -57,7 +49,6 @@ public class ProyectoDatabaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(categoria) REFERENCES categoria(id) ON DELETE SET NULL,\n" +
                 "FOREIGN KEY(usuario) REFERENCES usuario(user_id) ON DELETE CASCADE)"
         );
-
 
         //tabla conjuntos
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLA_CONJUNTO+ "(\n" +

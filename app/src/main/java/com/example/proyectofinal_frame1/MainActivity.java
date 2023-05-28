@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar myToolbar;
 
     TablaPrenda prenda;
-    TablaCategoria categoria;
     TablaUsuario user;
 
 
@@ -83,14 +82,20 @@ public class MainActivity extends AppCompatActivity {
         ProyectoDatabaseHelper proyectoDBHelper = new ProyectoDatabaseHelper(MainActivity.this);
         SQLiteDatabase db = proyectoDBHelper.getWritableDatabase();
 
+        //Ejemplos prendas
         prenda = new TablaPrenda(this);
-        categoria = new TablaCategoria(this);
         user = new TablaUsuario(this);
-//
-//        String rutaImagen = "https://www.trajesguzman.com/media/1624/camisa-basica-blanca.jpg";
-//        long idUser = user.insertarUsuario("emely", "mijij", "okey");
-//        long id= prenda.insertarPrenda("Camisa", rutaImagen, "verano", 1, idUser);
-//        long id2= prenda.insertarPrenda("Camisa", "https://hmperu.vtexassets.com/arquivos/ids/3024520-483-725/Pantalon-de-buzo---Rosado---H-M-PE.jpg?v=637983998116170000", "verano", 1, idUser);
+
+        long idUser = user.insertarUsuario("emely", "mijij", "okey");
+        prenda.insertarPrenda("Camisa", "https://www.trajesguzman.com/media/1624/camisa-basica-blanca.jpg", 1, idUser);
+        prenda.insertarPrenda("Camiseta blanca", "https://www.disfracesantifaz.com/2038-large_default/camiseta-chica-blanca.jpg", 1, idUser);
+        prenda.insertarPrenda("Blusa verde", "https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fcc%2Fdc%2Fccdcffa050547931b6cc535b6f4bef0d270e12ee.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bladies_shirtsblouses_blouses%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/main]", 1, idUser);
+        prenda.insertarPrenda("Chandal rosa", "https://hmperu.vtexassets.com/arquivos/ids/3024520-483-725/Pantalon-de-buzo---Rosado---H-M-PE.jpg?v=637983998116170000", 2, idUser);
+        //prenda.insertarPrenda("vaqueros pitillo", "https://media.vogue.es/photos/5cc7367f92f813c7264e4eb6/master/w_1280,c_limit/pantalones_vaqueros_pitillo_mango_basicos_armario_2019_7371.jpg", 2, idUser);
+        prenda.insertarPrenda("pantalones blancos", "https://media.vogue.es/photos/5cc750398f6f6723b65bea04/master/w_1280,c_limit/pantalones_blancos_929.jpg", 2, idUser);
+        prenda.insertarPrenda("Converse blancas", "https://media.revistagq.com/photos/6093ca05235a5910299c929c/master/w_1280,c_limit/converse.jpeg", 3, idUser);
+        prenda.insertarPrenda("Tacón lunares", "https://www.angari.es/wp-content/uploads/2018/09/zapatos-lunares-negros-con-lazos.jpg", 3, idUser);
+
 
 
         navView = findViewById(R.id.nav_view);
@@ -123,15 +128,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //AlertDialogs
-    private AlertDialog alertDialogSeleccionCamGal;
-    private AlertDialog alertDialogAniadirDatosPrenda;
-
-    //camara
-    private static final int CAMERA_REQUEST_CODE = 1;
-
     // funcionalidad botones toolbar_prendas
-    String currentPhotoPath;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -141,31 +138,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, AniadirActivity.class);
             startActivity(intent);
             return true;
-//            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-//            View dView = getLayoutInflater().inflate(R.layout.seleccionar_imagen, null);
-//            Button camara = (Button) dView.findViewById(R.id.btnCamara);
-//            Button galeria = (Button) dView.findViewById(R.id.btnGaleria);
-//
-//            camara.setOnClickListener(new View.OnClickListener() {
-//                @RequiresApi(api = Build.VERSION_CODES.O)
-//                @Override
-//                public void onClick(View v) {
-//                    camaraLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
-//                    abrirDialogDatos();
-//                }
-//            });
-//
-//            galeria.setOnClickListener(new View.OnClickListener() {
-//                @RequiresApi(api = Build.VERSION_CODES.O)
-//                @Override
-//                public void onClick(View v) {
-//                    galeriaLauncher.launch("image/*");
-//                }
-//            });
-//
-//            builder.setView(dView);
-//            alertDialogSeleccionCamGal = builder.create();
-//            alertDialogSeleccionCamGal.show();
         }
 
         // eliminar prenda/conjunto
@@ -173,40 +145,6 @@ public class MainActivity extends AppCompatActivity {
             Button delete = findViewById(R.id.btn_delete);
             delete.setVisibility(View.VISIBLE);
         }
-
-
         return super.onOptionsItemSelected(item);
     }
-
-//
-
-//    ActivityResultLauncher<String> galeriaLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
-//        @Override
-//        public void onActivityResult(Uri result) {
-//            String rutaImagen = obtenerRutaDeImagen(result);
-//            //prenda.insertarPrenda("nombreG", rutaImagen, "etiquetas", 1,1);
-//            imagen.setImageURI(result);
-//        }
-//    });
-
-
-
-//    private void abrirDialogDatos(){
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-//        View dView = getLayoutInflater().inflate(R.layout.insercion_datos_prenda, null);
-//        EditText nombrePrenda = dView.findViewById(R.id.nombrePrenda);
-//        ImageView imagenPrendaDialog = dView.findViewById(R.id.imagenPrenda);
-//        imagenPrendaDialog.setImageBitmap(imgBitmap);
-//
-//        String nombre = nombrePrenda.getText().toString();
-//        //chip con subcategorias
-//
-//        builder.setView(dView);
-//        alertDialogAniadirDatosPrenda = builder.create();
-//        alertDialogAniadirDatosPrenda.show();
-//        prenda.insertarPrenda(nombre, rutaImagen, 1, 1);
-//
-//    }
-
 }

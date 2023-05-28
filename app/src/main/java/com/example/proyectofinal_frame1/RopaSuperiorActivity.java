@@ -49,7 +49,7 @@ public class RopaSuperiorActivity extends AppCompatActivity {
     private PrendaAdapter prendaAdapter;
     private List<Prenda> listaPrendas;
     private ImageView btnBack;
-    private TablaPrenda tablaPrenda;
+    private TablaPrenda tablaPrenda = new TablaPrenda(RopaSuperiorActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,6 @@ public class RopaSuperiorActivity extends AppCompatActivity {
 
         prendaAdapter = new PrendaAdapter(listaPrendas);
         recyclerViewPrendas.setAdapter(prendaAdapter);
-
     }
 
     // para volver a la pantalla anterior

@@ -93,7 +93,7 @@ public class Registro extends AppCompatActivity {
 
             idUser = tablaUsuario.insertarUsuario(nombre, correo, contrasenaSegura);
             long idSalt= tablaSalt.insertarSalt(idUser, salt);
-            if (idUser != 0) {
+            if (idUser != 0 && idUser > 0) {
                 Toast.makeText(Registro.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
                 // redirigir al usuario a la página de inicio de sesión
                 toMain();

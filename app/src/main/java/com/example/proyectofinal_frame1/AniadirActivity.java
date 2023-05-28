@@ -48,6 +48,8 @@ public class AniadirActivity extends AppCompatActivity {
     private ImageView imagenViewPrenda;
     private Bitmap imgBitmap;
     private ImageView btnBack;
+    private long categoria;
+
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
 
@@ -72,11 +74,10 @@ public class AniadirActivity extends AppCompatActivity {
         btnCamara= findViewById(R.id.btnCamara);
         btnGaleria= findViewById(R.id.btnGaleria);
         imagenViewPrenda = findViewById(R.id.imagenPrenda);
-        categoriaChipGroup = findViewById(R.id.chip_categorias);
-        subcategoriaChipGroup = findViewById(R.id.chip_subcategorias);
+        categoriaChipGroup = findViewById(R.id.chipGroupCategorias);
         btnGuardar = findViewById(R.id.btn_guardar);
 
-        int id = categoriaChipGroup.getCheckedChipId();
+        int chipId = categoriaChipGroup.getCheckedChipId();
 
         btnCamara.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,7 +95,6 @@ public class AniadirActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     permisoGaleria();
                 }
-
             }
         });
 
@@ -114,10 +114,7 @@ public class AniadirActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -265,6 +262,28 @@ public class AniadirActivity extends AppCompatActivity {
         }
     }
 
+    private long obtenerCategoria(int chipId){
+        switch (chipId) {
+            case R.id.chipParteSuperior:
+                categoria = 1;
+                break;
+            case R.id.chipParteInferior:
+                categoria = 2;
+                break;
+            case R.id.chipZapatos:
+                categoria = 3;
+                break;
+            case R.id.chipComplementos:
+                categoria = 4;
+                break;
+            case R.id.chipAccesorios:
+                categoria = 5;
+                break;
+            default:
+                Toast.makeText(AniadirActivity.this, "No se ha seleccionado categoria", Toast.LENGTH_SHORT).show();
+        }
+        return categoria;
+    }
 
 
     // para volver a la pantalla anterior
