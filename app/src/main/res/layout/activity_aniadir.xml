@@ -92,7 +92,7 @@
             android:layout_marginTop="57dp"
             android:layout_marginEnd="5dp"
             android:paddingStart="10dp"
-            android:text="Selecciona la categoría"
+            android:text="Selecciona una categoría"
             android:textColor="#000000"
             android:textSize="20sp" />
 
@@ -174,7 +174,7 @@
         <Button
             android:id="@+id/btnCamara"
             android:layout_width="130dp"
-            android:layout_height="55dp"
+            android:layout_height="40dp"
             android:layout_below="@+id/horizontalScrollCat"
             android:layout_alignParentStart="true"
             android:layout_marginStart="50dp"
@@ -192,7 +192,7 @@
         <Button
             android:id="@+id/btnGaleria"
             android:layout_width="130dp"
-            android:layout_height="55dp"
+            android:layout_height="40dp"
             android:layout_below="@+id/horizontalScrollCat"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="12dp"
@@ -208,22 +208,22 @@
 
         <ImageView
             android:id="@+id/imagenPrenda"
-            android:layout_width="261dp"
-            android:layout_height="wrap_content"
+            android:layout_width="257dp"
+            android:layout_height="299dp"
+            android:layout_above="@+id/btn_guardar"
             android:layout_below="@+id/btnCamara"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
             android:layout_marginStart="70dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="70dp"
-            android:layout_marginBottom="65dp"
+            android:layout_marginBottom="10dp"
             android:visibility="visible"
             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
         <Button
             android:id="@+id/btn_guardar"
-            android:layout_width="129dp"
+            android:layout_width="130dp"
             android:layout_height="55dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"

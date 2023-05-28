@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,6 +20,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,13 +36,14 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.chip.ChipGroup;
+import com.slowmac.autobackgroundremover.BackgroundRemover;
+import com.slowmac.autobackgroundremover.OnBackgroundChangeListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class AniadirActivity extends AppCompatActivity {
-
 
     private Prenda prenda;
     private EditText nombrePrenda;
@@ -53,13 +60,27 @@ public class AniadirActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
 
+    private BackgroundRemover remover;
+    private RemoveBgService removeBgService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //aniadirBinding = ActivityAniadirBinding.inflate(getLayoutInflater());
+        //setContentView(aniadirBinding.getRoot());
         setContentView(R.layout.activity_aniadir);
-        prenda = new Prenda();
 
+        //imagenUri = crearUri();
+
+        /*
+        aniadirBinding.btnCamara.setOnClickListener(v -> {
+            registrarPictureLauncher();
+        });
+
+         */
+        removeBgService = new RemoveBgService();
+
+        prenda = new Prenda();
 
         btnBack = findViewById(R.id.btn_back);
         // funcionalidad al clicar en btnBack
@@ -85,6 +106,7 @@ public class AniadirActivity extends AppCompatActivity {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     onActivityResult(REQUEST_IMAGE_CAPTURE, RESULT_OK, intent);
 
+                    permisoCamara();
                 }
         });
 
@@ -156,30 +178,46 @@ public class AniadirActivity extends AppCompatActivity {
         }
          */
     }
+/*
+    public Bitmap makeTransparent(Bitmap bitmap) {
+        Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(newBitmap);
+        Paint paint = new Paint();
+        paint.setColor(Color.TRANSPARENT);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        canvas.drawBitmap(bitmap, 0, 0, null);
+        canvas.drawRect(0, 0, bitmap.getWidth(), bitmap.getHeight(), paint);
+        return newBitmap;
+    }
 
-
-    ActivityResultLauncher<String> camaraPermission = registerForActivityResult(new ActivityResultContracts.RequestPermission(),
-            new ActivityResultCallback<Boolean>() {
-                @Override
-                public void onActivityResult(Boolean result) {
-                    if(result){
-                        //camaraLauncher.launch(intent);
-                    }else {
-                        Toast.makeText(getApplicationContext(), "Aceptar los permisos para introducir imágenes", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-
+ */
 
 
     ActivityResultLauncher<Intent> camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
-            if(result.getResultCode()==RESULT_OK){
+            new ActivityResultContracts.RequestPermission();
+            if(result.getResultCode() == Activity.RESULT_OK){
                 Bundle extras = result.getData().getExtras();
                 imgBitmap = (Bitmap) extras.get("data");
+                //Bitmap bitmapTransparente  =makeTransparent(imgBitmap);
+                /*
+                remover.bitmapForProcessing(imgBitmap, true, new OnBackgroundChangeListener() {
+                    @Override
+                    public void onSuccess(Bitmap bitmap) {
+                        // Haz lo que desees con este bitmap
+                        //imagenViewPrenda.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                    }
+
+                    @Override
+                    public void onFailed(Exception exception) {
+                        // Maneja la excepción
+                        Toast.makeText(getApplicationContext(), "No se ha podido quitar el fondo", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                 */
                 rutaImagen = guardarImagenEnAlmacenamientoInterno(imgBitmap);
                 imagenViewPrenda.setImageBitmap(imgBitmap);
             }
@@ -196,13 +234,53 @@ public class AniadirActivity extends AppCompatActivity {
                 Intent data = result.getData();
                 Uri imageUri = data.getData();
                 imagenViewPrenda.setImageURI(imageUri);
-                prenda.setUrlImagen(obtenerRutaDeImagen(imageUri));
-
+                prenda.setUrlImagen(obtenerRutaDeImagen(imageUri).toString()+"/remove-bg");
             }else {
-                Toast.makeText(AniadirActivity.this, "Canceled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AniadirActivity.this, "Operación canceleda", Toast.LENGTH_SHORT).show();
             }
         }
     });
+
+    /*
+    // Llamamos al servicio para quitar el fondo de la imagen
+        removeBgService.removeBackground(imageFile, new Callback<RemoveBgResponse>() {
+        @Override
+        public void onResponse(Call<RemoveBgResponse> call, Response<RemoveBgResponse> response) {
+            if (response.isSuccessful()) {
+                RemoveBgResponse removeBgResponse = response.body();
+                if (removeBgResponse != null) {
+                    String resultUrl = removeBgResponse.getData().getResultUrl();
+                    // Hacer algo con el resultado, como descargar la imagen resultante o mostrarla en una ImageView
+                }
+            } else {
+                // Manejar el caso de respuesta no exitosa
+                Toast.makeText(AniadirActivity.this, "Error al quitar fondo", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<RemoveBgResponse> call, Throwable t) {
+            // Manejar el caso de error en la solicitud
+            Toast.makeText(AniadirActivity.this, "Error al quitar fondo", Toast.LENGTH_SHORT).show();
+        }
+    });
+}
+
+    private File saveImageToFile(Bitmap bitmap) {
+        File file = new File(getCacheDir(), "image.jpg");
+        try {
+            FileOutputStream outputStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
+     */
+
 
     private String guardarImagenEnAlmacenamientoInterno(Bitmap bitmap) {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
@@ -243,10 +321,9 @@ public class AniadirActivity extends AppCompatActivity {
         int permiso = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if(permiso == PackageManager.PERMISSION_GRANTED){
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.setType("image/*");
             camaraLauncher.launch(intent);
         }else{
-            requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, 200);
         }
     }
 
