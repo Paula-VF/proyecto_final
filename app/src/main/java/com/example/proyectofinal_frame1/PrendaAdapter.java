@@ -17,6 +17,10 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
     private List<Prenda> prendas;
     private OnPrendaListener mOnPrendaListener;
 
+    public PrendaAdapter(List<Prenda> prendas){
+        this.prendas= prendas;
+    }
+
     public PrendaAdapter(List<Prenda> prendas, OnPrendaListener onPrendaListener) {
         this.prendas = prendas;
         this.mOnPrendaListener = onPrendaListener;

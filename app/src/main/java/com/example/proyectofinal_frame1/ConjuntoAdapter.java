@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class ConjuntoAdapter extends RecyclerView.Adapter<ConjuntoAdapter.ConjuntoViewHolder>{
+public class  ConjuntoAdapter extends RecyclerView.Adapter<ConjuntoAdapter.ConjuntoViewHolder>{
     private List<ConjuntoItem> conjuntos;
     private OnConjuntoListener mOnConjuntoListener;
 

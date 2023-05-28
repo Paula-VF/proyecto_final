@@ -48,8 +48,6 @@ public class AniadirActivity extends AppCompatActivity {
     private ImageView imagenViewPrenda;
     private Bitmap imgBitmap;
     private ImageView btnBack;
-
-    private ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
 
@@ -86,20 +84,12 @@ public class AniadirActivity extends AppCompatActivity {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     onActivityResult(REQUEST_IMAGE_CAPTURE, RESULT_OK, intent);
 
-                    //permisoCamara();
-
                 }
         });
 
         btnGaleria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                pickMedia.launch(new PickVisualMediaRequest());
-                /*
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                galeriaLauncher.launch(intent);
-                */
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     permisoGaleria();
