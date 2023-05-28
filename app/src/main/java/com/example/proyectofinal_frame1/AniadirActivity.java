@@ -265,13 +265,13 @@ public class AniadirActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void permisoGaleria(){
-        int permiso = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES);
+        int permiso = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
         if(permiso == PackageManager.PERMISSION_GRANTED){
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             galeriaLauncher.launch(intent);
         }else {
-            requestPermissions(new String[]{Manifest.permission.READ_MEDIA_IMAGES}, 100);
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
         }
     }
 
