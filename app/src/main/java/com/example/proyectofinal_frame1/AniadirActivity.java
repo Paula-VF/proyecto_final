@@ -137,6 +137,7 @@ public class AniadirActivity extends AppCompatActivity {
                         nombrePrenda.getText().clear();
                         categoriaChipGroup.clearCheck();
                         imagenViewPrenda.setImageResource(android.R.drawable.ic_menu_gallery);
+                        prenda = new Prenda();
                     }
 
                     //Falta guardar la imagen en la bd. Porque falta terminar de finiquitar la funcionalidad de usuario
