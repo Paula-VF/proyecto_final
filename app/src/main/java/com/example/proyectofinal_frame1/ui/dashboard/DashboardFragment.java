@@ -37,6 +37,7 @@ import java.util.List;
 
 public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnConjuntoListener {
 
+    static DashboardFragment conjuntosFragment;
     private FragmentDashboardBinding binding;
     private Context context;
 
@@ -56,11 +57,10 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
         View root = binding.getRoot();
 
         context = container.getContext();
-
+        conjuntosFragment = this;
 
         recyclerViewPrendas = root.findViewById(R.id.recyclerViewPrendas);
         recyclerViewPrendas.setLayoutManager(new GridLayoutManager(context, 2));
-
 
         listaConjuntos = new ArrayList<>();
         listaConjuntos.add(new ConjuntoItem("Conjunto día de playa", R.drawable.ic_baseline_photo_camera_back_24));
@@ -68,28 +68,8 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
         listaConjuntos.add(new ConjuntoItem("Conjunto miércoles", R.drawable.ic_baseline_photo_camera_back_24));
         listaConjuntos.add(new ConjuntoItem("Conjunto casual", R.drawable.ic_baseline_photo_camera_back_24));
 
-
         conjuntoAdapter = new ConjuntoAdapter(listaConjuntos, this);
         recyclerViewPrendas.setAdapter(conjuntoAdapter);
-
-        /*
-        recyclerViewPrendas.setOnClickListener(new AdapterView.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, Conjunto.class);
-                startActivity(intent);
-            }
-        });
-        recyclerViewPrendas.setOnLongClickListener(new AdapterView.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                recyclerViewPrendas.get;
-                abrirDialogo();
-                return false;
-            }
-        });
-
-         */
 
 
         floatBtn = (FloatingActionButton) root.findViewById(R.id.float_btn);
@@ -107,6 +87,13 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
 
 
 
+    public static DashboardFragment getInstance(){
+        return conjuntosFragment;
+    }
+
+    public List<ConjuntoItem> getListaConjuntos() {
+        return listaConjuntos;
+    }
 
     private void nombrarConjunto() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(context);
@@ -125,7 +112,7 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
                     String conjunto = nombre.getText().toString();
                     nuevoConjunto = new ConjuntoItem(conjunto, R.drawable.ic_baseline_photo_camera_back_24);
                     listaConjuntos.add(nuevoConjunto);
-                    //arrayAdapter.notifyDataSetChanged();
+                    conjuntoAdapter.notifyDataSetChanged();
                     dialogo.cancel();
                     Toast.makeText(context, "Conjunto " + conjunto + " creado.", Toast.LENGTH_SHORT).show();
                 }else {
@@ -146,28 +133,22 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
         dialogo.show();
     }
 
-    public List<ConjuntoItem> getListaConjuntos() {
-        return listaConjuntos;
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 
-
-    private void abrirDialogo(int position) {
+    // dialogo para eliminar un conjunto
+    public void abrirDialogo(int position) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(context);
         dialog.setTitle("ELIMINAR");
-        dialog.setMessage("Si aceptas elimniar este conjunto no podrás volver a recuperarlo. ¿Estás seguro?");
+        dialog.setMessage("Si aceptas eliminar este conjunto no podrás volver a recuperarlo. ¿Estás seguro?");
         dialog.setPositiveButton("Sí", new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                nuevoConjunto = null;
                 listaConjuntos.remove(position);
                 conjuntoAdapter.notifyDataSetChanged();
-                //listView.refreshDrawableState();
                 Toast.makeText(context, "Conjunto " + listaConjuntos.get(position) + " eliminado.",
                         Toast.LENGTH_SHORT).show();
             }
@@ -183,16 +164,19 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
         dialogo.show();
     }
 
-
+    // al clicar en un conjunto
     @Override
     public void onConjuntoClick(int position) {
+        // se abre el activity de Conjunto con los artículos que le correspondan
         Intent intent = new Intent(context, Conjunto.class);
         intent.putExtra("Objeto_Conjunto", listaConjuntos.get(position));
         startActivity(intent);
     }
 
+    // al mantener pulsado en un conjunto
     @Override
     public void onConjuntoLongClick(int position) {
+        // se abre el dialogo para preguntar si se desea eliminar el conjunto
         abrirDialogo(position);
     }
 }

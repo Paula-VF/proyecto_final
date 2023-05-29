@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
 
 public class ArmarConjuntosFragment extends Fragment {
 
+    private static ArmarConjuntosFragment armarConjuntos;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,10 +32,10 @@ public class ArmarConjuntosFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private Button btnAleatorio;
-    private Button btnGuardar;
+    private ImageView btnAleatorio;
+    private ImageView btnGuardar;
     private AlertDialog dialogo;
-    private DashboardFragment conjuntos;
+    private ConjuntoItem nuevoConjunto;
     private Context context;
 
     public ArmarConjuntosFragment() {
@@ -67,7 +69,8 @@ public class ArmarConjuntosFragment extends Fragment {
 
             CarruselFragment carrusel1, carrusel2, carrusel3;
             FragmentManager fragmentManager = getChildFragmentManager();
-
+            Button btnAleatorio;
+            Button btnGuardar;
         }
     }
 
@@ -76,13 +79,14 @@ public class ArmarConjuntosFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_armar_conjuntos, container, false);
 
-
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        armarConjuntos = this;
 
         CarruselFragment carrusel1, carrusel2, carrusel3;
         FragmentManager fragmentManager = getChildFragmentManager();
@@ -103,21 +107,27 @@ public class ArmarConjuntosFragment extends Fragment {
                 .replace(R.id.contenedorCarrusel3, carrusel3)
                 .commit();
 
-        /*
         btnAleatorio = view.findViewById(R.id.btn_random);
         btnGuardar = view.findViewById(R.id.btn_save);
 
+        /*
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //guardarConjunto();
+                Toast.makeText(context, "Hola", Toast.LENGTH_SHORT).show();
             }
         });
 
          */
     }
 
+    public static ArmarConjuntosFragment getInstance() {
+        return armarConjuntos;
+    }
 
+    public ImageView getBtnGuardar() {
+        return btnGuardar;
+    }
 
     // funcionalidad boton Guardar
     private void guardarConjunto() {
@@ -128,20 +138,20 @@ public class ArmarConjuntosFragment extends Fragment {
         Button addBtn = dView.findViewById(R.id.btn_add);
         Button cancelBtn = dView.findViewById(R.id.btn_cancel);
         titulo.setText("Nombre del conjunto:");
-        addBtn.setText("GUARDAR");
+        addBtn.setText("CREAR");
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(nombre != null) {
                     String conjunto = nombre.getText().toString();
-                    conjuntos = new DashboardFragment();
-                    //conjuntos.getListaPrendas().add(new Prenda(conjunto, R.drawable.ic_baseline_photo_camera_back_24));
+                    nuevoConjunto = new ConjuntoItem(conjunto, R.drawable.ic_baseline_photo_camera_back_24);
+                    DashboardFragment.getInstance().getListaConjuntos().add(nuevoConjunto);
                     //arrayAdapter.notifyDataSetChanged();
                     dialogo.cancel();
                     Toast.makeText(context, "Conjunto " + conjunto + " creado.", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(context, "Introduce un nombre para guardar.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Introduce un nombre para crear el conjunto.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
