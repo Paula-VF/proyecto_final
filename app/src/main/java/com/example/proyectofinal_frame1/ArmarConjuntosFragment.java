@@ -35,6 +35,7 @@ public class ArmarConjuntosFragment extends Fragment {
     private AlertDialog dialogo;
     private DashboardFragment conjuntos;
     private Context context;
+    private static long idUsuario;
 
     public ArmarConjuntosFragment() {
         // Required empty public constructor
@@ -65,7 +66,6 @@ public class ArmarConjuntosFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
 
-            CarruselFragment carrusel1, carrusel2, carrusel3;
             FragmentManager fragmentManager = getChildFragmentManager();
 
         }
@@ -87,9 +87,9 @@ public class ArmarConjuntosFragment extends Fragment {
         CarruselFragment carrusel1, carrusel2, carrusel3;
         FragmentManager fragmentManager = getChildFragmentManager();
 
-        carrusel1 = new CarruselFragment(1);
-        carrusel2 = new CarruselFragment(2);
-        carrusel3 = new CarruselFragment(3);
+        carrusel1 = new CarruselFragment(1, idUsuario);
+        carrusel2 = new CarruselFragment(2, idUsuario);
+        carrusel3 = new CarruselFragment(3, idUsuario);
 
         fragmentManager.beginTransaction()
                 .replace(R.id.contenedorCarrusel1, carrusel1)
@@ -103,7 +103,6 @@ public class ArmarConjuntosFragment extends Fragment {
                 .replace(R.id.contenedorCarrusel3, carrusel3)
                 .commit();
 
-        /*
         btnAleatorio = view.findViewById(R.id.btn_random);
         btnGuardar = view.findViewById(R.id.btn_save);
 
@@ -114,11 +113,7 @@ public class ArmarConjuntosFragment extends Fragment {
             }
         });
 
-         */
     }
-
-
-
     // funcionalidad boton Guardar
     private void guardarConjunto() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(context);
@@ -158,4 +153,11 @@ public class ArmarConjuntosFragment extends Fragment {
         dialogo.show();
     }
 
+    public static long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public static void setIdUsuario(long idUsuario) {
+        ArmarConjuntosFragment.idUsuario = idUsuario;
+    }
 }

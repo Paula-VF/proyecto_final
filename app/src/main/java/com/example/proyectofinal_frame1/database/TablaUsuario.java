@@ -35,6 +35,25 @@ public class TablaUsuario extends ProyectoDatabaseHelper{
         return id;
     }
 
+    public long obtenerUsuario(String email){
+        long usuarioId = 0;
+        try {
+            ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            String[] params = {email};
+            Cursor cursor = db.rawQuery("SELECT * FROM "+TABLA_USUARIO+ " WHERE email = ?", params);
+
+            if(cursor.moveToFirst()){
+                int columnIndex = cursor.getColumnIndex("user_id");
+                usuarioId = cursor.getLong(columnIndex);
+            }
+            cursor.close();
+        } catch (Exception ex) {
+            ex.toString();
+        }
+        return usuarioId;
+    }
+
     public boolean existeUsuario(String email) {
         boolean existe = false;
 
@@ -42,7 +61,7 @@ public class TablaUsuario extends ProyectoDatabaseHelper{
             ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             String[] params = {email};
-            Cursor cursor = db.rawQuery("SELECT * FROM usuario WHERE email= ?", params);
+            Cursor cursor = db.rawQuery("SELECT * FROM "+TABLA_USUARIO+ " WHERE email= ?", params);
 
             existe = cursor.moveToNext();
             cursor.close();
@@ -51,6 +70,25 @@ public class TablaUsuario extends ProyectoDatabaseHelper{
             existe = false;
         }
         return existe;
+    }
+
+    public String obtenerContrasena(long idUsuario){
+        String contrasena = "";
+        try {
+            ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            String[] params = {String.valueOf(idUsuario)};
+            Cursor cursor = db.rawQuery("SELECT * FROM "+TABLA_USUARIO+ " WHERE user_id = ?", params);
+
+            if(cursor.moveToFirst()){
+                int columnIndex = cursor.getColumnIndex("contrasena");
+                contrasena = cursor.getString(columnIndex);
+            }
+            cursor.close();
+        } catch (Exception ex) {
+            ex.toString();
+        }
+        return contrasena;
     }
 
 }

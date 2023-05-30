@@ -70,7 +70,6 @@ public class Registro extends AppCompatActivity {
                     }
                 }
             }
-
         });
     }
 
@@ -95,6 +94,7 @@ public class Registro extends AppCompatActivity {
             long idSalt= tablaSalt.insertarSalt(idUser, salt);
             if (idUser != 0 && idUser > 0) {
                 Toast.makeText(Registro.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
+                ArmarConjuntosFragment.setIdUsuario(idUser);
                 // redirigir al usuario a la página de inicio de sesión
                 toMain();
             } else {

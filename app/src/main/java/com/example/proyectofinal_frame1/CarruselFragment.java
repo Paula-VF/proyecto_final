@@ -28,13 +28,15 @@ public class CarruselFragment extends Fragment {
     private TablaPrenda tablaPrenda;
     private List<String> rutasImagenes;
     private int idCategoría;
+    private long idUsuario;
 
     public CarruselFragment() {
         // Constructor vacío requerido
     }
 
-    public CarruselFragment(int idCategoría){
+    public CarruselFragment(int idCategoría, long idUsuario){
         this.idCategoría = idCategoría;
+        this.idUsuario = idUsuario;
     }
 
     @SuppressLint("MissingInflatedId")
@@ -44,7 +46,6 @@ public class CarruselFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_carrusel, container, false);
 
-
         recyclerView = view.findViewById(R.id.recyclerViewCarruselFragment);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
@@ -53,12 +54,6 @@ public class CarruselFragment extends Fragment {
 
         CarruselAdapter adapter = new CarruselAdapter(getActivity(), rutasImagenes);
         recyclerView.setAdapter(adapter);
-
-
         return view;
     }
-
-
-
-
 }
