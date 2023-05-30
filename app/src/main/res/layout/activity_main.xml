@@ -21,7 +21,6 @@
         app:itemIconSize="35dp"
         app:itemIconTint="@drawable/bottom_navigation_selector"
         app:itemTextColor="@color/grey_font"/>
-
     <!--> app:itemIconSize para ajustar el tamaño de los iconos -->
     <!--> app:itemIconTint para ajustar el color de los iconos -->
 

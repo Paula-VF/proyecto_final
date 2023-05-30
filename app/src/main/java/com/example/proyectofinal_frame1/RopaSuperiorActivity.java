@@ -1,53 +1,27 @@
 package com.example.proyectofinal_frame1;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.proyectofinal_frame1.database.TablaPrenda;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
-public class RopaSuperiorActivity extends AppCompatActivity {
+public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAdapter.OnPrendaListener{
     private RecyclerView recyclerViewPrendas;
     private PrendaAdapter prendaAdapter;
     private List<Prenda> listaPrendas;
     private ImageView btnBack;
     private TablaPrenda tablaPrenda = new TablaPrenda(RopaSuperiorActivity.this);
+    private AlertDialog dialogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +40,36 @@ public class RopaSuperiorActivity extends AppCompatActivity {
 
         listaPrendas = tablaPrenda.obtenerPrendas(1);
 
-        prendaAdapter = new PrendaAdapter(listaPrendas);
+        prendaAdapter = new PrendaAdapter(listaPrendas, this);
         recyclerViewPrendas.setAdapter(prendaAdapter);
+
+    }
+
+
+
+    public void dialogoEliminar(int position) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("ELIMINAR");
+        dialog.setMessage("Si aceptas eliminar este artículo no podrás volver a recuperarlo. ¿Estás seguro?");
+        dialog.setPositiveButton("Sí", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                listaPrendas.remove(position);
+                prendaAdapter.notifyItemChanged(position);
+                prendaAdapter.notifyDataSetChanged();
+                Toast.makeText(getApplicationContext(), listaPrendas.get(position) + " eliminado/a.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.setNegativeButton("No", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialogo.cancel();
+            }
+        });
+
+        dialogo = dialog.create();
+        dialogo.show();
     }
 
     // para volver a la pantalla anterior
@@ -77,4 +79,14 @@ public class RopaSuperiorActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onPrendaClick(int position) {
+        Toast.makeText(getApplicationContext(), "Hola",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPrendaLongClick(int position) {
+        dialogoEliminar(position);
+    }
 }

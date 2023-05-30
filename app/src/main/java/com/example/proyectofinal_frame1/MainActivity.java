@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
 //        registerResult(); Esto creo que se tiene que borrar
 
 
-
         //Creación de la base de datos
         ProyectoDatabaseHelper proyectoDBHelper = new ProyectoDatabaseHelper(MainActivity.this);
         SQLiteDatabase db = proyectoDBHelper.getWritableDatabase();

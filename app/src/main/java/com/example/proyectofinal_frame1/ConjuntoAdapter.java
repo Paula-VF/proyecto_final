@@ -26,7 +26,7 @@ public class  ConjuntoAdapter extends RecyclerView.Adapter<ConjuntoAdapter.Conju
     @Override
     public ConjuntoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_prenda, parent, false);
-        return new ConjuntoAdapter.ConjuntoViewHolder(view, mOnConjuntoListener);
+        return new ConjuntoViewHolder(view, mOnConjuntoListener);
     }
 
     @Override
@@ -45,8 +45,8 @@ public class  ConjuntoAdapter extends RecyclerView.Adapter<ConjuntoAdapter.Conju
 
         private ImageView imageView;
         private TextView nombreTextView;
-        OnConjuntoListener conjuntoListener;
-        public ConjuntoViewHolder(@NonNull View itemView, ConjuntoAdapter.OnConjuntoListener conjuntoListener) {
+        private OnConjuntoListener conjuntoListener;
+        public ConjuntoViewHolder(@NonNull View itemView, OnConjuntoListener conjuntoListener) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewPrenda);
             nombreTextView = itemView.findViewById(R.id.textViewNombrePrenda);

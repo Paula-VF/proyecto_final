@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,11 +25,21 @@ import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
 import java.util.List;
 
 public class CarruselFragment extends Fragment {
+
+    private static CarruselFragment carruselFragment;
     private RecyclerView recyclerView;
     private TablaPrenda tablaPrenda;
     private List<String> rutasImagenes;
     private int idCategoría;
+
     private long idUsuario;
+
+    private ImageView btnAleatorio;
+    private ImageView btnGuardar;
+    private Context context;
+    private ConjuntoItem nuevoConjunto;
+    private AlertDialog dialogo;
+
 
     public CarruselFragment() {
         // Constructor vacío requerido
@@ -46,6 +57,8 @@ public class CarruselFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_carrusel, container, false);
 
+        context = container.getContext();
+        carruselFragment = this;
         recyclerView = view.findViewById(R.id.recyclerViewCarruselFragment);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
@@ -55,5 +68,48 @@ public class CarruselFragment extends Fragment {
         CarruselAdapter adapter = new CarruselAdapter(getActivity(), rutasImagenes);
         recyclerView.setAdapter(adapter);
         return view;
+    }
+
+
+    public static CarruselFragment getInstance(){
+        return carruselFragment;
+    }
+
+    public void guardarConjunto() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        View dView = getLayoutInflater().inflate(R.layout.dialogo_subcategoria, null);
+        TextView titulo = dView.findViewById(R.id.titulo);
+        EditText nombre = dView.findViewById(R.id.nombre);
+        Button addBtn = dView.findViewById(R.id.btn_add);
+        Button cancelBtn = dView.findViewById(R.id.btn_cancel);
+        titulo.setText("Nombre del conjunto:");
+        addBtn.setText("CREAR");
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(nombre != null) {
+                    String conjunto = nombre.getText().toString();
+                    nuevoConjunto = new ConjuntoItem(conjunto, R.drawable.ic_baseline_photo_camera_back_24);
+                    DashboardFragment.getInstance().getListaConjuntos().add(nuevoConjunto);
+                    //arrayAdapter.notifyDataSetChanged();
+                    dialogo.cancel();
+                    Toast.makeText(context, "Conjunto " + conjunto + " creado.", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, "Introduce un nombre para crear el conjunto.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogo.cancel();
+            }
+        });
+
+        dialog.setView(dView);
+        dialogo = dialog.create();
+        dialogo.show();
     }
 }

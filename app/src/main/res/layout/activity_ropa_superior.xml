@@ -9,6 +9,7 @@
     android:id="@+id/layout_ropa_superior"
     tools:context=".RopaSuperiorActivity">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -46,13 +47,16 @@
         android:id="@+id/btn_back"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="9dp"
+        android:layout_alignBottom="@+id/my_toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/my_toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_baseline_arrow_left_24" />
-
 
 </RelativeLayout>
