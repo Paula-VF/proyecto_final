@@ -1,16 +1,13 @@
 package com.example.proyectofinal_frame1.ui.dashboard;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,8 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.proyectofinal_frame1.Conjunto;
 import com.example.proyectofinal_frame1.ConjuntoAdapter;
 import com.example.proyectofinal_frame1.ConjuntoItem;
-import com.example.proyectofinal_frame1.Prenda;
-import com.example.proyectofinal_frame1.PrendaAdapter;
 import com.example.proyectofinal_frame1.R;
 import com.example.proyectofinal_frame1.databinding.FragmentDashboardBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -63,10 +58,10 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
         recyclerViewPrendas.setLayoutManager(new GridLayoutManager(context, 2));
 
         listaConjuntos = new ArrayList<>();
-        listaConjuntos.add(new ConjuntoItem("Conjunto día de playa", R.drawable.ic_baseline_photo_camera_back_24));
-        listaConjuntos.add(new ConjuntoItem("Conjunto boda", R.drawable.ic_baseline_photo_camera_back_24));
-        listaConjuntos.add(new ConjuntoItem("Conjunto miércoles", R.drawable.ic_baseline_photo_camera_back_24));
-        listaConjuntos.add(new ConjuntoItem("Conjunto casual", R.drawable.ic_baseline_photo_camera_back_24));
+        listaConjuntos.add(new ConjuntoItem("Conjunto día de playa", R.drawable.conjunto));
+        listaConjuntos.add(new ConjuntoItem("Conjunto boda", R.drawable.conjunto));
+        listaConjuntos.add(new ConjuntoItem("Conjunto miércoles", R.drawable.conjunto));
+        listaConjuntos.add(new ConjuntoItem("Conjunto casual", R.drawable.conjunto));
 
         conjuntoAdapter = new ConjuntoAdapter(listaConjuntos, this);
         recyclerViewPrendas.setAdapter(conjuntoAdapter);
@@ -95,22 +90,24 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
         return listaConjuntos;
     }
 
+    public ConjuntoAdapter getConjuntoAdapter() {
+        return conjuntoAdapter;
+    }
+
     private void nombrarConjunto() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-        View dView = getLayoutInflater().inflate(R.layout.dialogo_subcategoria, null);
+        View dView = getLayoutInflater().inflate(R.layout.dialogo_conjunto, null);
         TextView titulo = dView.findViewById(R.id.titulo);
         EditText nombre = dView.findViewById(R.id.nombre);
         Button addBtn = dView.findViewById(R.id.btn_add);
         Button cancelBtn = dView.findViewById(R.id.btn_cancel);
-        titulo.setText("Nombre del conjunto:");
-        addBtn.setText("CREAR");
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(nombre != null) {
                     String conjunto = nombre.getText().toString();
-                    nuevoConjunto = new ConjuntoItem(conjunto, R.drawable.ic_baseline_photo_camera_back_24);
+                    nuevoConjunto = new ConjuntoItem(conjunto, R.drawable.conjunto);
                     listaConjuntos.add(nuevoConjunto);
                     conjuntoAdapter.notifyDataSetChanged();
                     dialogo.cancel();
@@ -168,6 +165,7 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
     @Override
     public void onConjuntoClick(int position) {
         // se abre el activity de Conjunto con los artículos que le correspondan
+        //getView().startAnimation(AnimationUtils.loadAnimation(context, R.anim.anim_item));
         Intent intent = new Intent(context, Conjunto.class);
         intent.putExtra("Objeto_Conjunto", listaConjuntos.get(position));
         startActivity(intent);

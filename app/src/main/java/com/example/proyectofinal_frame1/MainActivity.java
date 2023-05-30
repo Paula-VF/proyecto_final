@@ -48,18 +48,9 @@ public class MainActivity extends AppCompatActivity {
     TablaPrenda prenda;
     TablaUsuario user;
 
-
-
     private ImageView imagen;
     private ActivityMainBinding binding;
-
     private BottomNavigationView navView;
-
-    public MainActivity(){
-
-    }
-
-    FrameLayout frameLayout; // https://abhiandroid.com/programming/camera
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

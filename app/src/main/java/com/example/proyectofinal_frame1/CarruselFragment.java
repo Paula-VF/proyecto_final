@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -67,6 +66,20 @@ public class CarruselFragment extends Fragment {
 
         CarruselAdapter adapter = new CarruselAdapter(getActivity(), rutasImagenes);
         recyclerView.setAdapter(adapter);
+
+        ArmarConjuntosFragment.getInstance().getBtnGuardar().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guardarConjunto();
+            }
+        });
+
+        ArmarConjuntosFragment.getInstance().getBtnAleatorio().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Funciona.", Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 
@@ -77,22 +90,20 @@ public class CarruselFragment extends Fragment {
 
     public void guardarConjunto() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-        View dView = getLayoutInflater().inflate(R.layout.dialogo_subcategoria, null);
+        View dView = getLayoutInflater().inflate(R.layout.dialogo_conjunto, null);
         TextView titulo = dView.findViewById(R.id.titulo);
         EditText nombre = dView.findViewById(R.id.nombre);
         Button addBtn = dView.findViewById(R.id.btn_add);
         Button cancelBtn = dView.findViewById(R.id.btn_cancel);
-        titulo.setText("Nombre del conjunto:");
-        addBtn.setText("CREAR");
-
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(nombre != null) {
                     String conjunto = nombre.getText().toString();
-                    nuevoConjunto = new ConjuntoItem(conjunto, R.drawable.ic_baseline_photo_camera_back_24);
-                    DashboardFragment.getInstance().getListaConjuntos().add(nuevoConjunto);
-                    //arrayAdapter.notifyDataSetChanged();
+                    //nuevoConjunto = new ConjuntoItem(conjunto, R.drawable.conjunto);
+                    DashboardFragment.getInstance().getListaConjuntos().add(new ConjuntoItem(conjunto, R.drawable.conjunto));
+                    DashboardFragment.getInstance().getConjuntoAdapter().notifyDataSetChanged();
+                    //tablaConjunto.insertarConjunto(conjunto,1);
                     dialogo.cancel();
                     Toast.makeText(context, "Conjunto " + conjunto + " creado.", Toast.LENGTH_SHORT).show();
                 }else {

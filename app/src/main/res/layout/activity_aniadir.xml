@@ -236,6 +236,16 @@
             android:textSize="16sp"
             android:visibility="visible"
             app:icon="@drawable/baseline_save_24" />
+
+        <Button
+            android:id="@+id/btn_png"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="74dp"
+            android:text="PNG" />
     </RelativeLayout>
 
 </RelativeLayout>

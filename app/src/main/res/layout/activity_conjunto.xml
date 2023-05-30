@@ -104,28 +104,28 @@
             android:orientation="vertical">
 
             <FrameLayout
-                android:id="@+id/imageAccesorios1"
+                android:id="@+id/imageExtra1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/prenda8" />
 
             <FrameLayout
-                android:id="@+id/imageAccesorios2"
+                android:id="@+id/imageExtra2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/prenda7" />
 
             <FrameLayout
-                android:id="@+id/imageComplementos1"
+                android:id="@+id/imageExtra3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/prenda10" />
 
             <FrameLayout
-                android:id="@+id/imageComplementos2"
+                android:id="@+id/imageExtra4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

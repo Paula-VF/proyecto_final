@@ -109,16 +109,6 @@ public class ArmarConjuntosFragment extends Fragment {
 
         btnAleatorio = view.findViewById(R.id.btn_random);
         btnGuardar = view.findViewById(R.id.btn_save);
-
-
-        /*
-        btnGuardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Hola", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
     }
 
     public static ArmarConjuntosFragment getInstance() {
@@ -128,44 +118,7 @@ public class ArmarConjuntosFragment extends Fragment {
     public ImageView getBtnGuardar() {
         return btnGuardar;
     }
-    // funcionalidad boton Guardar
-    private void guardarConjunto() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-        View dView = getLayoutInflater().inflate(R.layout.dialogo_subcategoria, null);
-        TextView titulo = dView.findViewById(R.id.titulo);
-        EditText nombre = dView.findViewById(R.id.nombre);
-        Button addBtn = dView.findViewById(R.id.btn_add);
-        Button cancelBtn = dView.findViewById(R.id.btn_cancel);
-        titulo.setText("Nombre del conjunto:");
-        addBtn.setText("CREAR");
-
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(nombre != null) {
-                    String conjunto = nombre.getText().toString();
-                    nuevoConjunto = new ConjuntoItem(conjunto, R.drawable.ic_baseline_photo_camera_back_24);
-                    DashboardFragment.getInstance().getListaConjuntos().add(nuevoConjunto);
-                    //arrayAdapter.notifyDataSetChanged();
-                    dialogo.cancel();
-                    Toast.makeText(context, "Conjunto " + conjunto + " creado.", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(context, "Introduce un nombre para crear el conjunto.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialogo.cancel();
-            }
-        });
-
-        dialog.setView(dView);
-        dialogo = dialog.create();
-        dialogo.show();
-    }
+    public ImageView getBtnAleatorio() {return btnAleatorio; }
 
     public static long getIdUsuario() {
         return idUsuario;

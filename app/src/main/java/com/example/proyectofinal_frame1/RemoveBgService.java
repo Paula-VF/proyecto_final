@@ -58,7 +58,7 @@ public class RemoveBgService {
         Call<RemoveBgResponse> removeBackground(@Part MultipartBody.Part imageFile);
     }
 
-    public class RemoveBgResponse {
+    public static class RemoveBgResponse {
         @SerializedName("data")
         private Data data;
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -13,6 +14,14 @@ public class Conjunto extends AppCompatActivity {
 
     private ImageView btnBack;
     private ImageButton btnDelete;
+
+    private FrameLayout pArriba;
+    private FrameLayout pAbajo;
+    private FrameLayout zapatos;
+    private FrameLayout extra1;
+    private FrameLayout extra2;
+    private FrameLayout extra3;
+    private FrameLayout extra4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +40,8 @@ public class Conjunto extends AppCompatActivity {
                 onSupportNavigateUp();
             }
         });
+
+
 
     }
 
