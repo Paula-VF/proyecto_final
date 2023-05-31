@@ -14,7 +14,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="50dp"
         android:layout_marginTop="168dp"
-        android:layout_marginEnd="49dp"
+        android:layout_marginEnd="50dp"
         android:orientation="vertical">
 
         <TextView
@@ -69,77 +69,66 @@
             android:inputType="textPassword" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnAccesoCuenta"
-        android:layout_width="321dp"
-        android:layout_height="59dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginBottom="135dp"
-        android:backgroundTint="#c28bef"
-        android:text="Acceder a mi cuenta"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.837" />
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtLinkCuenta"
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:layout_alignStart="@+id/btnAccesoCuenta"
-        android:layout_alignTop="@+id/btnAccesoCuenta"
-        android:layout_alignEnd="@+id/btnAccesoCuenta"
-        android:layout_alignBottom="@+id/btnAccesoCuenta"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="85dp"
-        android:layout_marginEnd="75dp"
-        android:layout_marginBottom="-78dp"
-        android:gravity="center"
-        android:text="¿No tienes cuenta? Regístrate"
-        android:textColor="#000000"
-        android:textSize="16sp" />
+        <Button
+            android:id="@+id/btnAccesoCuenta"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="#c28bef"
+            android:text="Acceder a mi cuenta"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.837" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+        <TextView
+            android:id="@+id/txtLinkCuenta"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignStart="@+id/btnAccesoCuenta"
+            android:layout_alignTop="@+id/btnAccesoCuenta"
+            android:layout_alignEnd="@+id/btnAccesoCuenta"
+            android:layout_alignBottom="@+id/btnAccesoCuenta"
+            android:gravity="center"
+            android:text="¿No tienes cuenta? Regístrate"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:orientation="horizontal"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="61dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="78dp"
-            android:layout_height="57dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.084"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.761"
+            android:layout_width="75dp"
+            android:layout_height="55dp"
             app:srcCompat="@drawable/dma" />
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="251dp"
-            android:layout_height="57dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.368"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
             app:srcCompat="@drawable/dress_me_app" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </RelativeLayout>

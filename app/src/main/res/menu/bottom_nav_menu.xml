@@ -19,7 +19,7 @@
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@mipmap/ic_info"
+        android:icon="@mipmap/ajustes"
         android:title="Acerca de" />
 
 </menu>

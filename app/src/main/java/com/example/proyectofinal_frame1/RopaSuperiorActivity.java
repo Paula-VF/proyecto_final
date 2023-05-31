@@ -17,12 +17,15 @@ import android.widget.Toast;
 
 import com.example.proyectofinal_frame1.database.TablaPrenda;
 import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
+import com.example.proyectofinal_frame1.ui.notifications.NotificationsFragment;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 import java.util.List;
 
 public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAdapter.OnPrendaListener{
+
+    private static RopaSuperiorActivity ropaSuperior;
     private RecyclerView recyclerViewPrendas;
     private PrendaAdapter prendaAdapter;
     private List<Prenda> listaPrendas;
@@ -35,6 +38,9 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ropa_superior);
+
+        ropaSuperior = this;
+
         btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +60,13 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
     }
 
 
+    public static RopaSuperiorActivity getInstance(){
+        return ropaSuperior;
+    }
+
+    public List<Prenda> getListaPrendas() {
+        return listaPrendas;
+    }
 
     public void dialogoEliminar(int position) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -87,11 +100,12 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
         ChipGroup conjuntosChipGroup = dView.findViewById(R.id.chipGroup_conjuntos);
         Button addBtn = dView.findViewById(R.id.btn_aniadir);
         Button cancelBtn = dView.findViewById(R.id.btn_cancelar);
-        for(int i = 0; i < DashboardFragment.getInstance().getListaConjuntos().size(); i++) {
-            ConjuntoItem conj = DashboardFragment.getInstance().getListaConjuntos().get(i);
-            chip = new Chip(this);
-            chip.setText(conj.getNombre());
+        for(ConjuntoItem conj : DashboardFragment.getInstance().getListaConjuntos()) {
+            // ConjuntoItem conj = DashboardFragment.getInstance().getListaConjuntos().get(i);
+            Chip chip = new Chip(this);
+            chip.setText(conj.toString());
             conjuntosChipGroup.addView(chip);
+            dView.refreshDrawableState();
         }
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +114,7 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
                 int chipId = conjuntosChipGroup.getCheckedChipId();
 
                 dialogo.cancel();
-                Toast.makeText(getApplicationContext(), "Conjunto creado.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Conjunto creado", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -125,9 +139,7 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
 
     @Override
     public void onPrendaClick(int position) {
-        Intent intent = new Intent(this, DashboardFragment.class);
-        //intent.putExtra("Objeto_Conjunto", listaConjuntos.get(position));
-        startActivity(intent);
+        aniadiraConjunto(position);
     }
 
     @Override

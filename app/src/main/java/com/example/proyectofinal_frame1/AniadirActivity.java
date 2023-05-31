@@ -53,8 +53,6 @@ public class AniadirActivity extends AppCompatActivity {
     private ImageView btnBack;
     private TablaPrenda tablaPrenda = new TablaPrenda(this);
     private TablaConjunto tablaConjunto = new TablaConjunto(this);
-
-    private static final int REQUEST_CAMERA_PERMISSION_CODE = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
 
     private BackgroundRemover remover;
@@ -64,18 +62,8 @@ public class AniadirActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //aniadirBinding = ActivityAniadirBinding.inflate(getLayoutInflater());
-        //setContentView(aniadirBinding.getRoot());
         setContentView(R.layout.activity_aniadir);
 
-        //imagenUri = crearUri();
-
-        /*
-        aniadirBinding.btnCamara.setOnClickListener(v -> {
-            registrarPictureLauncher();
-        });
-
-         */
         removeBgService = new RemoveBgService();
 
         prenda = new Prenda();
@@ -156,60 +144,6 @@ public class AniadirActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        /*
-        Bundle extras = data.getExtras();
-        Bitmap imageBitmap = (Bitmap) extras.get("data");
-        imagenViewPrenda.setImageBitmap(imageBitmap);
-        */
-
-        /*
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            imagenViewPrenda.setImageBitmap(imageBitmap);
-        }
-         */
-
-        /*
-        try {
-            String mPath = getExternalStorageDirectory().toString() + "/" + fecha + ".png";
-            direccion_imagen = "/" + fecha + ".png";
-            View u = findViewById(R.id.constrain_screen);
-            u.setDrawingCacheEnabled(true);
-            u.buildDrawingCache(true);
-            Bitmap bitmap = Bitmap.createBitmap(u.getDrawingCache());
-            u.setDrawingCacheEnabled(false);
-
-            File imageFile = new File(mPath);
-
-            FileOutputStream outputStream = new FileOutputStream(imageFile);
-            int quality = 100;
-            bitmap.compress(Bitmap.CompressFormat.PNG, quality, outputStream);
-            outputStream.flush();
-            outputStream.close();
-        } catch (Throwable e) {
-            Toast.makeText(this, "ERROR al intentar generar imagen .png", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-         */
-    }
-/*
-    public Bitmap makeTransparent(Bitmap bitmap) {
-        Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(newBitmap);
-        Paint paint = new Paint();
-        paint.setColor(Color.TRANSPARENT);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-        canvas.drawBitmap(bitmap, 0, 0, null);
-        canvas.drawRect(0, 0, bitmap.getWidth(), bitmap.getHeight(), paint);
-        return newBitmap;
-    }
-
- */
-
 
     ActivityResultLauncher<Intent> camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -219,23 +153,6 @@ public class AniadirActivity extends AppCompatActivity {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Bundle extras = result.getData().getExtras();
                         imgBitmap = (Bitmap) extras.get("data");
-                        //Bitmap bitmapTransparente  =makeTransparent(imgBitmap);
-                /*
-                remover.bitmapForProcessing(imgBitmap, true, new OnBackgroundChangeListener() {
-                    @Override
-                    public void onSuccess(Bitmap bitmap) {
-                        // Haz lo que desees con este bitmap
-                        //imagenViewPrenda.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                    }
-
-                    @Override
-                    public void onFailed(Exception exception) {
-                        // Maneja la excepción
-                        Toast.makeText(getApplicationContext(), "No se ha podido quitar el fondo", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                 */
                         rutaImagen = guardarImagenEnAlmacenamientoInterno(imgBitmap);
                         prenda.setUrlImagen(rutaImagen);
                         imagenViewPrenda.setImageBitmap(imgBitmap);

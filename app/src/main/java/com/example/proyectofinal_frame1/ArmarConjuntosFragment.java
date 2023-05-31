@@ -32,11 +32,8 @@ public class ArmarConjuntosFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private ImageView btnAleatorio;
-    private ImageView btnGuardar;
-    private AlertDialog dialogo;
-    private ConjuntoItem nuevoConjunto;
-    private Context context;
+    CarruselFragment carrusel1, carrusel2, carrusel3;
+    private ImageView btnAleatorio, btnGuardar;
     private static long idUsuario;
 
     public ArmarConjuntosFragment() {
@@ -69,8 +66,6 @@ public class ArmarConjuntosFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
 
             FragmentManager fragmentManager = getChildFragmentManager();
-            Button btnAleatorio;
-            Button btnGuardar;
         }
     }
 
@@ -88,7 +83,6 @@ public class ArmarConjuntosFragment extends Fragment {
 
         armarConjuntos = this;
 
-        CarruselFragment carrusel1, carrusel2, carrusel3;
         FragmentManager fragmentManager = getChildFragmentManager();
 
         carrusel1 = new CarruselFragment(1, idUsuario);
@@ -119,6 +113,18 @@ public class ArmarConjuntosFragment extends Fragment {
         return btnGuardar;
     }
     public ImageView getBtnAleatorio() {return btnAleatorio; }
+
+    public CarruselFragment getCarrusel1() {
+        return carrusel1;
+    }
+
+    public CarruselFragment getCarrusel2() {
+        return carrusel2;
+    }
+
+    public CarruselFragment getCarrusel3() {
+        return carrusel3;
+    }
 
     public static long getIdUsuario() {
         return idUsuario;

@@ -21,12 +21,15 @@ import android.widget.Toast;
 import com.example.proyectofinal_frame1.database.TablaPrenda;
 import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CarruselFragment extends Fragment {
 
     private static CarruselFragment carruselFragment;
     private RecyclerView recyclerView;
+    private CarruselAdapter adapter;
     private TablaPrenda tablaPrenda;
     private List<String> rutasImagenes;
     private int idCategoría;
@@ -64,7 +67,7 @@ public class CarruselFragment extends Fragment {
         tablaPrenda = new TablaPrenda(getActivity());
         rutasImagenes = tablaPrenda.obtenerRutasImagenes(idCategoría);
 
-        CarruselAdapter adapter = new CarruselAdapter(getActivity(), rutasImagenes);
+        adapter = new CarruselAdapter(getActivity(), rutasImagenes);
         recyclerView.setAdapter(adapter);
 
         ArmarConjuntosFragment.getInstance().getBtnGuardar().setOnClickListener(new View.OnClickListener() {
@@ -77,7 +80,7 @@ public class CarruselFragment extends Fragment {
         ArmarConjuntosFragment.getInstance().getBtnAleatorio().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Funciona.", Toast.LENGTH_SHORT).show();
+                aleatorio();
             }
         });
         return view;
@@ -122,5 +125,20 @@ public class CarruselFragment extends Fragment {
         dialog.setView(dView);
         dialogo = dialog.create();
         dialogo.show();
+    }
+
+    public void aleatorio(){
+        // Crear un objeto Random
+        Random random = new Random();
+        List<Prenda> lista = RopaSuperiorActivity.getInstance().getListaPrendas();
+
+        // Obtener un número aleatorio dentro del rango de índices del ArrayList
+        int randomIndex = random.nextInt(rutasImagenes.size());
+
+        // Obtener el elemento correspondiente al índice aleatorio del ArrayList
+            //Object randomItem = rutasImagenes.get(randomIndex);
+
+        // Utilizar el elemento seleccionado aleatoriamente según sea necesario
+        adapter.getItemId(randomIndex);
     }
 }

@@ -55,11 +55,11 @@ public class Registro extends AppCompatActivity {
 
                 // Verificar si todos los campos están completos
                 if (nombre.isEmpty() || correo.isEmpty() || contrasena.isEmpty() || repiteContrasena.isEmpty()) {
-                    Toast.makeText(Registro.this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
                 } else {
                     // Validar la dirección de correo electrónico
                     if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
-                        correoField.setError("Por favor ingrese una dirección de correo electrónico válida");
+                        correoField.setError("Por favor, ingrese una dirección de correo electrónico válida");
                         correoField.requestFocus();
                     }else if (!contrasena.equals(repiteContrasena)) { // Validar que las contraseñas coincidan
                         repiteContrasenaField.setError("Las contraseñas no coinciden");

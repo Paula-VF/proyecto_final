@@ -37,14 +37,16 @@ public class Acceso extends AppCompatActivity {
         btnAcceder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toMain();
+                /*
                 String correo = correoField.getText().toString().trim();
                 String contrasena = contrasenaField.getText().toString().trim();
 
                 if(correo.isEmpty()||contrasena.isEmpty()){
-                    Toast.makeText(Acceso.this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Acceso.this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
                 }else{
                     if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
-                        correoField.setError("Por favor ingrese una dirección de correo electrónico válida");
+                        correoField.setError("Por favor, ingrese una dirección de correo electrónico válida");
                         correoField.requestFocus();
                     }else if (!tablaUsuario.existeUsuario(correo)){
                         correoField.setError("No existe cuenta con este correo electrónico");
@@ -62,6 +64,8 @@ public class Acceso extends AppCompatActivity {
                         }
                     }
                 }
+
+                 */
             }
         });
 

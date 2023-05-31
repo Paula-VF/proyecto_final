@@ -24,6 +24,7 @@ import com.example.proyectofinal_frame1.Conjunto;
 import com.example.proyectofinal_frame1.ConjuntoAdapter;
 import com.example.proyectofinal_frame1.ConjuntoItem;
 import com.example.proyectofinal_frame1.R;
+import com.example.proyectofinal_frame1.database.TablaConjunto;
 import com.example.proyectofinal_frame1.databinding.FragmentDashboardBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -42,6 +43,7 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
     private List<ConjuntoItem> listaConjuntos;
     private AlertDialog dialogo;
     private ConjuntoItem nuevoConjunto;
+    private TablaConjunto tablaConjunto;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
 
         context = container.getContext();
         conjuntosFragment = this;
+        tablaConjunto = new TablaConjunto(context);
 
         recyclerViewPrendas = root.findViewById(R.id.recyclerViewPrendas);
         recyclerViewPrendas.setLayoutManager(new GridLayoutManager(context, 2));
@@ -110,6 +113,7 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
                     nuevoConjunto = new ConjuntoItem(conjunto, R.drawable.conjunto);
                     listaConjuntos.add(nuevoConjunto);
                     conjuntoAdapter.notifyDataSetChanged();
+                    tablaConjunto.insertarConjunto(conjunto, 1); // corregir usuario
                     dialogo.cancel();
                     Toast.makeText(context, "Conjunto " + conjunto + " creado.", Toast.LENGTH_SHORT).show();
                 }else {

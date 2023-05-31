@@ -8,64 +8,96 @@
     android:visibility="visible"
     tools:context=".ui.notifications.NotificationsFragment">
 
-    <!-->
-    <include
-        android:id="@+id/my_toolbar"
-        layout="@layout/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-    <!-->
-
-    <TextView
-        android:id="@+id/created_by"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:gravity="left"
-        android:text="Aplicación creada por Emely Aguilar y Paula Vallespín."
-        android:textAlignment="gravity"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.112" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/cerrar_sesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:drawableLeft="@drawable/baseline_logout_24"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/ourBlue"
+            android:gravity="left"
+            android:text="Cerrar sesión"
+            android:textAlignment="gravity"
+            android:textColor="@color/ourBlue"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.68"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.112" />
+
+        <TextView
+            android:id="@+id/acerca_de"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/cerrar_sesion"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:drawableLeft="@drawable/baseline_info_24"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/ourBlue"
+            android:gravity="left"
+            android:text="Acerca de"
+            android:textAlignment="gravity"
+            android:textColor="@color/ourBlue"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.68"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.112" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="136dp"
+        android:layout_height="107dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="120dp"
+        android:layout_marginStart="137dp"
         android:layout_marginTop="193dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="274dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginBottom="104dp"
         android:src="@drawable/dma"
         tools:layout_editor_absoluteX="121dp"
         tools:layout_editor_absoluteY="282dp" />
 
     <ImageView
         android:id="@+id/nombre"
-        android:layout_width="264dp"
-        android:layout_height="84dp"
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
         android:layout_alignStart="@+id/logo"
         android:layout_alignTop="@+id/logo"
         android:layout_alignEnd="@+id/logo"
         android:layout_alignBottom="@+id/logo"
         android:layout_marginStart="-45dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="106dp"
         android:layout_marginEnd="-45dp"
-        android:layout_marginBottom="-86dp"
+        android:layout_marginBottom="-50dp"
         android:src="@drawable/dress_me_app"
         tools:layout_editor_absoluteX="67dp"
         tools:layout_editor_absoluteY="473dp" />
