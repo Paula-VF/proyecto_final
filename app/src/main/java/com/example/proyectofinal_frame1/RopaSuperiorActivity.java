@@ -75,10 +75,15 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
         dialog.setPositiveButton("Sí", new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Prenda prendaABorrar = listaPrendas.get(position);
+                long idPrenda = prendaABorrar.getId();
                 listaPrendas.remove(position);
+                if(tablaPrenda.eliminarPrenda(idPrenda)){
+                    Toast.makeText(getApplicationContext(), "prenda borrada de la bd", Toast.LENGTH_SHORT).show();
+                }
                 prendaAdapter.notifyItemChanged(position);
                 prendaAdapter.notifyDataSetChanged();
-                Toast.makeText(getApplicationContext(), listaPrendas.get(position) + " eliminado/a.",
+                Toast.makeText(getApplicationContext(), prendaABorrar.getNombre() + " eliminado/a." + idPrenda,
                         Toast.LENGTH_SHORT).show();
             }
         });

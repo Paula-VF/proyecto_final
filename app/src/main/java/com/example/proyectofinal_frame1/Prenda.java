@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Prenda implements Serializable {
     // atributos
+    private long id;
     private String nombre;
     private String urlImagen;
 
@@ -53,5 +54,13 @@ public class Prenda implements Serializable {
 
     public void setUsuario(long usuario) {
         this.usuario = usuario;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

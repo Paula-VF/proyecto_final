@@ -73,14 +73,13 @@ public class TablaPrenda extends ProyectoDatabaseHelper{
 
     public List<Prenda> obtenerPrendas(long categoria) {
         List<Prenda> prendas = new ArrayList<>();
-
         try {
             // Obtener la base de datos en modo lectura
             ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
             SQLiteDatabase db = dbHelper.getReadableDatabase();
 
             // Definir las columnas que deseas recuperar
-            String[] columnas = {"nombre", "imagen", "categoria", "usuario"};
+            String[] columnas = {"id", "nombre", "imagen", "categoria", "usuario"};
             String filtrado = "categoria = ?";
 
             String[] argumentos = {String.valueOf(categoria)};
@@ -92,6 +91,7 @@ public class TablaPrenda extends ProyectoDatabaseHelper{
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     // Obtener los valores de cada columna
+                    @SuppressLint("Range") long id = cursor.getLong(cursor.getColumnIndex("id"));
                     @SuppressLint("Range") String nombre = cursor.getString(cursor.getColumnIndex("nombre"));
                     @SuppressLint("Range") String rutaImagen = cursor.getString(cursor.getColumnIndex("imagen"));
                     @SuppressLint("Range") long categoriaPrenda = cursor.getLong(cursor.getColumnIndex("categoria"));
@@ -99,6 +99,7 @@ public class TablaPrenda extends ProyectoDatabaseHelper{
 
                     // Crear una instancia de Prenda y agregarla a la lista
                     Prenda prenda = new Prenda();
+                    prenda.setId(id);
                     prenda.setNombre(nombre);
                     prenda.setUrlImagen(rutaImagen);
                     prenda.setCategoria(categoriaPrenda);
@@ -115,4 +116,29 @@ public class TablaPrenda extends ProyectoDatabaseHelper{
         return prendas;
     }
 
+    public boolean eliminarPrenda(long idPrenda){
+        boolean borrado = false;
+        try {
+            // Obtener la base de datos en modo escritura
+            ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+            // Definir la cláusula WHERE para seleccionar la prenda con el ID proporcionado
+            String selection = "id = ?";
+            String[] selectionArgs = { String.valueOf(idPrenda) };
+
+            // Eliminar la prenda de la tabla
+            int filasEliminadas = db.delete(TABLA_PRENDA, selection, selectionArgs);
+
+            // Comprobar si se ha eliminado alguna fila
+            if (filasEliminadas > 0) {
+                borrado = true;
+            }
+            // Cerrar la base de datos
+            db.close();
+        } catch (Exception ex) {
+            ex.toString();
+        }
+        return borrado;
+    }
 }

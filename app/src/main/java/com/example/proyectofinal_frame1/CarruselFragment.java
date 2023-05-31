@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.example.proyectofinal_frame1.database.TablaPrenda;
 import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -41,7 +40,6 @@ public class CarruselFragment extends Fragment {
     private Context context;
     private ConjuntoItem nuevoConjunto;
     private AlertDialog dialogo;
-
 
     public CarruselFragment() {
         // Constructor vacío requerido
@@ -85,7 +83,6 @@ public class CarruselFragment extends Fragment {
         });
         return view;
     }
-
 
     public static CarruselFragment getInstance(){
         return carruselFragment;
