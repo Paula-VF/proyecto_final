@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
 
+import java.util.List;
+
 public class ArmarConjuntosFragment extends Fragment {
 
     private static ArmarConjuntosFragment armarConjuntos;
@@ -103,6 +105,15 @@ public class ArmarConjuntosFragment extends Fragment {
 
         btnAleatorio = view.findViewById(R.id.btn_random);
         btnGuardar = view.findViewById(R.id.btn_save);
+
+        btnAleatorio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                carrusel1.aleatorio(carrusel1.rutasImagenes);
+                carrusel2.aleatorio(carrusel2.rutasImagenes);
+                carrusel3.aleatorio(carrusel3.rutasImagenes);
+            }
+        });
     }
 
     public static ArmarConjuntosFragment getInstance() {

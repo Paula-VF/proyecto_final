@@ -30,13 +30,11 @@ public class CarruselFragment extends Fragment {
     private RecyclerView recyclerView;
     private CarruselAdapter adapter;
     private TablaPrenda tablaPrenda;
-    private List<String> rutasImagenes;
+    protected List<String> rutasImagenes;
     private int idCategoría;
 
     private long idUsuario;
 
-    private ImageView btnAleatorio;
-    private ImageView btnGuardar;
     private Context context;
     private ConjuntoItem nuevoConjunto;
     private AlertDialog dialogo;
@@ -75,12 +73,6 @@ public class CarruselFragment extends Fragment {
             }
         });
 
-        ArmarConjuntosFragment.getInstance().getBtnAleatorio().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                aleatorio();
-            }
-        });
         return view;
     }
 
@@ -124,18 +116,14 @@ public class CarruselFragment extends Fragment {
         dialogo.show();
     }
 
-    public void aleatorio(){
+    public void aleatorio(List<String> rutasdeImagenes){
         // Crear un objeto Random
         Random random = new Random();
-        List<Prenda> lista = RopaSuperiorActivity.getInstance().getListaPrendas();
 
         // Obtener un número aleatorio dentro del rango de índices del ArrayList
-        int randomIndex = random.nextInt(rutasImagenes.size());
-
-        // Obtener el elemento correspondiente al índice aleatorio del ArrayList
-            //Object randomItem = rutasImagenes.get(randomIndex);
-
-        // Utilizar el elemento seleccionado aleatoriamente según sea necesario
-        adapter.getItemId(randomIndex);
+        int randomIndex = random.nextInt(rutasdeImagenes.size());
+        adapter = new CarruselAdapter(getActivity(), rutasdeImagenes);
+        recyclerView.setAdapter(adapter);
+        recyclerView.scrollToPosition(randomIndex);
     }
 }
