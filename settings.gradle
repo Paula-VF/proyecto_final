@@ -10,7 +10,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' } // aniadido
+        jcenter()
     }
 }
 rootProject.name = "proyectoFinal_frame1"
-include ':app'
+include ':app', ':imageslider' // aniadido
+

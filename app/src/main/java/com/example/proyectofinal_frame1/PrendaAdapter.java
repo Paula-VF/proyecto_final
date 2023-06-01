@@ -9,20 +9,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaViewHolder>{
     private List<Prenda> prendas;
-
-    public PrendaAdapter(List<Prenda> prendas) {
-        this.prendas = prendas;
+    private OnPrendaListener mOnPrendaListener;
+    public PrendaAdapter(List<Prenda> prendas, OnPrendaListener onPrendaListener){
+        this.prendas= prendas;
+        this.mOnPrendaListener = onPrendaListener;
     }
 
     @NonNull
     @Override
     public PrendaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_prenda, parent, false);
-        return new PrendaViewHolder(view);
+        return new PrendaViewHolder(view, mOnPrendaListener);
     }
 
     @Override
@@ -36,36 +39,44 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
         return prendas.size();
     }
 
-    public static class PrendaViewHolder extends RecyclerView.ViewHolder {
+    // ViewHolder
+    public static class PrendaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
         private ImageView imageView;
         private TextView nombreTextView;
-        private TextView textViewEtiqueta1;
-        private TextView textViewEtiqueta2;
-        private TextView textViewEtiqueta3;
+        private OnPrendaListener onPrendaListener;
 
-        public PrendaViewHolder(@NonNull View itemView) {
+        public PrendaViewHolder(@NonNull View itemView, OnPrendaListener onPrendaListener) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewPrenda);
             nombreTextView = itemView.findViewById(R.id.textViewNombrePrenda);
-            textViewEtiqueta1 = itemView.findViewById(R.id.textViewEtiqueta1);
-            textViewEtiqueta2 = itemView.findViewById(R.id.textViewEtiqueta2);
-            textViewEtiqueta3 = itemView.findViewById(R.id.textViewEtiqueta3);
+            this.onPrendaListener = onPrendaListener;
+
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         public void bind(Prenda prenda) {
-            imageView.setImageResource(prenda.getUrlImagen());
+            Glide.with(itemView)
+                    .load(prenda.getUrlImagen())
+                    .into(imageView);
             nombreTextView.setText(prenda.getNombre());
-            List<String> etiquetas = prenda.getEtiquetas();
-            if (etiquetas.size() > 0) {
-                textViewEtiqueta1.setText(etiquetas.get(0));
-            }
-            if (etiquetas.size() > 1) {
-                textViewEtiqueta2.setText(etiquetas.get(1));
-            }
-            if (etiquetas.size() > 2) {
-                textViewEtiqueta3.setText(etiquetas.get(2));
-            }
         }
+
+        @Override
+        public void onClick(View v) {
+            onPrendaListener.onPrendaClick(getAdapterPosition());
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            onPrendaListener.onPrendaLongClick(getAdapterPosition());
+            return false;
+        }
+    }
+
+    public interface OnPrendaListener {
+        void onPrendaClick(int position);
+        void onPrendaLongClick(int position);
     }
 }

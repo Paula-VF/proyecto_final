@@ -20,11 +20,17 @@
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.proyectofinal_frame1.ui.notifications.NotificationsFragment"
-        android:label="Otras opciones"
+        android:label="Acerca de"
         tools:layout="@layout/fragment_notifications" />
     <fragment
-        android:id="@+id/carouselFragment"
-        android:name="com.example.proyectofinal_frame1.CarouselFragment"
+        android:id="@+id/carruselFragment"
+        android:name="com.example.proyectofinal_frame1.CarruselFragment"
         android:label="Carrusel"
-        tools:layout="@layout/fragment_carousel" />
+        tools:layout="@layout/fragment_carrusel" />
+
+    <fragment
+        android:id="@+id/armarConjuntosFragment"
+        android:name="com.example.proyectofinal_frame1.ArmarConjuntosFragment"
+        android:label="Carrusel"
+        tools:layout="@layout/fragment_armar_conjuntos" />
 </navigation>
