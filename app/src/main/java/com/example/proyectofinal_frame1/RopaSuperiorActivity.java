@@ -6,21 +6,20 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.proyectofinal_frame1.database.TablaConjunto;
 import com.example.proyectofinal_frame1.database.TablaPrenda;
 import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
-import com.example.proyectofinal_frame1.ui.notifications.NotificationsFragment;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAdapter.OnPrendaListener{
@@ -31,8 +30,11 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
     private List<Prenda> listaPrendas;
     private ImageView btnBack;
     private TablaPrenda tablaPrenda = new TablaPrenda(RopaSuperiorActivity.this);
+    private TablaConjunto tablaConjunto = new TablaConjunto(this);
     private AlertDialog dialogo;
-    private Chip chip;
+    private List<String> prueba;
+
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,13 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
 
         prendaAdapter = new PrendaAdapter(listaPrendas, this);
         recyclerViewPrendas.setAdapter(prendaAdapter);
+
+        prueba = new ArrayList<>();
+        prueba.add("hola");
+        prueba.add("esto");
+        prueba.add("funciona");
+        prueba.add("o");
+        prueba.add("no");
 
     }
 
@@ -99,24 +108,24 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
     }
 
     public void aniadiraConjunto(int position) {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View dView = getLayoutInflater().inflate(R.layout.dialogo_prenda_conjunto, null);
         TextView titulo = dView.findViewById(R.id.titulo_aniadir);
-        ChipGroup conjuntosChipGroup = dView.findViewById(R.id.chipGroup_conjuntos);
+        listView = findViewById(R.id.list_view);
         Button addBtn = dView.findViewById(R.id.btn_aniadir);
         Button cancelBtn = dView.findViewById(R.id.btn_cancelar);
-        for(ConjuntoItem conj : DashboardFragment.getInstance().getListaConjuntos()) {
-            // ConjuntoItem conj = DashboardFragment.getInstance().getListaConjuntos().get(i);
-            Chip chip = new Chip(this);
-            chip.setText(conj.toString());
-            conjuntosChipGroup.addView(chip);
-            dView.refreshDrawableState();
+        /*
+        itemsCheck = new ArrayList<>();
+        for(String i: prueba){
+            itemsCheck.add(new DialogCheckbox(i, false));
+            adapter = new CheckboxAdapter(itemsCheck, this);
+            listView.setAdapter(adapter);
         }
+         */
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int chipId = conjuntosChipGroup.getCheckedChipId();
 
                 dialogo.cancel();
                 Toast.makeText(getApplicationContext(), "Conjunto creado", Toast.LENGTH_SHORT).show();
@@ -130,8 +139,8 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
             }
         });
 
-        dialog.setView(dView);
-        dialogo = dialog.create();
+        builder.setView(dView);
+        dialogo = builder.create();
         dialogo.show();
     }
 

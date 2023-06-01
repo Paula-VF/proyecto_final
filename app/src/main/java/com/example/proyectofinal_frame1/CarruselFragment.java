@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.proyectofinal_frame1.database.TablaConjunto;
 import com.example.proyectofinal_frame1.database.TablaPrenda;
 import com.example.proyectofinal_frame1.ui.dashboard.DashboardFragment;
 
@@ -30,7 +32,9 @@ public class CarruselFragment extends Fragment {
     private RecyclerView recyclerView;
     private CarruselAdapter adapter;
     private TablaPrenda tablaPrenda;
-    protected List<String> rutasImagenes;
+    private TablaConjunto tablaConjunto;
+    private List<ConjuntoItem> listaConjuntos;
+    private List<String> rutasImagenes;
     private int idCategoría;
 
     private long idUsuario;
@@ -39,8 +43,9 @@ public class CarruselFragment extends Fragment {
     private ConjuntoItem nuevoConjunto;
     private AlertDialog dialogo;
 
+    private DashboardFragment conjFragment;
+
     public CarruselFragment() {
-        // Constructor vacío requerido
     }
 
     public CarruselFragment(int idCategoría, long idUsuario){
@@ -56,6 +61,7 @@ public class CarruselFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_carrusel, container, false);
 
         context = container.getContext();
+        tablaConjunto = new TablaConjunto(context);
         carruselFragment = this;
         recyclerView = view.findViewById(R.id.recyclerViewCarruselFragment);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
@@ -65,6 +71,8 @@ public class CarruselFragment extends Fragment {
 
         adapter = new CarruselAdapter(getActivity(), rutasImagenes);
         recyclerView.setAdapter(adapter);
+
+        listaConjuntos = new ArrayList<>();
 
         ArmarConjuntosFragment.getInstance().getBtnGuardar().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,10 +100,14 @@ public class CarruselFragment extends Fragment {
             public void onClick(View v) {
                 if(nombre != null) {
                     String conjunto = nombre.getText().toString();
-                    //nuevoConjunto = new ConjuntoItem(conjunto, R.drawable.conjunto);
-                    DashboardFragment.getInstance().getListaConjuntos().add(new ConjuntoItem(conjunto, R.drawable.conjunto));
-                    DashboardFragment.getInstance().getConjuntoAdapter().notifyDataSetChanged();
-                    //tablaConjunto.insertarConjunto(conjunto,1);
+                    /*
+                    ConjuntoItem conjunto1 = new ConjuntoItem(conjunto, R.drawable.conjunto);
+                    DashboardFragment a = DashboardFragment.getInstance();
+                    a.getListaConjuntos().add(conjunto1);
+                    a.getConjuntoAdapter().notifyDataSetChanged();
+
+                     */
+                    tablaConjunto.insertarConjunto(conjunto, 1);
                     dialogo.cancel();
                     Toast.makeText(context, "Conjunto " + conjunto + " creado.", Toast.LENGTH_SHORT).show();
                 }else {
@@ -126,4 +138,6 @@ public class CarruselFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.scrollToPosition(randomIndex);
     }
+
+
 }

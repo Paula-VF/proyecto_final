@@ -18,21 +18,13 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollCat"
+    <ListView
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="61dp"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="16dp"
-        android:paddingStart="10dp"
-        android:scrollbars="none">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup_conjuntos"
-            style="@style/Widget.MaterialComponents.ChipGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </HorizontalScrollView>
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:divider="#000"
+        android:dividerHeight="0.8dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"

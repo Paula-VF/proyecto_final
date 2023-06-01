@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         imagen = (ImageView) findViewById(R.id.imagenPrenda);
-//        registerResult(); Esto creo que se tiene que borrar
 
 
         //Creación de la base de datos

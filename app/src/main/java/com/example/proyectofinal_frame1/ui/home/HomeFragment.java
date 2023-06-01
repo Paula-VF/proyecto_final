@@ -98,38 +98,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-
-        /*
-        // funcionalidad bottom_nav_menu
-        BottomNavigationView navView = root.findViewById(R.id.nav_view);
-        //navView.setSelectedItemId(R.id.nav_host_fragment_activity_main);
-        navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @SuppressLint("ResourceType")
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.navigation_home:
-                        replaceFragment(new HomeFragment());
-                        break;
-                    case R.id.navigation_dashboard:
-                        replaceFragment(new DashboardFragment());
-                        break;
-                    case R.id.armarConjuntosFragment:
-                        replaceFragment(new CarruselFragment());
-                        break;
-                    case R.id.navigation_notifications:
-                        replaceFragment(new NotificationsFragment());
-                        break;
-                }
-                return true;
-            }
-        });
-
-         */
-
-        // final TextView textView = binding.textHome;
-        // homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
         return root;
     }
 
