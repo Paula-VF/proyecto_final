@@ -82,8 +82,6 @@ public class RopaInferiorActivity extends AppCompatActivity implements PrendaAda
 
     @Override
     public void onPrendaClick(int position) {
-        Toast.makeText(getApplicationContext(), "Hola",
-                Toast.LENGTH_SHORT).show();
     }
 
     @Override

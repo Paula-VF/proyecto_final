@@ -1,6 +1,8 @@
 package com.example.proyectofinal_frame1.ui.notifications;
 
+import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.proyectofinal_frame1.Inicio;
 import com.example.proyectofinal_frame1.R;
 import com.example.proyectofinal_frame1.databinding.FragmentNotificationsBinding;
 import com.google.android.material.snackbar.Snackbar;
@@ -48,6 +51,9 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // funcionalidad al clicar en Cerrar sesión
+                Intent intent = new Intent(context, Inicio.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 

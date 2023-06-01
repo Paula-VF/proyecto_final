@@ -85,8 +85,6 @@ public class ZapatosActivity extends AppCompatActivity implements PrendaAdapter.
 
     @Override
     public void onPrendaClick(int position) {
-        Toast.makeText(getApplicationContext(), "Hola",
-                Toast.LENGTH_SHORT).show();
     }
 
     @Override

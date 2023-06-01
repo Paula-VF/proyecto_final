@@ -2,6 +2,7 @@ package com.example.proyectofinal_frame1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -37,8 +38,6 @@ public class Acceso extends AppCompatActivity {
         btnAcceder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toMain();
-                /*
                 String correo = correoField.getText().toString().trim();
                 String contrasena = contrasenaField.getText().toString().trim();
 
@@ -64,8 +63,6 @@ public class Acceso extends AppCompatActivity {
                         }
                     }
                 }
-
-                 */
             }
         });
 

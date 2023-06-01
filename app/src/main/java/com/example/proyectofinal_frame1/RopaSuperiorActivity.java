@@ -32,9 +32,7 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
     private List<Prenda> listaPrendas;
     private ImageView btnBack;
     private TablaPrenda tablaPrenda = new TablaPrenda(RopaSuperiorActivity.this);
-    private TablaConjunto tablaConjunto = new TablaConjunto(this);
     private AlertDialog dialogo;
-    private List<String> prueba;
 
     private LinearLayout linear;
 
@@ -61,12 +59,6 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
         prendaAdapter = new PrendaAdapter(listaPrendas, this);
         recyclerViewPrendas.setAdapter(prendaAdapter);
 
-        prueba = new ArrayList<>();
-        prueba.add("hola");
-        prueba.add("esto");
-        prueba.add("funciona");
-        prueba.add("o");
-        prueba.add("no");
 
     }
 
@@ -109,41 +101,41 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
         dialogo.show();
     }
 
-    public void aniadiraConjunto(int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View dView = getLayoutInflater().inflate(R.layout.dialogo_prenda_conjunto, null);
-        TextView titulo = dView.findViewById(R.id.titulo_aniadir);
-        linear = findViewById(R.id.lista);
-        Button addBtn = dView.findViewById(R.id.btn_aniadir);
-        Button cancelBtn = dView.findViewById(R.id.btn_cancelar);
-        for(ConjuntoItem conj : DashboardFragment.getInstance().getListaConjuntos()) {
-            // ConjuntoItem conj = DashboardFragment.getInstance().getListaConjuntos().get(i);
-            CheckBox check = new CheckBox(this);
-            check.setText(conj.toString());
-            linear.addView(check);
-            dView.refreshDrawableState();
-        }
-
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // funcionalidad al seleccionar los checkboxes
-                dialogo.cancel();
-                Toast.makeText(getApplicationContext(), "Conjunto creado", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialogo.cancel();
-            }
-        });
-
-        builder.setView(dView);
-        dialogo = builder.create();
-        dialogo.show();
-    }
+//    public void aniadiraConjunto(int position) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        View dView = getLayoutInflater().inflate(R.layout.dialogo_prenda_conjunto, null);
+//        TextView titulo = dView.findViewById(R.id.titulo_aniadir);
+//        linear = findViewById(R.id.lista);
+//        Button addBtn = dView.findViewById(R.id.btn_aniadir);
+//        Button cancelBtn = dView.findViewById(R.id.btn_cancelar);
+//        for(ConjuntoItem conj : DashboardFragment.getInstance().getListaConjuntos()) {
+//            // ConjuntoItem conj = DashboardFragment.getInstance().getListaConjuntos().get(i);
+//            CheckBox check = new CheckBox(this);
+//            check.setText(conj.toString());
+//            linear.addView(check);
+//            dView.refreshDrawableState();
+//        }
+//
+//        addBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // funcionalidad al seleccionar los checkboxes
+//                dialogo.cancel();
+//                Toast.makeText(getApplicationContext(), "Conjunto creado", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        cancelBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialogo.cancel();
+//            }
+//        });
+//
+//        builder.setView(dView);
+//        dialogo = builder.create();
+//        dialogo.show();
+//    }
 
     // para volver a la pantalla anterior
     @Override
@@ -154,7 +146,7 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
 
     @Override
     public void onPrendaClick(int position) {
-        aniadiraConjunto(position);
+//        aniadiraConjunto(position);
     }
 
     @Override
