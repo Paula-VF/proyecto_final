@@ -34,7 +34,7 @@ public class CarruselFragment extends Fragment {
     private TablaPrenda tablaPrenda;
     private TablaConjunto tablaConjunto;
     private List<ConjuntoItem> listaConjuntos;
-    private List<String> rutasImagenes;
+    List<String> rutasImagenes;
     private int idCategoría;
 
     private long idUsuario;
@@ -72,7 +72,6 @@ public class CarruselFragment extends Fragment {
         adapter = new CarruselAdapter(getActivity(), rutasImagenes);
         recyclerView.setAdapter(adapter);
 
-        listaConjuntos = new ArrayList<>();
 
         ArmarConjuntosFragment.getInstance().getBtnGuardar().setOnClickListener(new View.OnClickListener() {
             @Override

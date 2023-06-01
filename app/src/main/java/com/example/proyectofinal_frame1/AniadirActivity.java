@@ -4,7 +4,6 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -30,15 +29,10 @@ import android.widget.Toast;
 import com.example.proyectofinal_frame1.database.TablaConjunto;
 import com.example.proyectofinal_frame1.database.TablaPrenda;
 import com.google.android.material.chip.ChipGroup;
-import com.slowmac.autobackgroundremover.BackgroundRemover;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AniadirActivity extends AppCompatActivity {
 
@@ -54,17 +48,12 @@ public class AniadirActivity extends AppCompatActivity {
     private TablaPrenda tablaPrenda = new TablaPrenda(this);
     private TablaConjunto tablaConjunto = new TablaConjunto(this);
     private static final int REQUEST_IMAGE_CAPTURE = 2;
-
-    private BackgroundRemover remover;
-    private RemoveBgService removeBgService;
     private File myPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aniadir);
-
-        removeBgService = new RemoveBgService();
 
         prenda = new Prenda();
 
@@ -83,7 +72,6 @@ public class AniadirActivity extends AppCompatActivity {
         imagenViewPrenda = findViewById(R.id.imagenPrenda);
         categoriaChipGroup = findViewById(R.id.chipGroupCategorias);
         btnGuardar = findViewById(R.id.btn_guardar);
-        btnPNG = findViewById(R.id.btn_png);
 
         btnCamara.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,13 +90,6 @@ public class AniadirActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     permisoGaleria();
                 }
-            }
-        });
-
-        btnPNG.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                convertirPng(myPath);
             }
         });
 
@@ -178,30 +159,6 @@ public class AniadirActivity extends AppCompatActivity {
                 }
             });
 
-    private void convertirPng(File imageFile) {
-        // Llamamos al servicio para quitar el fondo de la imagen
-        removeBgService.removeBackground(imageFile, new Callback<RemoveBgService.RemoveBgResponse>() {
-            public void onResponse(Call<RemoveBgService.RemoveBgResponse> call, Response<RemoveBgService.RemoveBgResponse> response) {
-                if (response.isSuccessful()) {
-                    RemoveBgService.RemoveBgResponse removeBgResponse = response.body();
-                    if (removeBgResponse != null) {
-                        String resultUrl = removeBgResponse.getData().getResultUrl();
-                        // Mostrarla en una ImageView
-                        imagenViewPrenda.setImageURI(Uri.parse(resultUrl));
-                    }
-                } else {
-                    // Manejar el caso de respuesta no exitosa
-                    Toast.makeText(AniadirActivity.this, "Error al quitar fondo", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RemoveBgService.RemoveBgResponse> call, Throwable t) {
-                // Manejar el caso de error en la solicitud
-                Toast.makeText(AniadirActivity.this, "Error al quitar fondo", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     private String guardarImagenEnAlmacenamientoInterno(Bitmap bitmap) {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());

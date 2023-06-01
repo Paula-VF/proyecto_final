@@ -16,6 +16,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:screenOrientation="portrait"
         android:icon="@drawable/dma"
         android:label="@string/app_name"
         android:roundIcon="@drawable/dma_circular"

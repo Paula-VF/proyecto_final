@@ -20,8 +20,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyectofinal_frame1.ConjuntoActivity;
-import com.example.proyectofinal_frame1.CarruselFragment;
-import com.example.proyectofinal_frame1.Conjunto;
 import com.example.proyectofinal_frame1.ConjuntoAdapter;
 import com.example.proyectofinal_frame1.ConjuntoClase;
 import com.example.proyectofinal_frame1.ConjuntoItem;
@@ -47,10 +45,6 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
     private ConjuntoItem nuevoConjunto;
     private TablaConjunto tablaConjunto;
     private View root;
-
-
-    public DashboardFragment() {
-    }
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -91,22 +85,14 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
         return root;
     }
 
-    public static DashboardFragment getInstance(){
-        return conjuntosFragment;
+
+
+    public static DashboardFragment getInstance() { return conjuntosFragment;
     }
 
     public List<ConjuntoItem> getListaConjuntos() {
         return listaConjuntos;
     }
-
-    public ConjuntoAdapter getConjuntoAdapter() {
-        return conjuntoAdapter;
-    }
-
-    public View getRoot() {
-        return root;
-    }
-
 
     private void nombrarConjunto() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(context);

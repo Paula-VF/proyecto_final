@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +36,7 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
     private AlertDialog dialogo;
     private List<String> prueba;
 
-    private ListView listView;
+    private LinearLayout linear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,22 +113,21 @@ public class RopaSuperiorActivity extends AppCompatActivity implements PrendaAda
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View dView = getLayoutInflater().inflate(R.layout.dialogo_prenda_conjunto, null);
         TextView titulo = dView.findViewById(R.id.titulo_aniadir);
-        listView = findViewById(R.id.list_view);
+        linear = findViewById(R.id.lista);
         Button addBtn = dView.findViewById(R.id.btn_aniadir);
         Button cancelBtn = dView.findViewById(R.id.btn_cancelar);
-        /*
-        itemsCheck = new ArrayList<>();
-        for(String i: prueba){
-            itemsCheck.add(new DialogCheckbox(i, false));
-            adapter = new CheckboxAdapter(itemsCheck, this);
-            listView.setAdapter(adapter);
+        for(ConjuntoItem conj : DashboardFragment.getInstance().getListaConjuntos()) {
+            // ConjuntoItem conj = DashboardFragment.getInstance().getListaConjuntos().get(i);
+            CheckBox check = new CheckBox(this);
+            check.setText(conj.toString());
+            linear.addView(check);
+            dView.refreshDrawableState();
         }
-         */
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // funcionalidad al seleccionar los checkboxes
                 dialogo.cancel();
                 Toast.makeText(getApplicationContext(), "Conjunto creado", Toast.LENGTH_SHORT).show();
             }

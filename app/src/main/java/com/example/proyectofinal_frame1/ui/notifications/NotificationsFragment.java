@@ -61,13 +61,6 @@ public class NotificationsFragment extends Fragment {
         return root;
     }
 
-    protected void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager = getParentFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.accesoriosLayout, fragment); // creo que el fallo está aquí
-        // si se pone R.id.accesoriosLayout se ven los activity pero sin el toolbar
-        fragmentTransaction.commit();
-    }
 
     @Override
     public void onDestroyView() {

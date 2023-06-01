@@ -18,11 +18,12 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <ListView
-        android:id="@+id/list_view"
+    <LinearLayout
+        android:id="@+id/lista"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
+        android:orientation="vertical"
         android:divider="#000"
         android:dividerHeight="0.8dp"/>
 
