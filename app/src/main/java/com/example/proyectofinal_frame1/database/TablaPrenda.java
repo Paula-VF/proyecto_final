@@ -141,4 +141,41 @@ public class TablaPrenda extends ProyectoDatabaseHelper{
         }
         return borrado;
     }
+
+    public Prenda obtenerPrendaPorId(long idPrenda) {
+        Prenda prenda = null;
+
+        try {
+            ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+            String[] columnas = {"id", "nombre", "imagen", "categoria", "usuario"};
+            String selection = "id = ?";
+            String[] selectionArgs = {String.valueOf(idPrenda)};
+
+            Cursor cursor = db.query(TABLA_PRENDA, columnas, selection, selectionArgs, null, null, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                @SuppressLint("Range") long id = cursor.getLong(cursor.getColumnIndex("id"));
+                @SuppressLint("Range") String nombre = cursor.getString(cursor.getColumnIndex("nombre"));
+                @SuppressLint("Range") String rutaImagen = cursor.getString(cursor.getColumnIndex("imagen"));
+                @SuppressLint("Range") long categoriaPrenda = cursor.getLong(cursor.getColumnIndex("categoria"));
+                @SuppressLint("Range") long usuario = cursor.getLong(cursor.getColumnIndex("usuario"));
+
+                prenda = new Prenda();
+                prenda.setId(id);
+                prenda.setNombre(nombre);
+                prenda.setUrlImagen(rutaImagen);
+                prenda.setCategoria(categoriaPrenda);
+                prenda.setUsuario(usuario);
+            }
+
+            cursor.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return prenda;
+    }
+
 }

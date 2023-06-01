@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,8 +19,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.proyectofinal_frame1.Conjunto;
+import com.example.proyectofinal_frame1.ConjuntoActivity;
 import com.example.proyectofinal_frame1.ConjuntoAdapter;
+import com.example.proyectofinal_frame1.ConjuntoClase;
 import com.example.proyectofinal_frame1.ConjuntoItem;
 import com.example.proyectofinal_frame1.R;
 import com.example.proyectofinal_frame1.database.TablaConjunto;
@@ -45,6 +45,7 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
     private ConjuntoItem nuevoConjunto;
     private TablaConjunto tablaConjunto;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         DashboardViewModel dashboardViewModel =
@@ -61,10 +62,10 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
         recyclerViewPrendas.setLayoutManager(new GridLayoutManager(context, 2));
 
         listaConjuntos = new ArrayList<>();
-        listaConjuntos.add(new ConjuntoItem("Conjunto día de playa", R.drawable.conjunto));
-        listaConjuntos.add(new ConjuntoItem("Conjunto boda", R.drawable.conjunto));
-        listaConjuntos.add(new ConjuntoItem("Conjunto miércoles", R.drawable.conjunto));
-        listaConjuntos.add(new ConjuntoItem("Conjunto casual", R.drawable.conjunto));
+        for (int i = 0; i<tablaConjunto.obtenerConjuntos().size(); i++){
+            ConjuntoClase conjunto = tablaConjunto.obtenerConjuntos().get(i);
+            listaConjuntos.add(new ConjuntoItem(conjunto.getId(), conjunto.getNombre(), R.drawable.conjunto));
+        }
 
         conjuntoAdapter = new ConjuntoAdapter(listaConjuntos, this);
         recyclerViewPrendas.setAdapter(conjuntoAdapter);
@@ -82,8 +83,6 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
 
         return root;
     }
-
-
 
     public static DashboardFragment getInstance(){
         return conjuntosFragment;
@@ -170,8 +169,11 @@ public class DashboardFragment extends Fragment implements ConjuntoAdapter.OnCon
     public void onConjuntoClick(int position) {
         // se abre el activity de Conjunto con los artículos que le correspondan
         //getView().startAnimation(AnimationUtils.loadAnimation(context, R.anim.anim_item));
-        Intent intent = new Intent(context, Conjunto.class);
-        intent.putExtra("Objeto_Conjunto", listaConjuntos.get(position));
+        ConjuntoItem conjunto = listaConjuntos.get(position);
+        Intent intent = new Intent(context, ConjuntoActivity.class);
+        //solo hace falta que al pinchar sobre el conjunto se le pase el id del conjunto
+        //a ConjuntoActivity para que se muestren las prendas que son de ese conjunto
+        intent.putExtra("idConjunto", conjunto.getIdConjunto());
         startActivity(intent);
     }
 

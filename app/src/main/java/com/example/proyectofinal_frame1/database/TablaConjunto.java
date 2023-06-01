@@ -1,10 +1,17 @@
 package com.example.proyectofinal_frame1.database;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
+
+import com.example.proyectofinal_frame1.ConjuntoClase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TablaConjunto extends ProyectoDatabaseHelper{
 
@@ -31,4 +38,36 @@ public class TablaConjunto extends ProyectoDatabaseHelper{
         }
         return id;
     }
+
+    public List<ConjuntoClase> obtenerConjuntos() {
+        List<ConjuntoClase> conjuntos = new ArrayList<>();
+
+        try {
+            ProyectoDatabaseHelper dbHelper = new ProyectoDatabaseHelper(context);
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+            String[] columnas = {"id", "nombre", "usuario"};
+
+            Cursor cursor = db.query(TABLA_CONJUNTO, columnas, null, null, null, null, null);
+
+            while (cursor.moveToNext()) {
+                @SuppressLint("Range") long id = cursor.getLong(cursor.getColumnIndex("id"));
+                @SuppressLint("Range") String nombre = cursor.getString(cursor.getColumnIndex("nombre"));
+                @SuppressLint("Range") int usuario = cursor.getInt(cursor.getColumnIndex("usuario"));
+
+                ConjuntoClase conjunto = new ConjuntoClase();
+                conjunto.setId(id);
+                conjunto.setNombre(nombre);
+                conjunto.setUsuario(usuario);
+                conjuntos.add(conjunto);
+            }
+
+            cursor.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return conjuntos;
+    }
+
 }
